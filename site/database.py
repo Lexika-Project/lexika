@@ -8,7 +8,6 @@ import urllib.parse
 import psycopg
 
 from dotenv import dotenv_values
-from tqdm import tqdm
 
 os.chdir(os.path.dirname(__file__))
 
@@ -310,28 +309,9 @@ def get_error():  # pylint: disable=missing-function-docstring
             return (liste_langue, error_table)
 
 
-def insert_from_csv(
-    cur, filename, liste_langue, add_line_func
-):  # pylint: disable=missing-function-docstring
-    filename_csv = "release/" + filename + ".csv"
-
-    cur.execute(
-        "INSERT INTO livre (nom_livre) VALUES (%(filename)s);",
-        {"filename": filename},
-    )
-    for langue in liste_langue:
-        add_langue(cur, langue, filename)
-    with open(filename_csv, "r", encoding="utf-8") as file:
-        liste_line = file.readlines()
-        with tqdm(total=len(liste_line), desc=filename) as pbar:
-            global count_sens
-            for line in liste_line:
-                add_line_func(cur, line, liste_langue, filename, count_sens)
-                count_sens += 1
-                pbar.update()
 
 
-count_sens = 0
+
 if __name__ == "__main__":
     reset_table()
     with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
