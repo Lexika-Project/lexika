@@ -5,7 +5,7 @@ output
 audio
 
 # documents sources
-*.pdf
+ocr/pdf
 *.jpg
 
 # config privée
