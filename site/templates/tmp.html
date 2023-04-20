@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script defer type="module" src="static/js/tmp.js"></script>
+    <link href="static/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="static/css/tmp.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="searchDiv">
+        <input type="text" id="search" placeholder="chercher" value="">
+        <button id="searchButton">chercher</button>
+        <select id="engineSelect">
+            <option value="tsquery">TsQuery</option>
+            <option value="regex">Regex</option>
+        </select>
+        <span><label>language de base : </label><select id="baseSelect"></select></span>
+        <span><label>language arrivé : </label><select id="resultSelect"></select></span>
+    </div>
+    <div id="resultZone">
+    </div>
+    <button hidden class="clickable" id="prev">Précédent</button>
+    <span id="pageDisplay"></span>
+    <button hidden class="clickable" id="next">Suivant</button>
+
+
+</body>
+
+</html>

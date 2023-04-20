@@ -1,0 +1,22 @@
+full-pdf
+test*.py
+lib
+output
+audio
+
+# documents sources
+*.pdf
+*.jpg
+
+# config privée
+.env
+
+# artefacts python
+__pycache__
+.mypy_cache
+.pytest_cache
+*.pyc
+
+# artefacts Node.js
+node_modules
+.npm

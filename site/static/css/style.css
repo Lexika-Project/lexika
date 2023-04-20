@@ -1,0 +1,46 @@
+span{
+    position: relative;
+}
+div{
+    text-align: center;
+    margin-top: 50px;
+}
+table{
+    border:1px solid black;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom: 20px;
+}
+table,
+td {
+    border: 1px solid #333;
+}
+
+thead,
+tfoot {
+    background-color: #333;
+    color: #fff;
+}
+
+.linkPdf{
+    text-decoration: none;
+    color:blue;
+}
+.linkHistory{
+    text-decoration: none;
+    color:black;
+}
+.pageNumber{
+    cursor: pointer;
+}
+.currentPage{
+    font-weight: bold;
+}
+#pageDisplay > *{
+    font-size: 20px;
+    text-decoration: none;
+    color:black;
+    margin-left: 3px;
+    margin-right: 3px;
+    user-select: none;
+}

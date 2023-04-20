@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script defer type="module" src="static/js/home.js"></script>
+    <link href="static/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div id="searchDiv">
+        <input type="text" id="search" placeholder="chercher" value="">
+        <button id="searchButton">chercher</button>
+        <select id="engineSelect">
+            <option value="tsquery">TsQuery</option>
+            <option value="regex">Regex</option>
+            <!--<option value="dmethaphone">Double Méthaphone</option>
+            <option value="similarity">Similarity</option> -->
+        </select>
+        <span><label>language de base : </label><select id="baseSelect"></select></span>
+        <span><label>language arrivé : </label><select id="resultSelect"></select></span>
+    </div>
+    <div id="tableDiv">
+        <button hidden id="edit">Editer</button>
+        <button hidden id="send">Mise a jour de la base de donnée</button>
+        <table id="table">
+            <thead id="resultTitle"></thead>
+            <tbody id="resultSearch"></tbody>
+        </table>
+        <button hidden class="clickable" id="prev">Précédent</button>
+        <span id="pageDisplay"></span>
+        <button hidden class="clickable" id="next">Suivant</button>
+    </div>
+
+
+</body>
+
+</html>

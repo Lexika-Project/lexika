@@ -1,0 +1,34 @@
+
+.drag-audio{
+    
+    background-color: lightgray;
+    outline: 2px dashed black;
+    outline-offset: -5px;
+    height: 200px;
+    width: 400px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+}
+
+
+.drag-audio span{
+  margin: 10px 0 15px 0;
+}
+.drag-audio button{
+  padding: 10px 25px;
+  font-weight: 500;
+  border: 2px solid black;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.drag-audio-enter{
+    outline-offset: -10px;
+  }
+#unsupported-extention-popup{
+    background-color: lightcoral;
+}

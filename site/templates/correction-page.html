@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Correction page</title>
+    <link href="static/css/style.css" rel="stylesheet">
+    <link href="static/css/correction-page.css" rel="stylesheet">
+    <script defer type="module" src="static/js/correction-page.js"></script>
+</head>
+
+<body>
+    <span id="switchButton">
+        <button id="prev">Précédent</button>
+        <button id="next">Suivant</button>
+        <select id="selectPage"></select>
+    </span>
+
+    <span id="tableDiv">
+        <button hidden id="edit">Editer</button>
+        <button hidden id="send">Mise a jour de la base de donnée</button>
+        <table id="table">
+            <thead id="resultTitle"></thead>
+            <tbody id="resultSearch"></tbody>
+        </table>
+    </span>
+    <span id="pdf">
+        <input id="showBox" type="checkbox">
+        <label class="clickable" id="labelBox">Afficher les contoures</label>
+        <embed id="pdfViewer">
+    </span>
+
+
+</body>
+
+</html>

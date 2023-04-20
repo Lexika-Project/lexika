@@ -1,0 +1,5 @@
+pdfminer
+pymupdf
+tqdm
+numpy
+pytesseract
