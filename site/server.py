@@ -6,7 +6,8 @@ Returns:
 # import os
 import json
 from flask import Flask, jsonify, render_template, request, redirect
-from werkzeug.utils import secure_filename
+
+# from werkzeug.utils import secure_filename
 from database import (
     search,
     modif_data,
@@ -105,8 +106,8 @@ def receive_audio():  # pylint: disable=missing-function-docstring
     file = request.files["file"]
     sens = request.form["sens"]
     langue = request.form["langue"]
-    secure_name = secure_filename(file.filename)
-    update_link(sens, langue, secure_name)
+    # secure_name = secure_filename(file.filename)
+    # update_link(sens, langue, secure_name)
     # file.save(os.path.join("./static/audio/", secure_name))
     return "ok"
 
