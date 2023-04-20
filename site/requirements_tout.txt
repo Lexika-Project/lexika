@@ -1,5 +1,0 @@
-psycopg
-psycopg-binary
-python-dotenv
-tqdm
-flask

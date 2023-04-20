@@ -3,18 +3,19 @@
 Returns:
     _type_: _description_
 """
+import os
 import urllib.parse
 import psycopg
 
 from dotenv import dotenv_values
+from tqdm import tqdm
 
-# import os
-# os.chdir(os.path.dirname(__file__))
+os.chdir(os.path.dirname(__file__))
 
-# if os.path.exists(".env"):
-#     config = dotenv_values(".env")
-# else:
-config = dotenv_values("default.env")
+if os.path.exists(".env"):
+    config = dotenv_values(".env")
+else:
+    config = dotenv_values("default.env")
 
 
 FILENAME_DB_SHEMA = "database/database.sql"
@@ -122,6 +123,7 @@ def modif_data(langue, text, sens):  # pylint: disable=missing-function-docstrin
 def search(
     keyword, engine, langue, langue_base, offset
 ):  # pylint: disable=missing-function-docstring
+
     res = []
     with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
         with conn.cursor() as cur:
@@ -308,6 +310,28 @@ def get_error():  # pylint: disable=missing-function-docstring
             return (liste_langue, error_table)
 
 
+def insert_from_csv(
+    cur, filename, liste_langue, add_line_func
+):  # pylint: disable=missing-function-docstring
+    filename_csv = "release/" + filename + ".csv"
+
+    cur.execute(
+        "INSERT INTO livre (nom_livre) VALUES (%(filename)s);",
+        {"filename": filename},
+    )
+    for langue in liste_langue:
+        add_langue(cur, langue, filename)
+    with open(filename_csv, "r", encoding="utf-8") as file:
+        liste_line = file.readlines()
+        with tqdm(total=len(liste_line), desc=filename) as pbar:
+            global count_sens
+            for line in liste_line:
+                add_line_func(cur, line, liste_langue, filename, count_sens)
+                count_sens += 1
+                pbar.update()
+
+
+count_sens = 0
 if __name__ == "__main__":
     reset_table()
     with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
