@@ -1,5 +1,3 @@
-DROP EXTENSION IF EXISTS pg_trgm;
-
 DROP FUNCTION IF EXISTS get_id_langue;
 CREATE OR REPLACE FUNCTION get_id_langue(l langue.nom_langue%TYPE)
     RETURNS SETOF langue.id_langue%TYPE AS
