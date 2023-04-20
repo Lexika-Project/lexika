@@ -3,18 +3,18 @@
 Returns:
     _type_: _description_
 """
-import os
 import urllib.parse
 import psycopg
 
 from dotenv import dotenv_values
 
-os.chdir(os.path.dirname(__file__))
+# import os
+# os.chdir(os.path.dirname(__file__))
 
-if os.path.exists(".env"):
-    config = dotenv_values(".env")
-else:
-    config = dotenv_values("default.env")
+# if os.path.exists(".env"):
+#     config = dotenv_values(".env")
+# else:
+config = dotenv_values("default.env")
 
 
 FILENAME_DB_SHEMA = "database/database.sql"
@@ -122,7 +122,6 @@ def modif_data(langue, text, sens):  # pylint: disable=missing-function-docstrin
 def search(
     keyword, engine, langue, langue_base, offset
 ):  # pylint: disable=missing-function-docstring
-
     res = []
     with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
         with conn.cursor() as cur:
@@ -307,9 +306,6 @@ def get_error():  # pylint: disable=missing-function-docstring
             )
             error_table = cur.fetchall()
             return (liste_langue, error_table)
-
-
-
 
 
 if __name__ == "__main__":
