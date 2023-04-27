@@ -3,6 +3,7 @@ test*.py
 lib
 output
 audio
+.env
 
 # documents sources
 ocr/pdf

@@ -60,7 +60,8 @@ def get_parser():
         action="store",
         default=0,
         type=int,
-        help="indique la page que l'on veut transformer",
+        help="""indique la page que l'on veut transformer
+        (si cette argument n'est pas invoquer le programme fait tout le pdf)""",
     )
     parser.add_argument(
         "--output",
@@ -84,9 +85,9 @@ def get_parser():
         default=0,
         type=int,
         help="""choix du programme
-        -1 - test
-        0 - hienghene
-        1 - nyelayu""",
+        (-1 : test),
+        (0 : hienghene),
+        (1 : nyelayu)""",
     )
     parser.add_argument(
         "--debug",
@@ -213,7 +214,6 @@ def fr_compare(element1, element2, array):  # pylint: disable=missing-function-d
 
 
 def old1_concat_box(array, func_compare):  # pylint: disable=missing-function-docstring
-
     change = True
     while change:
         change = False
@@ -230,7 +230,6 @@ def old1_concat_box(array, func_compare):  # pylint: disable=missing-function-do
                         change = True
                         concat(array, res, element1, element2)
             else:
-
                 for element2 in array:
                     if overlap(element1, element2) and func_compare(
                         element1, element2, array
@@ -547,7 +546,6 @@ def get_array_tess(pdf_img, test_bold=False, bold_aprox=0.001):
 
 
 def save_as_img(array, img, file_output_name, num_page, color=(255, 0, 0), error=True):
-
     for element in array:
         if "bold" in element:
             if element["bold"]:
@@ -890,13 +888,25 @@ def test(
     TITLE_TOP = 0
 
 
+def getProcess():
+    match args.process:
+        case 0:
+            process = hienghene
+            START = 64
+            END = 252
+        case 1:
+            process = nyelayu
+            START = 62
+            END = 176
+    return [process, START, END]
+
+
 if __name__ == "__main__":
     os.chdir(os.path.dirname(__file__))
     args = get_parser().parse_args()
     filename_without_ex = os.path.splitext(args.filename)[0]
     file_input = "pdf/" + filename_without_ex
     with open(file_input + ".pdf", "rb") as pdf_file:
-
         i = 1
 
         numero_page = args.page
@@ -904,15 +914,7 @@ if __name__ == "__main__":
         file_output = "output/" + filename_without_ex
         if numero_page != 0:
             file_output += "-" + str(numero_page)
-        match args.process:
-            case 0:
-                process = hienghene
-                START = 64
-                END = 252
-            case 1:
-                process = nyelayu
-                START = 62
-                END = 176
+        process, START, END = getProcess()
         with open(file_output + ".csv", "w", encoding="utf-8") as file:
             with fitz.open(file_input + ".pdf") as pdf_file:
                 if numero_page == 0:
