@@ -10,31 +10,34 @@
 </head>
 
 <body>
+    <header>
+        <h1>Lexika</h1>
+    </header>
     <div id="searchDiv">
-        <input type="text" id="search" placeholder="chercher" value="">
-        <button id="searchButton">chercher</button>
-        <select id="engineSelect">
-            <option value="tsquery">TsQuery</option>
-            <option value="regex">Regex</option>
-            <!--<option value="dmethaphone">Double Méthaphone</option>
-            <option value="similarity">Similarity</option> -->
-        </select>
-        <span><label>language de base : </label><select id="baseSelect"></select></span>
-        <span><label>language arrivé : </label><select id="resultSelect"></select></span>
+        <input type="text" id="search" placeholder="Chercher" value="">
+        <button id="searchButton"><i class="fa fa-search"></i></button>
+        <div id="optionsDiv">
+            <select id="engineSelect">
+                <option value="tsquery">TsQuery</option>
+                <option value="regex">Regex</option>
+            </select>
+            <span><label>Langue de base : </label><select id="baseSelect"></select></span>
+            <span><label>Langue d'arrivée : </label><select id="resultSelect"></select></span>
+        </div>
     </div>
     <div id="tableDiv">
         <button hidden id="edit">Editer</button>
-        <button hidden id="send">Mise a jour de la base de donnée</button>
+        <button hidden id="send">Mise à jour de la base de données</button>
         <table id="table">
             <thead id="resultTitle"></thead>
             <tbody id="resultSearch"></tbody>
         </table>
-        <button hidden class="clickable" id="prev">Précédent</button>
-        <span id="pageDisplay"></span>
-        <button hidden class="clickable" id="next">Suivant</button>
+        <div id="pagination">
+            <button hidden class="clickable" id="prev">Précédent</button>
+            <span id="pageDisplay"></span>
+            <button hidden class="clickable" id="next">Suivant</button>
+        </div>
     </div>
-
-
 </body>
 
 </html>
