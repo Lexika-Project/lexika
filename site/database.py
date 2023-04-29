@@ -15,7 +15,13 @@ os.chdir(os.path.dirname(__file__))
 if os.path.exists(".env"):
     config = dotenv_values(".env")
 else:
-    config = dotenv_values("default.env")
+    config = {
+        "USER": os.environ.get("USER_DB"),
+        "PASSWORD": os.environ.get("PASSWORD_DB"),
+        "HOST": os.environ.get("HOST_DB"),
+        "PORT": os.environ.get("PORT_DB"),
+        "DATABASE": os.environ.get("DATABASE_DB"),
+    }
 
 
 FILENAME_DB_SHEMA = "database/database.sql"
@@ -123,7 +129,6 @@ def modif_data(langue, text, sens):  # pylint: disable=missing-function-docstrin
 def search(
     keyword, engine, langue, langue_base, offset
 ):  # pylint: disable=missing-function-docstring
-
     res = []
     with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
         with conn.cursor() as cur:
