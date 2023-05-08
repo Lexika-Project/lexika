@@ -121,6 +121,11 @@ table th {
     margin-top: 10px;
 }
 
+#regex-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 #searchButton {
     margin-left: 10px;
