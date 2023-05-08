@@ -44,7 +44,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 button:hover {
@@ -126,7 +126,7 @@ table th {
 }
 
 #regex-btn {
-    margin-left: 200px;
+    margin-left: 20px;
 }
 
 #search {
