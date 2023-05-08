@@ -13,13 +13,9 @@
     <header>
         <h1>Lexika</h1>
     </header>
-    
-    <div id="topdiv">
+    <div id="searchDiv">
         <div><input type="text" id="search" placeholder="Chercher" value=""></div>
         <span><button id="regex-btn">Expression régulière</button></span>
-    </div>
-    
-    <div id="searchDiv">
         <button id="searchButton">Recherche <i class="fa fa-search"></i></button>
         <div id="optionsDiv">
             <select id="engineSelect">
@@ -28,8 +24,8 @@
             </select>
             <span><label>Langue de base : </label><select id="baseSelect"></select></span>
             <span><label>Langue d'arrivée : </label><select id="resultSelect"></select></span>
-            <div id="regex-commands" style="display: none;"></div>
         </div>
+        <div id="regex-commands" style="display: none;"></div>
     </div>
     <div id="tableDiv">
         <button hidden id="edit">Editer</button>
