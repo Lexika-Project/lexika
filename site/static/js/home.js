@@ -233,26 +233,62 @@ const regexCommands = [
 	{expression: '.', description: "Correspond à n'importe quel caractère sauf un saut de ligne"},
 	{expression: '*', description: 'Répète le caractère précédent zéro ou plusieurs fois'},
 	{expression: '+', description: 'Répète le caractère précédent une ou plusieurs fois'},
-	// Ajoutez ici les autres expressions régulières du tableau
+	// Add more regex expressions and their descriptions here
 ];
 
-const regexCommandsList = document.getElementById('regex-commands');
+const regexCommandsContainer = document.getElementById('regex-commands');
 
 function displayRegexCommands() {
-	regexCommandsList.innerHTML = '';
+	// Create a table element
+	const table = document.createElement('table');
+	
+	// Create a table header
+	const thead = document.createElement('thead');
+	const headerRow = document.createElement('tr');
+	const headerExpression = document.createElement('th');
+	headerExpression.innerText = 'Expression';
+	const headerDescription = document.createElement('th');
+	headerDescription.innerText = 'Description';
+	headerRow.appendChild(headerExpression);
+	headerRow.appendChild(headerDescription);
+	thead.appendChild(headerRow);
+	table.appendChild(thead);
+
+	// Create a table body
+	const tbody = document.createElement('tbody');
+
 	for (const command of regexCommands) {
-		const li = document.createElement('li');
-		li.innerHTML = `<strong>${command.expression}</strong> : ${command.description}`;
-		regexCommandsList.appendChild(li);
+		// Create a table row for each command
+		const row = document.createElement('tr');
+
+		// Create table cells for expression and description
+		const expressionCell = document.createElement('td');
+		expressionCell.innerText = command.expression;
+		const descriptionCell = document.createElement('td');
+		descriptionCell.innerText = command.description;
+
+		// Append table cells to the row
+		row.appendChild(expressionCell);
+		row.appendChild(descriptionCell);
+
+		// Append the row to the table body
+		tbody.appendChild(row);
 	}
+
+	// Append the table body to the table
+	table.appendChild(tbody);
+
+	// Clear the previous content and append the table to the container
+	regexCommandsContainer.innerHTML = '';
+	regexCommandsContainer.appendChild(table);
 }
 
 const regexButton = document.getElementById('regex-btn');
 regexButton.addEventListener('click', () => {
-	if (regexCommandsList.style.display === 'none') {
-		regexCommandsList.style.display = 'block';
+	if (regexCommandsContainer.style.display === 'none') {
+		regexCommandsContainer.style.display = 'block';
 		displayRegexCommands();
 	} else {
-		regexCommandsList.style.display = 'none';
+		regexCommandsContainer.style.display = 'none';
 	}
 });
