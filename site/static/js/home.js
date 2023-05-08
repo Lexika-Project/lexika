@@ -228,13 +228,31 @@ async function main() {
 	sendButtonInit(sendButton);
 }
 
-const regexBtn = document.getElementById('regex-btn');
-const regexCommands = document.getElementById('regex-commands');
 
-regexBtn.addEventListener('click', () => {
-  if (regexCommands.style.display === 'none') {
-    regexCommands.style.display = 'block';
-  } else {
-    regexCommands.style.display = 'none';
-  }
-}); 
+const regexCommands = [
+	{expression: '.', description: "Correspond à n'importe quel caractère sauf un saut de ligne"},
+	{expression: '*', description: 'Répète le caractère précédent zéro ou plusieurs fois'},
+	{expression: '+', description: 'Répète le caractère précédent une ou plusieurs fois'},
+	// Ajoutez ici les autres expressions régulières du tableau
+];
+
+const regexCommandsList = document.getElementById('regex-commands');
+
+function displayRegexCommands() {
+	regexCommandsList.innerHTML = '';
+	for (const command of regexCommands) {
+		const li = document.createElement('li');
+		li.innerHTML = `<strong>${command.expression}</strong> : ${command.description}`;
+		regexCommandsList.appendChild(li);
+	}
+}
+
+const regexButton = document.getElementById('regex-btn');
+regexButton.addEventListener('click', () => {
+	if (regexCommandsList.style.display === 'none') {
+		regexCommandsList.style.display = 'block';
+		displayRegexCommands();
+	} else {
+		regexCommandsList.style.display = 'none';
+	}
+});
