@@ -228,9 +228,6 @@ async function main() {
 	sendButtonInit(sendButton);
 }
 
-
-// ...
-
 const regexCommands = [
 	{expression: '.', description: "Correspond à n'importe quel caractère sauf un saut de ligne", example: 'a.o → ao, abo, a2o'},
 	{expression: '*', description: 'Répète le caractère précédent zéro ou plusieurs fois', example: 'ab*c → ac, abc, abbc'},
