@@ -35,6 +35,9 @@ header {
 h1 {
     color: #ffffff;
     font-size: 24px;
+    display: flex;
+    align-items: center;
+
 }
 
 #searchDiv {
@@ -143,4 +146,9 @@ table th {
 
 #regex-btn {
     margin-left: 10px;
+}
+
+#topdiv {
+    display: "flex";
+    margin-top: 20px;
 }
