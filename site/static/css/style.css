@@ -119,10 +119,6 @@ table th {
     color: #333;
 }
 
-#searchButtonGroup {
-    display: flex;
-}
-
 #topdiv {
     display: flex;
     justify-content: center;
