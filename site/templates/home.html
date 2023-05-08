@@ -14,13 +14,14 @@
         <h1>Lexika</h1>
     </header>
     <div id="topdiv">
+        <span><select id="engineSelect"><option value="tsquery">TsQuery</option><option value="regex">Regex</option></select></span>
         <span><input type="text" id="search" placeholder="Chercher" value=""></span>
         <span><button id="searchButton">Recherche <i class="fa fa-search"></i></button></span>
         <span><button id="regex-btn">Expression régulière</button></span>
     </div>
     <div id="searchDiv">
         <div id="optionsDiv">
-            <span><select id="engineSelect"><option value="tsquery">TsQuery</option><option value="regex">Regex</option></select></span>
+            
             <span><select id="baseSelect"></select></span>
             <span><label id="arrow"><i class="fa-sharp fa-regular fa-arrow-right"></i></label><select id="resultSelect"></select></span>
 

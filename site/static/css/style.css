@@ -134,6 +134,7 @@ table th {
     font-size: 18px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    margin-left: 10px;
 }
 
 button {
