@@ -162,6 +162,6 @@ select {
 }
 
 label {
-    color: #333;
     font-size: 18px;
+    font-family: Arial Black;
 }
