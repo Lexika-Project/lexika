@@ -126,7 +126,11 @@ table th {
 }
 
 #regex-btn {
-    margin-left: 200px;
+    margin-left: 120px;
+}
+
+#searchButton {
+    margin-left: 50px;
 }
 
 #search {
