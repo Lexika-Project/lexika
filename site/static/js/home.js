@@ -241,12 +241,12 @@ const regexCommands = [
 	{expression: '[abc]', description: 'Correspond à un des caractères entre les crochets', example: 'a[bc] → ab, ac'},
 	{expression: '[^abc]', description: 'Correspond à tout caractère sauf ceux entre les crochets', example: 'a[^bc] → ad, ae'},
 	{expression: '(a|b)', description: "Correspond à l'un des éléments séparés par le symbole |", example: '(ab|cd) → ab, cd'},
-	{expression: '\d', description: 'Correspond à un chiffre (équivalent à [0-9])', example: 'a\\d → a0, a1, a9'},
-	{expression: '\D', description: "Correspond à un caractère qui n'est pas un chiffre", example: 'a\\D → aa, a%, a-'},
-	{expression: '\w', description: 'Correspond à un caractère alphanumérique ou un tiret bas', example: 'a\\w → aa, a1, a_'},
-	{expression: '\W', description: "Correspond à un caractère qui n'est pas alphanumérique", example: 'a\\W → a!, a%, a@'},
-	{expression: '\s', description: 'Correspond à un espace, un tab ou un saut de ligne', example: 'a\\s → a , a\\t, a\\n'},
-	{expression: '\S', description: "Correspond à un caractère qui n'est pas un espace", example: 'a\\S → aa, a1, a!'},
+	{expression: '\d', description: 'Correspond à un chiffre (équivalent à [0-9])', example: 'a\d → a0, a1, a9'},
+	{expression: '\D', description: "Correspond à un caractère qui n'est pas un chiffre", example: 'a\D → aa, a%, a-'},
+	{expression: '\w', description: 'Correspond à un caractère alphanumérique ou un tiret bas', example: 'a\w → aa, a1, a_'},
+	{expression: '\W', description: "Correspond à un caractère qui n'est pas alphanumérique", example: 'a\W → a!, a%, a@'},
+	{expression: '\s', description: 'Correspond à un espace, un tab ou un saut de ligne', example: 'a\s → a , a\\t, a\\n'},
+	{expression: '\S', description: "Correspond à un caractère qui n'est pas un espace", example: 'a\S → aa, a1, a!'},
 	// Add more regex expressions, their descriptions, and examples here
 ];
 
