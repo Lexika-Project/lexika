@@ -151,4 +151,5 @@ table th {
 #topdiv {
     display: "flex";
     margin-top: 20px;
+    align-items: center;
 }
