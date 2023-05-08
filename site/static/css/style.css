@@ -130,12 +130,16 @@ table th {
 }
 
 #search {
+    cursor: pointer;
     width: 145%;
     padding: 10px;
     font-size: 18px;
-    border: 1px solid #ccc;
+    background-color: #ffffff;
+    color: #333;
+    border: 1px solid #333;
     border-radius: 4px;
     margin-left: 10px;
+    border-radius: 4px;
 }
 
 button {
