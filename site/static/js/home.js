@@ -227,3 +227,14 @@ async function main() {
 
 	sendButtonInit(sendButton);
 }
+
+const regexBtn = document.getElementById('regex-btn');
+const regexCommands = document.getElementById('regex-commands');
+
+regexBtn.addEventListener('click', () => {
+  if (regexCommands.style.display === 'none') {
+    regexCommands.style.display = 'block';
+  } else {
+    regexCommands.style.display = 'none';
+  }
+}); 
