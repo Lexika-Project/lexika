@@ -48,7 +48,8 @@ h1 {
 }
 
 #search {
-    width: 200%;
+    width: 300%;
+    padding: 10px;
     font-size: 18px;
     border: 1px solid #ccc;
     border-radius: 4px;
