@@ -147,3 +147,13 @@ table th {
     margin-left: 10px;
 }
 
+#topdiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#topdiv span {
+    margin: 0 10px;
+}
+
