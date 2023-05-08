@@ -126,12 +126,12 @@ table th {
 }
 
 #searchButton {
-    margin-left: 135px;
+    margin-left: 10px;
 }
 
 #search {
     cursor: pointer;
-    width: 100px;
+    width: 250px;
     padding: 10px;
     font-size: 18px;
     background-color: #ffffff;
