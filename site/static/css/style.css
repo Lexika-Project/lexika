@@ -50,8 +50,8 @@ h1 {
 #topdiv {
     display: flex;
     justify-content: center;
-    gap: 20px;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 #search {
