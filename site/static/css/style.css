@@ -42,15 +42,20 @@ h1 {
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
+    width: 70%;
 }
 
 #search {
-    width: 70%;
+    width: 100%;
     padding: 10px;
     font-size: 18px;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-bottom: 10px;
+}
+
+#searchDiv > button {
+    margin-left: 10px;
 }
 
 button {
