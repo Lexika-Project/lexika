@@ -160,3 +160,8 @@ select {
     margin-bottom: 10px;
     transition: background-color 0.3s;
 }
+
+label {
+    color: #333;
+    font-size: 18px;
+}
