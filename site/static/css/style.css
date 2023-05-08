@@ -59,11 +59,6 @@ button:hover {
     margin-bottom: 20px;
 }
 
-select {
-    padding: 5px;
-    font-size: 16px;
-}
-
 #tableDiv {
     width: 90%;
     margin: 0 auto;
@@ -142,6 +137,19 @@ table th {
 }
 
 button {
+    cursor: pointer;
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+
+select {
     cursor: pointer;
     background-color: #333;
     color: #ffffff;
