@@ -60,13 +60,13 @@ button {
 
 #btn {
     display: flex;
-    margin-bottom: 12px;
+    margin-bottom: 13px;
     justify-content: center;
 }
 
 #pdfViewer {
     width: 100%;
-    height: 800px;
+    height: 1100px;
     border: solid black 1px;
 }   
 
