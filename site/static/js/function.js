@@ -4,6 +4,8 @@ export function createTableResult(tab, books, langueBase, listeLangue, resultTit
 		affichePage = true;
 	}
 
+	
+
 	let editButton = document.querySelector("#edit");
 	let sendButton = document.querySelector("#send");
 	editButton.hidden = false;

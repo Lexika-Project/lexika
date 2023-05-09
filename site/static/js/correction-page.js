@@ -6,6 +6,7 @@ import {
     sendButtonInit,
 } from "./function.js";
 
+
 const urlParam = new URLSearchParams(window.location.search);
 const livre = urlParam.get("livre");
 const numPage = parseInt(urlParam.get("page"));
