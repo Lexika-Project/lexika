@@ -58,6 +58,10 @@ button {
     bottom: 0;
 }
 
+#tableDiv {
+    margin-top: 20px;
+}
+
 #btn {
     margin-bottom: 20px;
 }
