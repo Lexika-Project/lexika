@@ -46,3 +46,26 @@ header {
     align-items: center;
     justify-content: center;
 }
+button:hover {
+    background-color: #444;
+}
+#tableDiv {
+    width: 90%;
+    margin: 0 auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+table th {
+    background-color: #333;
+    color: #ffffff;
+}
