@@ -92,3 +92,7 @@ button {
 #editbtn {
     justify-content: center;
 }
+
+#showBox {
+    display: none;
+}
