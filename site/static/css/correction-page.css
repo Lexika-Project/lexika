@@ -65,9 +65,10 @@ button {
 }
 
 #pdfViewer {
-    display: flex;
+    width: 100%;
+    height: 500px;
     border: solid black 1px;
-}        
+}   
 
 .container {
     margin-top: 20px;
