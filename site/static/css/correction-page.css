@@ -1,10 +1,3 @@
-#tableDiv {
-    position: absolute;
-    top: 10%;
-    left: 1%;
-    width: 45%;
-    height: 95%;
-}
 
 #switchButton {
     cursor: pointer;
@@ -63,13 +56,6 @@ button {
     justify-content: center;
     margin-top: 10px;
     bottom: 0;
-}
-
-#tabletop {
-    margin-top: 20px;
-    width: 45%;
-    height: 100%;
-    text-align: center;
 }
 
 #btn {
