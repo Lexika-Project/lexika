@@ -25,6 +25,7 @@
     left: 50%;
     transform: translate(-50%,-50%);
 }
+
 .clickable{
     cursor: pointer;
     user-select: none;
@@ -40,14 +41,6 @@ a {
 
 }
 
-h1 {
-    background-color: #333;
-    height: 60px;
-    padding: 0 20px;
-    display: flex;
-    text-align: left;
-
-}
 
 
 button {
@@ -61,3 +54,4 @@ button {
     margin-bottom: 10px;
     transition: background-color 0.3s;
 }
+
