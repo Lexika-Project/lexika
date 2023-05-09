@@ -4,15 +4,6 @@
     left:1%;
     width:45%;
 }
-
-#pdf{
-    position: fixed;
-    top:10%;
-    right:1%;
-    width:45%;
-    height: 80%;
-    text-align: center;
-}
 #pdfViewer{
     width: 100%;
     height: 95%;
@@ -80,4 +71,22 @@ button {
     justify-content: center;
     margin-top: 10px;
     bottom: 0;
+}
+
+#tabletop {
+    position: fixed;
+    top: 10%;
+    right: 1%;
+    width: 45%;
+    height: 80%;
+    text-align: center;
+}
+
+#pdf {
+    position: fixed;
+    top: 10%;
+    left: 1%;
+    width: 45%;
+    height: 80%;
+    text-align: center;
 }

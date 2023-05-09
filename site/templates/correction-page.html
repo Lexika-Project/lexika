@@ -11,10 +11,12 @@
 </head>
 
 <body>
+
     <header>
         <h1 ><a href="https://lexika.vercel.app/home">Lexika</a></h1>
     </header>
-    <div>
+
+    <div id="tabletop">
         <span id="tableDiv">
             <button hidden id="edit">Editer</button>
             <button hidden id="send">Mise a jour de la base de donnée</button>
@@ -32,11 +34,14 @@
         </span>
     </div>
 
-    <span id="pdf">
-        <input id="showBox" type="checkbox">
-        <label class="clickable" id="labelBox">Afficher les contours</label>
+    <div id="pdf">
+        <span>
+            <input id="showBox" type="checkbox">
+            <label class="clickable" id="labelBox">Afficher les contours</label>
+        </span>
+
         <embed id="pdfViewer">
-    </span>
+    </div>
 
 
 </body>
