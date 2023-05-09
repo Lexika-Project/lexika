@@ -34,11 +34,11 @@ a {
     color: #ffffff;
     font-size: 24px;
     display: flex;
-    align-items: center;
+    text-align: center;
     text-decoration: none;
 
 }
-header {
+head {
     background-color: #333;
     height: 60px;
     padding: 0 20px;
