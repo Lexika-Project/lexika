@@ -76,10 +76,8 @@ button {
 }
 
 #divswitchbutton{
-position: absolute;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    bottom: 0;
 }
