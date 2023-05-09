@@ -14,15 +14,17 @@
     <header>
         <h1 ><a href="https://lexika.vercel.app/home">Lexika</a></h1>
     </header>
+    <div>
+        <span id="tableDiv">
+            <button hidden id="edit">Editer</button>
+            <button hidden id="send">Mise a jour de la base de donnée</button>
+            <table id="table">
+                <thead id="resultTitle"></thead>
+                <tbody id="resultSearch"></tbody>
+            </table>
+        </span>
+    </div>
 
-    <span id="tableDiv">
-        <button hidden id="edit">Editer</button>
-        <button hidden id="send">Mise a jour de la base de donnée</button>
-        <table id="table">
-            <thead id="resultTitle"></thead>
-            <tbody id="resultSearch"></tbody>
-        </table>
-    </span>
     <span id="pdf">
         <input id="showBox" type="checkbox">
         <label class="clickable" id="labelBox">Afficher les contours</label>
