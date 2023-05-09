@@ -6,12 +6,6 @@
     height: 95%;
 }
 
-#pdfViewer {
-    width: 600px;
-    height: 800px;
-    border: solid black 1px;
-}
-
 #switchButton {
     cursor: pointer;
     color: #ffffff;
@@ -78,11 +72,28 @@ button {
     text-align: center;
 }
 
-#pdf {
-    margin-top: 20px;
-    text-align: center;
-}
-
 #btn {
     margin-bottom: 20px;
+}
+
+#pdfViewer {
+    width: 600px;
+    height: 800px;
+    border: solid black 1px;
+}        
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.left-column {
+    flex: 1;
+}
+
+.right-column {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
 }
