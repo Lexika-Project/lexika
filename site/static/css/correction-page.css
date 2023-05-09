@@ -7,8 +7,8 @@
 }
 
 #pdfViewer {
-    width: 100%;
-    height: 100%;
+    width: 600px;
+    height: 800px;
     border: solid black 1px;
 }
 
@@ -80,7 +80,9 @@ button {
 
 #pdf {
     margin-top: 20px;
-    width: 45%;
-    height: 100%;
     text-align: center;
+}
+
+#btn {
+    margin-bottom: 20px;
 }
