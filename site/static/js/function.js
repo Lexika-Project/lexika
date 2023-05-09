@@ -28,6 +28,12 @@ export function createTableResult(tab, books, langueBase, listeLangue, resultTit
 		trLivre.appendChild(thLivre);
 	}
 
+	// Définir la propriété colSpan pour chaque cellule de la ligne trLivre
+	const colSpan = trTitle.children.length;
+	for (let cell of trLivre.children) {
+		cell.colSpan = colSpan;
+	}
+
 	resultTitle.appendChild(trLivre); // Ajouter la ligne avec les noms des livres
 
 	for (let langue of listeLangue) {
