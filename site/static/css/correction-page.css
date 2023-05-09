@@ -79,6 +79,5 @@ button {
     display: flex;
     justify-content: center;
     margin-top: 10px;
-    position: absolute;
     bottom: 0;
 }
