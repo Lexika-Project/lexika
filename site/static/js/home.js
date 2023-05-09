@@ -101,43 +101,49 @@ function createPageCount(total) {
 }
 
 async function search(keyword, engine, langueBase, langueResult, page) {
-	const offset = (page - 1) * 25;
-	resetSaveChange();
-	if (keyword !== "") {
-		await fetch("/search", {
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				keyword: keyword.toLowerCase(),
-				engine: engine,
-				langueBase: langueBase,
-				langueResult: langueResult,
-				offset: offset,
-			}),
-		})
-			.then((resp) => {
-				return resp.json();
-			})
-			.then((json) => {
-				if (json.verif === "ok") {
-					createPageCount(json.count);
-					createTableResult(
-						arrayToObject(json.table),
-						json.books, // Ajouter cette ligne
-						langueBase,
-						listeDesLangue(),
-						document.querySelector("#resultTitle"),
-						document.querySelector("#resultSearch"),
-						true // Ajouter cette ligne pour affichePage
-					);
-				} else {
-					console.log("Error database");
-				}
-			});
-	}
+    const offset = (page - 1) * 25;
+    resetSaveChange();
+    if (keyword !== "") {
+        await fetch("/search", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                keyword: keyword.toLowerCase(),
+                engine: engine,
+                langueBase: langueBase,
+                langueResult: langueResult,
+                offset: offset,
+            }),
+        })
+            .then((resp) => {
+                return resp.json();
+            })
+            .then((json) => {
+                if (json.verif === "ok") {
+                    const books = json.table.map((row) => {
+                        return {
+                            id_langue: row[0],
+                            nom_livre: row[4],
+                        };
+                    });
+                    createPageCount(json.count);
+                    createTableResult(
+                        arrayToObject(json.table),
+                        books,
+                        langueBase,
+                        listeDesLangue(),
+                        document.querySelector("#resultTitle"),
+                        document.querySelector("#resultSearch"),
+                        true
+                    );
+                } else {
+                    console.log("Error database");
+                }
+            });
+    }
 }
 document.querySelector("#searchButton").addEventListener("click", (_) => {
 	changePage(
