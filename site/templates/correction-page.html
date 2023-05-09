@@ -6,45 +6,64 @@
     <title>Correction page</title>
     <link href="static/css/style.css" rel="stylesheet">
     <link href="static/css/correction-page.css" rel="stylesheet">
+    <style>
+        /* Ajout de styles pour la mise en page */
+        .container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .left-column {
+            flex: 1;
+        }
+
+        .right-column {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+        }
+    </style>
     <script defer type="module" src="static/js/correction-page.js"></script>
-    
 </head>
 
 <body>
+    <div class="container">
+        <div class="left-column">
+            <header>
+                <h1><a href="https://lexika.vercel.app/home">Lexika</a></h1>
+            </header>
 
-    <header>
-        <h1 ><a href="https://lexika.vercel.app/home">Lexika</a></h1>
-    </header>
-
-    <span id="tabletop">
-        <span id="tableDiv">
-            <button hidden id="edit">Editer</button>
-            <button hidden id="send">Mise a jour de la base de donnée</button>
-            <table id="table">
-                <thead id="resultTitle"></thead>
-                <tbody id="resultSearch"></tbody>
-            </table>
-            <div id="divswitchbutton">
-                <span id="switchButton">
-                    <button id="prev">Précédent</button>
-                    <button id="next">Suivant</button>
-                    <select id="selectPage"></select>
+            <span id="tabletop">
+                <span id="tableDiv">
+                    <button hidden id="edit">Editer</button>
+                    <button hidden id="send">Mise a jour de la base de donnée</button>
+                    <table id="table">
+                        <thead id="resultTitle"></thead>
+                        <tbody id="resultSearch"></tbody>
+                    </table>
+                    <div id="divswitchbutton">
+                        <span id="switchButton">
+                            <button id="prev">Précédent</button>
+                            <button id="next">Suivant</button>
+                            <select id="selectPage"></select>
+                        </span>
+                    </div>
                 </span>
-            </div>
-        </span>
-    </span>
+            </span>
+        </div>
 
-    <span id="pdf">
-        
-        <span>
-            <input id="showBox" type="checkbox">
-            <label class="clickable" id="labelBox">Afficher les contours</label>
-        </span>
+        <div class="right-column">
+            <span id="pdf">
+                <span>
+                    <input id="showBox" type="checkbox">
+                    <label class="clickable" id="labelBox">Afficher les contours</label>
+                </span>
 
-        <embed id="pdfViewer">
-    </span>
-
-
+                <embed id="pdfViewer">
+            </span>
+        </div>
+    </div>
 </body>
 
 </html>
