@@ -25,7 +25,7 @@ for (let i = 0; i <= MAX_NUM_PAGE; i++) {
 }
 checkBox.checked = showBox;
 let livreBox = livre + "-rectangle";
-let livreStart = "LACITO_Hienghene";
+let livreStart = livre;
 if (showBox) {
     livreStart = livreBox;
 }
