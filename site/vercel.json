@@ -1,19 +1,27 @@
 {
     "version": 2,
     "builds": [
-        {
-            "src": "/server.py",
-            "use": "@vercel/python"
-        },
-        {
-            "src": "/static/**",
-            "use": "@vercel/static"
-        }
+      {
+        "src": "/server.py",
+        "use": "@vercel/python"
+      },
+      {
+        "src": "/static/**",
+        "use": "@vercel/static"
+      }
     ],
     "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "server.py"
+      {
+        "src": "/src/(.*)",
+        "dest": "/src/$1",
+        "headers": {
+          "cache-control": "public, max-age=604800"
         }
+      },
+      {
+        "src": "/(.*)",
+        "dest": "server.py"
+      }
     ]
-}
+  }
+  
