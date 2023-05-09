@@ -126,6 +126,7 @@ async function search(keyword, engine, langueBase, langueResult, page) {
 					createPageCount(json.count);
 					createTableResult(
 						arrayToObject(json.table),
+						json.books, // Ajouter cette ligne
 						langueBase,
 						listeDesLangue(),
 						document.querySelector("#resultTitle"),
@@ -159,6 +160,7 @@ document.querySelector("#search").addEventListener("keypress", (event) => {
 });
 
 async function main() {
+
 	let resp = await fetch("/listLangue", {
 		method: "POST",
 		headers: {
@@ -167,58 +169,38 @@ async function main() {
 		},
 		body: JSON.stringify({ livre: "all" }),
 	});
+
 	listeLangues = await resp.json();
+	
 	for (let langue of listeLangues) {
 		let tmp = document.createElement("option");
 		tmp.innerText = langue;
 		baseSelect.appendChild(tmp);
 	}
+
 	let tmp = document.createElement("option");
 	resultSelect.appendChild(tmp);
 	tmp.innerText = "Toutes les langues";
 	tmp.value = "all";
+
 	for (let langue of listeLangues) {
 		let tmp = document.createElement("option");
 		tmp.innerText = langue;
 		resultSelect.appendChild(tmp);
 	}
-	if (
-		keyword !== null &&
-		numPage !== NaN &&
-		langueBase !== null &&
-		langueTarget !== null
-	) {
+
+	if (keyword !== null && numPage !== NaN && langueBase !== null && langueTarget !== null) {
+
 		input.value = keyword;
 		baseSelect.value = langueBase;
 		engineSelect.value = engine;
 		resultSelect.value = langueTarget;
-		resultSelect.onchange = (_) => {
-			changePage(
-				keyword,
-				engine,
-				langueBase,
-				resultSelect.value,
-				numPage
-			);
-		};
-		engineSelect.onchange = (_) => {
-			changePage(
-				keyword,
-				engineSelect.value,
-				langueBase,
-				langueTarget,
-				numPage
-			);
-		};
-		baseSelect.onchange = (_) => {
-			changePage(
-				keyword,
-				engine,
-				baseSelect.value,
-				langueTarget,
-				numPage
-			);
-		};
+		resultSelect.onchange = (_) => {changePage(keyword,engine,langueBase,resultSelect.value,numPage);};
+
+		engineSelect.onchange = (_) => {changePage(keyword,engineSelect.value,langueBase,langueTarget,numPage);};
+
+		baseSelect.onchange = (_) => {changePage(keyword,engine,baseSelect.value,langueTarget,numPage);};
+
 		await search(keyword, engine, langueBase, langueTarget, numPage);
 	}
 
