@@ -29,3 +29,20 @@
     cursor: pointer;
     user-select: none;
 }
+
+a {
+    color: #ffffff;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
+}
+header {
+    background-color: #333;
+    height: 60px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
