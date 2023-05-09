@@ -66,8 +66,8 @@ button {
 
 #pdfViewer {
     border: solid black 1px;
-    height: 800px;
-    width: 800px;
+    height: 900px;
+    width: 1200px;
 }        
 
 .container {
@@ -87,4 +87,8 @@ button {
     justify-content: flex-end;
     align-items: flex-start;
     margin-right: 20px;
+}
+
+#editbtn {
+    justify-content: center;
 }
