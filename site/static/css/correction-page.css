@@ -44,6 +44,25 @@ a {
     text-align: center;
 }
 
+header {
+    color: #ffffff;
+    background-color: #333;
+    height: 60px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+
+}
+
 
 
 button {
