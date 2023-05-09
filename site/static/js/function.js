@@ -20,7 +20,11 @@ export function createTableResult(tab, books, langueBase, listeLangue, resultTit
 		thLivre = document.createElement("th");
 		const book = books.find((b) => b.id_langue === langue);
 		const bookName = book ? book.nom_livre : "";
-		thLivre.innerHTML = bookName;
+		if (langue === langueBase) {
+			thLivre.innerHTML = "Dictionnaire";
+		} else {
+			thLivre.innerHTML = bookName;
+		}
 		trLivre.appendChild(thLivre);
 	}
 
@@ -82,6 +86,7 @@ export function createTableResult(tab, books, langueBase, listeLangue, resultTit
 		}
 	}
 }
+
 
 
 function playSound(event) {
