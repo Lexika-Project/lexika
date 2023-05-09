@@ -28,20 +28,26 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="left-column">
-            <header>
-                <h1><a href="https://lexika.vercel.app/home">Lexika</a></h1>
-            </header>
 
+    <header>
+        <h1><a href="https://lexika.vercel.app/home">Lexika</a></h1>
+    </header>
+
+    <div class="container">
+
+
+        <div class="left-column">
             <span id="tabletop">
                 <span id="tableDiv">
+
                     <button hidden id="edit">Editer</button>
                     <button hidden id="send">Mise a jour de la base de donnée</button>
+
                     <table id="table">
                         <thead id="resultTitle"></thead>
                         <tbody id="resultSearch"></tbody>
                     </table>
+
                     <div id="divswitchbutton">
                         <span id="switchButton">
                             <button id="prev">Précédent</button>
@@ -49,12 +55,14 @@
                             <select id="selectPage"></select>
                         </span>
                     </div>
+
                 </span>
             </span>
         </div>
 
         <div class="right-column">
             <span id="pdf">
+                
                 <span>
                     <input id="showBox" type="checkbox">
                     <label class="clickable" id="labelBox">Afficher les contours</label>
@@ -63,6 +71,8 @@
                 <embed id="pdfViewer">
             </span>
         </div>
+
+
     </div>
 </body>
 
