@@ -29,3 +29,35 @@
     cursor: pointer;
     user-select: none;
 }
+
+a {
+    color: #ffffff;
+    font-size: 24px;
+    display: flex;
+    height: 60px;
+    padding: 0 20px;
+    text-decoration: none;
+
+}
+
+h1 {
+    background-color: #333;
+    height: 60px;
+    padding: 0 20px;
+    display: flex;
+    text-align: left;
+
+}
+
+
+button {
+    cursor: pointer;
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
