@@ -25,14 +25,13 @@ for (let i = 0; i <= MAX_NUM_PAGE; i++) {
 }
 checkBox.checked = showBox;
 let livreBox = livre + "-rectangle";
-let livreStart = livre;
+let livreStart = "LACITO_Hienghene";
 if (showBox) {
     livreStart = livreBox;
 }
 selectPage.value = numPage;
-document.querySelector(
-    "#pdfViewer"
-).src = `static/pdf/${livreStart}.pdf#page=${numPage}`;
+
+document.querySelector("#pdfViewer").src = `static/pdf/${livreStart}.pdf#page=${numPage}`;
 
 function changePage(num) {
     const url = new URL(window.location);
