@@ -65,9 +65,8 @@ button {
 }
 
 #pdfViewer {
+    display: flex;
     border: solid black 1px;
-    height: 900px;
-    width: 1200px;
 }        
 
 .container {
