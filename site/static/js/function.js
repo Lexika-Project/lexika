@@ -12,11 +12,23 @@ export function createTableResult(tab, books, langueBase, listeLangue, resultTit
 	let trTitle = document.createElement("tr");
 	let th;
 
+	// Créer une ligne pour afficher les noms des livres
+	let trLivre = document.createElement("tr");
+	let thLivre;
+
 	for (let langue of listeLangue) {
-		th = document.createElement("th");
+		thLivre = document.createElement("th");
 		const book = books.find((b) => b.id_langue === langue);
 		const bookName = book ? book.nom_livre : "";
-		th.innerHTML = `${bookName} - ${langue}`;
+		thLivre.innerHTML = bookName;
+		trLivre.appendChild(thLivre);
+	}
+
+	resultTitle.appendChild(trLivre); // Ajouter la ligne avec les noms des livres
+
+	for (let langue of listeLangue) {
+		th = document.createElement("th");
+		th.innerHTML = `${langue}`;
 		trTitle.appendChild(th);
 	}
 
@@ -70,6 +82,7 @@ export function createTableResult(tab, books, langueBase, listeLangue, resultTit
 		}
 	}
 }
+
 
 function playSound(event) {
 	let button = event.target;
