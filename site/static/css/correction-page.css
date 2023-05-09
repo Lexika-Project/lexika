@@ -9,11 +9,6 @@
     transition: background-color 0.3s;
 }
 
-.clickable {
-    cursor: pointer;
-    user-select: none;
-}
-
 a {
     color: #ffffff;
     display: flex;
@@ -98,7 +93,8 @@ button {
     display: none;
 }
 
-body {
+.clickable {
+    cursor: pointer;
+    user-select: none;
     font-family: Arial, sans-serif;
 }
-  
