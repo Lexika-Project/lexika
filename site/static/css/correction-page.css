@@ -59,12 +59,12 @@ button {
 }
 
 #btn {
+    display: flex;
     margin-bottom: 20px;
+    justify-content: center;
 }
 
 #pdfViewer {
-    width: 600px;
-    height: 800px;
     border: solid black 1px;
 }        
 
