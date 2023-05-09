@@ -130,7 +130,8 @@ async function search(keyword, engine, langueBase, langueResult, page) {
 						langueBase,
 						listeDesLangue(),
 						document.querySelector("#resultTitle"),
-						document.querySelector("#resultSearch")
+						document.querySelector("#resultSearch"),
+						true // Ajouter cette ligne pour affichePage
 					);
 				} else {
 					console.log("Error database");
