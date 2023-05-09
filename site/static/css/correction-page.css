@@ -66,6 +66,8 @@ button {
 
 #pdfViewer {
     border: solid black 1px;
+    height: 100%;
+    width: 100%;
 }        
 
 .container {
@@ -76,6 +78,7 @@ button {
 
 .left-column {
     flex: 1;
+    margin-left: 20px;
 }
 
 .right-column {
@@ -83,4 +86,5 @@ button {
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
+    margin-right: 20px;
 }
