@@ -60,7 +60,7 @@ button {
 
 #btn {
     display: flex;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     justify-content: center;
 }
 
@@ -90,6 +90,7 @@ button {
 }
 
 #editbtn {
+    display: flex;
     justify-content: center;
 }
 
