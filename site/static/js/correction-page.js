@@ -1,10 +1,11 @@
 import {
-	createTableResult,
-	arrayToObject,
-	resetSaveChange,
-	listernerOnchangeTable,
-	sendButtonInit,
+    createTableResult,
+    arrayToObject,
+    resetSaveChange,
+    listernerOnchangeTable,
+    sendButtonInit,
 } from "./function.js";
+
 const urlParam = new URLSearchParams(window.location.search);
 const livre = urlParam.get("livre");
 const numPage = parseInt(urlParam.get("page"));
@@ -18,47 +19,46 @@ let sendButton = document.querySelector("#send");
 let checkBox = document.querySelector("#showBox");
 let selectPage = document.querySelector("#selectPage");
 for (let i = 0; i <= MAX_NUM_PAGE; i++) {
-	console.log("oui");
-	const option = document.createElement("option");
-	option.value = i;
-	option.innerText = i;
-	selectPage.appendChild(option);
+    const option = document.createElement("option");
+    option.value = i;
+    option.innerText = i;
+    selectPage.appendChild(option);
 }
 checkBox.checked = showBox;
 let livreBox = livre + "-rectangle";
 let livreStart = livre;
 if (showBox) {
-	livreStart = livreBox;
+    livreStart = livreBox;
 }
 selectPage.value = numPage;
 document.querySelector(
-	"#pdfViewer"
+    "#pdfViewer"
 ).src = `static/pdf/${livreStart}.pdf#page=${numPage}`;
 
 function changePage(num) {
-	const url = new URL(window.location);
-	if (numPage > 1) {
-		const newURL = `${url.pathname}?livre=${livre}&page=${num}&showBox=${checkBox.checked}`;
-		window.location.href = newURL;
-	}
+    const url = new URL(window.location);
+    if (numPage > 1) {
+        const newURL = `${url.pathname}?livre=${livre}&page=${num}&showBox=${checkBox.checked}`;
+        window.location.href = newURL;
+    }
 }
 
 function changePdfBox(bool) {
-	if (checkBox.checked) {
-		document.querySelector(
-			"#pdfViewer"
-		).src = `static/pdf/${livreBox}.pdf#page=${numPage}`;
-	} else {
-		document.querySelector(
-			"#pdfViewer"
-		).src = `static/pdf/${livre}.pdf#page=${numPage}`;
-	}
+    if (checkBox.checked) {
+        document.querySelector(
+            "#pdfViewer"
+        ).src = `static/pdf/${livreBox}.pdf#page=${numPage}`;
+    } else {
+        document.querySelector(
+            "#pdfViewer"
+        ).src = `static/pdf/${livre}.pdf#page=${numPage}`;
+    }
 }
 
 checkBox.addEventListener("click", changePdfBox);
 document.querySelector("#labelBox").addEventListener("click", (_) => {
-	checkBox.checked = !checkBox.checked;
-	changePdfBox();
+    checkBox.checked = !checkBox.checked;
+    changePdfBox();
 });
 
 listernerOnchangeTable(document.querySelector("#table"), editButton);
@@ -67,49 +67,58 @@ sendButtonInit(sendButton);
 
 let listeLangue = "";
 fetch("/listLangue", {
-	method: "POST",
-	headers: {
-		Accept: "application/json",
-		"Content-Type": "application/json",
-	},
-	body: JSON.stringify({ livre: livre }),
+    method: "POST",
+    headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ livre: livre }),
 })
-	.then((resp) => resp.json())
-	.then((json) => {
-		listeLangue = json;
-	});
+    .then((resp) => resp.json())
+    .then((json) => {
+        listeLangue = json;
+    });
 
 fetch("/getPage", {
-	method: "POST",
-	headers: {
-		Accept: "application/json",
-		"Content-Type": "application/json",
-	},
-	body: JSON.stringify({
-		livre: livre,
-		page: numPage,
-	}),
+    method: "POST",
+    headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        livre: livre,
+        page: numPage,
+    }),
 })
-	.then((resp) => resp.json())
-	.then((json) => {
-		createTableResult(
-			arrayToObject(json),
-			"français",
-			listeLangue,
-			document.querySelector("#resultTitle"),
-			document.querySelector("#resultSearch"),
-			false
-		);
-	});
+    .then((resp) => resp.json())
+    .then((json) => {
+        const books = json.map((row) => {
+            return {
+                id_langue: row[1],
+                nom_livre: row[2],
+            };
+        });
+        createTableResult(
+            arrayToObject(json),
+            books,
+            "français",
+            listeLangue,
+            document.querySelector("#resultTitle"),
+            document.querySelector("#resultSearch"),
+            false
+        );
+    });
 
 document.querySelector("#next").onclick = next;
 function next() {
-	changePage(numPage + 1);
+    changePage(numPage + 1);
 }
+
 document.querySelector("#prev").onclick = prev;
 function prev() {
-	changePage(numPage - 1);
+    changePage(numPage - 1);
 }
+
 selectPage.onchange = (e) => {
 	changePage(e.target.value);
 };
