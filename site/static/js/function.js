@@ -32,7 +32,7 @@ export function createTableResult(tab, books, langueBase, listeLangue, resultTit
 	thLivre = document.createElement("th");
 	trLivre.appendChild(thLivre);
 
-	resultTitle.appendChild(trLivre); // Ajouter la ligne avec les noms des livres
+	resultTitle.appendChild(trLivre); 
 
 	for (let langue of listeLangue) {
 		th = document.createElement("th");
@@ -44,6 +44,10 @@ export function createTableResult(tab, books, langueBase, listeLangue, resultTit
 		th = document.createElement("th");
 		th.innerHTML = "page";
 		trTitle.appendChild(th);
+	} else {
+		th = document.createElement("th");
+		trTitle.appendChild(th);
+
 	}
 
 	resultTitle.appendChild(trTitle);

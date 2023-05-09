@@ -10,7 +10,6 @@ const urlParam = new URLSearchParams(window.location.search);
 const livre = urlParam.get("livre");
 const numPage = parseInt(urlParam.get("page"));
 const showBox = urlParam.get("showBox") === "true";
-// todo a changé par une valeur prise dans le pdf
 const MAX_NUM_PAGE = 274;
 resetSaveChange();
 
