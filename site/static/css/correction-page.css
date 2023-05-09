@@ -69,12 +69,12 @@ button {
 }        
 
 .container {
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
 }
 
 .left-column {
-    margin-top: 20px;
     flex: 1;
 }
 
