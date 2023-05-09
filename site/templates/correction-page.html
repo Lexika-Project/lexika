@@ -6,24 +6,6 @@
     <title>Correction page</title>
     <link href="static/css/style.css" rel="stylesheet">
     <link href="static/css/correction-page.css" rel="stylesheet">
-    <style>
-        /* Ajout de styles pour la mise en page */
-        .container {
-            display: flex;
-            flex-direction: row;
-        }
-
-        .left-column {
-            flex: 1;
-        }
-
-        .right-column {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;
-            align-items: flex-start;
-        }
-    </style>
     <script defer type="module" src="static/js/correction-page.js"></script>
 </head>
 
@@ -61,15 +43,16 @@
         </div>
 
         <div class="right-column">
-            <span id="pdf">
 
-                <span id="btn">
-                    <input id="showBox" type="checkbox">
-                    <label class="clickable" id="labelBox">Afficher les contours</label>
-                </span>
+            <div id="btn">
+                <input id="showBox" type="checkbox">
+                <label class="clickable" id="labelBox">Afficher les contours</label>
+            </div>
 
+            <div>
                 <embed id="pdfViewer">
-            </span>
+            </div>
+
         </div>
 
 
