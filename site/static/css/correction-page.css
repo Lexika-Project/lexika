@@ -74,19 +74,15 @@ button {
 }
 
 #tabletop {
-    position: fixed;
-    top: 10%;
-    right: 1%;
-    width: 45%;
-    height: 80%;
+    margin-top:20px ;
+    width: 500px;
+    height: 800px;
     text-align: center;
 }
 
 #pdf {
-    position: fixed;
-    top: 10%;
-    left: 1%;
-    width: 45%;
-    height: 80%;
+    margin-top:20px ;
+    width: 500px;
+    height: 800px;
     text-align: center;
 }
