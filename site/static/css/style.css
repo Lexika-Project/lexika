@@ -97,12 +97,6 @@ table th {
     margin-bottom: 20px;
 }
 
-.clickable {
-    padding: 10px;
-    font-size: 18px;
-    border-radius: 4px;
-    margin-bottom: 10px;
-}
 
 .pageNumber, .currentPage {
     font-size: 16px;
@@ -179,3 +173,15 @@ select {
     margin-right: 20px;
 }
 
+
+.clickable {
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #333;
+    border: 1px solid #333;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    transition: background-color 0.4s;
+}
