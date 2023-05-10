@@ -15,12 +15,15 @@
     <header>
         <h1><a href="https://lexika.vercel.app/home">Lexika</a></h1>
     </header>
+
     <div id="topdiv">
         <span><select id="engineSelect"><option value="tsquery">TsQuery</option><option value="regex">Regex</option></select></span>
         <span><input type="text" id="search" placeholder="Chercher" value=""></span>
         <span><button id="searchButton">Recherche <i class="fa fa-search"></i></button></span>
     </div>
+
     <div id="rgbtn"><button id="regex-btn">Expression régulière</button></div>
+
     <div id="searchDiv">
         <div id="optionsDiv">
             
@@ -30,6 +33,7 @@
         </div>
         <div id="regex-commands" style="display: none;"></div>
     </div>
+
     <div id="tableDiv">
         <button hidden id="edit">Editer</button>
         <button hidden id="send">Mise à jour de la base de données</button>
@@ -43,6 +47,7 @@
             <button hidden class="clickable" id="next">Suivant</button>
         </div>
     </div>
+    
 </body>
 
 </html>
