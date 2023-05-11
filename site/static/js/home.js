@@ -141,6 +141,9 @@ async function search(keyword, engine, langueBase, langueResult, page) {
                     );
                 } else {
                     console.log("Error database");
+					const message = document.createElement('p');
+					message.textContent = 'Aucun résultat trouvé pour votre recherche.';
+					document.querySelector('body').appendChild(message);
                 }
             });
     }
