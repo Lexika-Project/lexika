@@ -121,31 +121,38 @@ async function search(keyword, engine, langueBase, langueResult, page) {
             .then((resp) => {
                 return resp.json();
             })
-            .then((json) => {
-                if (json.verif === "ok") {
-                    const books = json.table.map((row) => {
-                        return {
-                            id_langue: row[0],
-                            nom_livre: row[4],
-                        };
-                    });
-                    createPageCount(json.count);
-                    createTableResult(
-                        arrayToObject(json.table),
-                        books,
-                        langueBase,
-                        listeDesLangue(),
-                        document.querySelector("#resultTitle"),
-                        document.querySelector("#resultSearch"),
-                        true
-                    );
-                } else {
-                    console.log("Error database");
-					const message = document.createElement('p');
-					message.textContent = 'Aucun résultat trouvé pour votre recherche.';
-					document.querySelector('body').appendChild(message);
-                }
-            });
+			.then((json) => {
+				if (json.verif === "ok") {
+					if (json.table.length === 0) {
+						// Aucun résultat trouvé
+						console.log("Aucun résultat trouvé pour votre recherche.");
+						const message = document.createElement('p');
+						message.textContent = 'Aucun résultat trouvé pour votre recherche.';
+						document.querySelector('body').appendChild(message);
+					} else {
+						// Résultats trouvés
+						const books = json.table.map((row) => {
+							return {
+								id_langue: row[0],
+								nom_livre: row[4],
+							};
+						});
+						createPageCount(json.count);
+						createTableResult(
+							arrayToObject(json.table),
+							books,
+							langueBase,
+							listeDesLangue(),
+							document.querySelector("#resultTitle"),
+							document.querySelector("#resultSearch"),
+							true
+						);
+					}
+				} else {
+					console.log("Error database");
+				}
+			});
+			
     }
 }
 document.querySelector("#searchButton").addEventListener("click", (_) => {
