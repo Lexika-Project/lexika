@@ -2,7 +2,7 @@ full-pdf
 test*.py
 lib
 output
-audio
+*.mp3
 .env
 
 # documents sources
