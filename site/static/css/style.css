@@ -190,12 +190,12 @@ p {
     justify-content: center;
     align-items: center;
     height: 30px;
-    width: fit-content;
-    text-align: center;
-    border: 2px solid #333;
-    border-radius: 4px;
+    width: fit-conten;
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #ccc;
     padding: 10px;
-    box-sizing: border-box;
-    font-size: 20px;
-    background-color: #f2f2f2;
+    font-size: 18px;
+    border-radius: 10px;
 }
+
