@@ -14,6 +14,8 @@ os.chdir(os.path.dirname(__file__))
 
 if os.path.exists(".env"):
     config = dotenv_values(".env")
+elif os.path.exists("../../.env"):
+    config = dotenv_values("../../.env")
 else:
     config = {
         "USER": os.environ.get("USER_DB"),
