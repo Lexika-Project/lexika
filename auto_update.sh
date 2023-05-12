@@ -4,6 +4,7 @@ do
     git fetch > /dev/null
     output_git=$(git status -uno)
     output_ps=$(ps -a)
+
     if [[ $output_git == *"behind"* || $output_ps != *"python"* ]]
     then 
         screen -X -S server quit
