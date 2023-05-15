@@ -42,7 +42,7 @@ export function createTableResult(tab, books, langueBase, listeLangue, resultTit
 			for (let langue of listeLangue) {
 				td = document.createElement("td");
 				if (ligne.has(langue)) {
-					td.innerHTML = `<a class="linkHistory" target="_blank" rel="noopener noreferrer" href="historique?sens=${sens}&langue=${langue}">${ligne.get(langue).text}</a>`;
+					td.innerHTML = `<a class="linkHistory"  rel="noopener noreferrer" href="historique?sens=${sens}&langue=${langue}">${ligne.get(langue).text}</a>`;
 					if (
 						ligne.get(langue).audioLink !== null &&
 						ligne.get(langue).audioLink !== undefined
@@ -64,7 +64,7 @@ export function createTableResult(tab, books, langueBase, listeLangue, resultTit
 				td = document.createElement("td");
 				let num = ligne.get(langueBase).numeroPage;
 				let livre = ligne.get(langueBase).nomLivre;
-				td.innerHTML = `<a class="linkPdf" target="_blank" rel="noopener noreferrer" href="correction-page?livre=${livre}&page=${num}&showBox=false">${num}</a>`;
+				td.innerHTML = `<a class="linkPdf"  rel="noopener noreferrer" href="correction-page?livre=${livre}&page=${num}&showBox=false">${num}</a>`;
 				tr.appendChild(td);
 			}
 
