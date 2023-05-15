@@ -132,7 +132,7 @@ table th {
 
 #search {
     cursor: pointer;
-    width: 300px;
+    width: 400px;
     padding: 10px;
     font-size: 18px;
     background-color: #ffffff;
@@ -197,13 +197,4 @@ p {
     padding: 10px;
     font-size: 18px;
     border-radius: 10px;
-}
-
-#searchtype {
-    background-color: #333;
-    color: #ffffff;
-    border: 1px solid #ccc;
-    padding: 10px;
-    font-size: 18px;
-    border-radius: 4px;
 }
