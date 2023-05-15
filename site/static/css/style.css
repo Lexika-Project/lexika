@@ -199,6 +199,14 @@ p {
     border-radius: 10px;
 }
 
-#regex-btn{
-    align-items: end;
+#regex-btn {
+    align-self: flex-end;
+    justify-self: flex-end;
 }
+  
+#span_regex {
+    position: absolute;
+    right: 0;
+}
+  
+  
