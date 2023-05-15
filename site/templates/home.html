@@ -26,7 +26,7 @@
                 <option value="regex">Expression régulière</option>
             </select></span>
         <span><input type="text" id="search" placeholder="Chercher" value=""></span>
-        <span><button id="searchButton">Recherche <i class="fa fa-search"></i></button></span>
+        <span><button class="bouton" id="searchButton">Recherche <i class="fa fa-search"></i></button></span>
     </div>
 
     <div id="searchDiv">
@@ -41,8 +41,8 @@
 
     <div id="tableDiv">
 
-        <button hidden id="edit">Editer</button>
-        <button hidden id="send">Mise à jour de la base de données</button>
+        <button class="bouton" hidden id="edit">Editer</button>
+        <button class="bouton" hidden id="send">Mise à jour de la base de données</button>
 
         <table id="table">
             <thead id="resultTitle"></thead>
@@ -50,9 +50,9 @@
         </table>
 
         <div id="pagination">
-            <button hidden class="clickable" id="prev">Précédent</button>
+            <button class="bouton" hidden class="clickable" id="prev">Précédent</button>
             <span id="pageDisplay"></span>
-            <button hidden class="clickable" id="next">Suivant</button>
+            <button class="bouton" hidden class="clickable" id="next">Suivant</button>
         </div>
 
     </div>
