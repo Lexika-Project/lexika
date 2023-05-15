@@ -14,28 +14,6 @@ export function createTableResult(tab, books, langueBase, listeLangue, resultTit
 	let trTitle = document.createElement("tr");
 	let th;
 
-	// Créer une ligne pour afficher les noms des livres
-	let trLivre = document.createElement("tr");
-	let thLivre;
-
-	for (let langue of listeLangue) {
-		thLivre = document.createElement("th");
-		const book = books.find((b) => b.id_langue === langue);
-		const bookName = book ? book.nom_livre : "";
-		if (langue === langueBase) {
-			thLivre.innerHTML = "Dictionnaire";
-		} else {
-			thLivre.innerHTML = bookName;
-		}
-		trLivre.appendChild(thLivre);
-	}
-
-	// Ajouter une colonne vide à la fin de la ligne trLivre
-	thLivre = document.createElement("th");
-	trLivre.appendChild(thLivre);
-
-	resultTitle.appendChild(trLivre); 
-
 	for (let langue of listeLangue) {
 		th = document.createElement("th");
 		th.innerHTML = `${langue}`;
