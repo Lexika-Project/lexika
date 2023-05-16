@@ -1,11 +1,5 @@
 export function createTableResult(tab, books, langueBase, listeLangue, resultTitle, resultSearch, affichePage) {
 
-	if (affichePage === undefined) {
-		affichePage = true;
-	}
-
-	
-
 	let editButton = document.querySelector("#edit");
 	let sendButton = document.querySelector("#send");
 	editButton.hidden = false;
@@ -18,16 +12,6 @@ export function createTableResult(tab, books, langueBase, listeLangue, resultTit
 		th = document.createElement("th");
 		th.innerHTML = `${langue}`;
 		trTitle.appendChild(th);
-	}
-
-	if (affichePage) {
-		th = document.createElement("th");
-		th.innerHTML = "page";
-		trTitle.appendChild(th);
-	} else {
-		th = document.createElement("th");
-		trTitle.appendChild(th);
-
 	}
 
 	resultTitle.appendChild(trTitle);
@@ -60,20 +44,10 @@ export function createTableResult(tab, books, langueBase, listeLangue, resultTit
 				td.addEventListener("keypress", keyHandler);
 				tr.appendChild(td);
 			}
-			if (affichePage) {
-				td = document.createElement("td");
-				let num = ligne.get(langueBase).numeroPage;
-				let livre = ligne.get(langueBase).nomLivre;
-				td.innerHTML = `<a class="linkPdf"  rel="noopener noreferrer" href="correction-page?livre=${livre}&page=${num}&showBox=false">${num}</a>`;
-				tr.appendChild(td);
-			}
-
 			resultSearch.appendChild(tr);
 		}
 	}
 }
-
-
 
 function playSound(event) {
 	let button = event.target;
@@ -85,39 +59,6 @@ function playSound(event) {
 	playSound.currentSound.play();
 }
 
-export function arrayToObject(arr, affichePage) {
-	if (affichePage === undefined) {
-		affichePage = true;
-	}
-	let tab = [];
-	let currentSens = -1;
-	let tmp = undefined;
-	for (let element of arr) {
-		if (element[2] !== currentSens) {
-			currentSens = element[2];
-			if (tmp !== undefined) {
-				tab.push(tmp);
-			}
-			tmp = new Map();
-		}
-		if (affichePage) {
-			tmp.set(element[0], {
-				text: element[1],
-				sens: element[2],
-				numeroPage: element[3],
-				nomLivre: element[4],
-				audioLink: element[5],
-			});
-		} else {
-			tmp.set(element[0], {
-				text: element[1],
-				sens: element[2],
-			});
-		}
-	}
-	tab.push(tmp);
-	return tab;
-}
 let saveChange = new Map();
 
 export function resetSaveChange() {
