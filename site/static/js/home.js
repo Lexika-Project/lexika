@@ -131,16 +131,9 @@ async function search(keyword, engine, langueBase, langueResult, page) {
 						document.querySelector('body').appendChild(message);
 					} else {
 						// Résultats trouvés
-						const books = json.table.map((row) => {
-							return {
-								id_langue: row[0],
-								nom_livre: row[4],
-							};
-						});
 						createPageCount(json.count);
 						createTableResult(
 							arrayToObject(json.table),
-							books,
 							langueBase,
 							listeDesLangue(),
 							document.querySelector("#resultTitle"),

@@ -104,7 +104,6 @@ fetch("/getPage", {
             listeLangue,
             document.querySelector("#resultTitle"),
             document.querySelector("#resultSearch"),
-            false
         );
     });
 

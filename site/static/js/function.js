@@ -1,4 +1,4 @@
-export function createTableResult(tab, books, langueBase, listeLangue, resultTitle, resultSearch, affichePage) {
+export function createTableResult(tab, langueBase, listeLangue, resultTitle, resultSearch) {
 
 	let editButton = document.querySelector("#edit");
 	let sendButton = document.querySelector("#send");
@@ -44,10 +44,13 @@ export function createTableResult(tab, books, langueBase, listeLangue, resultTit
 				td.addEventListener("keypress", keyHandler);
 				tr.appendChild(td);
 			}
+
 			resultSearch.appendChild(tr);
 		}
 	}
 }
+
+
 
 function playSound(event) {
 	let button = event.target;
@@ -57,6 +60,30 @@ function playSound(event) {
 	playSound?.currentSound?.pause();
 	playSound.currentSound = new Audio("/static/audio/" + button.audioLink);
 	playSound.currentSound.play();
+}
+
+export function arrayToObject(arr) {
+	
+	let tab = [];
+	let currentSens = -1;
+	let tmp = undefined;
+	for (let element of arr) {
+		if (element[2] !== currentSens) {
+			currentSens = element[2];
+			if (tmp !== undefined) {
+				tab.push(tmp);
+			}
+			tmp = new Map();
+		}
+		tmp.set(element[0], {
+			text: element[1],
+			sens: element[2],
+			nomLivre: element[4],
+			audioLink: element[5],
+		});
+	}
+	tab.push(tmp);
+	return tab;
 }
 
 let saveChange = new Map();
