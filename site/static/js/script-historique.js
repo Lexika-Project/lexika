@@ -29,25 +29,22 @@ function createTable(saveChange) {
 	const lastEntry = Array.from(saveChange).pop();
 	const lines = Array.from(lastEntry[1].values()); // Obtenir les lignes de la dernière entrée de la map
   
-	lines.forEach((line) => {
-	  const tr = document.createElement("tr");
-  
+
 	  // Date
-	  const tdDate = document.createElement("td");
-	  const date = new Date(line.date);
-	  const hours = String(date.getHours()).padStart(2, "0");
-	  const min = String(date.getMinutes()).padStart(2, "0");
-	  const second = String(date.getSeconds()).padStart(2, "0");
-	  tdDate.innerText = `${hours}:${min}:${second}, ${date.toLocaleDateString("fr")}`;
-	  tr.appendChild(tdDate);
+	const tdDate = document.createElement("td");
+	const date = new Date(line.date);
+	const hours = String(date.getHours()).padStart(2, "0");
+	const min = String(date.getMinutes()).padStart(2, "0");
+	const second = String(date.getSeconds()).padStart(2, "0");
+	tdDate.innerText = `${hours}:${min}:${second}, ${date.toLocaleDateString("fr")}`;
+	tr.appendChild(tdDate);
   
 	  // Traduction
-	  const tdTranslation = document.createElement("td");
-	  tdTranslation.innerText = line.text;
-	  tr.appendChild(tdTranslation);
+	const tdTranslation = document.createElement("td");
+	tdTranslation.innerText = line.text;
+	tr.appendChild(tdTranslation);
   
-	  result.appendChild(tr);
-	});
+	result.appendChild(tr);
   }
   
 
@@ -180,8 +177,24 @@ dragBox.addEventListener("drop", (event) => {
 	}
 });
 
+function changePdfBox(bool) {
+    if (checkBox.checked) {
+        document.querySelector(
+            "#pdfViewer"
+        ).src = `static/pdf/${livreBox}.pdf#page=${numPage}`;
+    } else {
+        document.querySelector(
+            "#pdfViewer"
+        ).src = `static/pdf/${livre}.pdf#page=${numPage}`;
+    }
+}
+
 listernerOnchangeTable(document.querySelector("#table"), editButton);
 
 sendButtonInit(sendButton);
 
 checkBox.addEventListener("click", changePdfBox);
+document.querySelector("#labelBox").addEventListener("click", (_) => {
+    checkBox.checked = !checkBox.checked;
+    changePdfBox();
+});
