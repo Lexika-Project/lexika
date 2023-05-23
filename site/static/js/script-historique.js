@@ -7,6 +7,7 @@ const sens = urlParam.get("sens");
 const ALLOWED_EXTENTION = ["mp3", "wav"];
 const MAX_NUM_PAGE = 274;
 
+let saveChange = []
 let editButton = document.querySelector("#edit");
 let sendButton = document.querySelector("#send");
 let checkBox = document.querySelector("#showBox");
@@ -22,65 +23,40 @@ if (showBox) {
 
 document.querySelector("#pdfViewer").src = `static/pdf/${livreStart}.pdf#page=${numPage}`;
 
-function createTable(saveChange) {
+function createTable(data) {
     let table = document.querySelector("#resultHistory");
-    table.innerHTML = ""; // Clear the table first
-
-    let data = arrayToObject(saveChange);
-    let header = document.createElement("tr");
-
-    // Assume we have the same keys for each nested map
-    let keys = Array.from(data.values().next().values()).next().keys();
-    for (let key of keys) {
-        let th = document.createElement("th");
-        th.innerText = key;
-        header.appendChild(th);
+    table.innerHTML = "";  // Clear the table first
+    for (let [date, value] of data) {
+        let tr = document.createElement("tr");
+        let td1 = document.createElement("td");
+        let td2 = document.createElement("td");
+        td1.textContent = date;
+        td2.textContent = value;
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        table.appendChild(tr);
     }
-    table.appendChild(header);
-
-    for (let [sens, map] of data) {
-        let row = document.createElement("tr");
-        for (let [langue, text] of map) {
-            let td = document.createElement("td");
-            td.innerText = text;
-            td.sens = sens;
-            td.langue = langue;
-            row.appendChild(td);
-        }
-        table.appendChild(row);
-    }
-}
-
-  
-
-function arrayToObject(arr) {
-	const map = new Map();
-	for (const [langue, sens, text] of arr) {
-	  if (!map.has(sens)) {
-		map.set(sens, new Map());
-	  }
-	  map.get(sens).set(langue, text);
-	}
-	return map;
-}
-
-function resetSaveChange() {
-	saveChange = new Map(); // Créer une nouvelle map
 }
 
 
 function sendButtonInit(sendButton) {
 	sendButton.addEventListener("click", (_) => {
+		let dataToSend = Array.from(document.querySelectorAll("#resultHistory tr")).map(tr => {
+			let date = tr.children[0].innerText;
+			let value = tr.children[1].innerText;
+			return [date, value];
+		});
 		fetch("/edit", {
 			method: "POST",
 			headers: {
 				Accept: "application/json",
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(mapToArray()),
+			body: JSON.stringify(dataToSend),
 		});
 	});
 }
+
 
 function listernerOnchangeTable(table, editButton) {
 	editButton.onclick = (_) => {
@@ -95,49 +71,43 @@ function listernerOnchangeTable(table, editButton) {
 	};
 	table.addEventListener("keyup", (event) => {
 		if (event.target.tagName.toLowerCase() === "td") {
-			let sens = event.target.sens;
-			let langue = event.target.langue;
+			let rowIndex = event.target.parentElement.rowIndex;
+			let columnIndex = event.target.cellIndex;
 			let text = event.target.innerText;
-			if (!saveChange.has(sens)) {
-				saveChange.set(sens, new Map());
+			if (columnIndex === 0) {
+				// Update date
+				saveChange[rowIndex][0] = text;
+			} else {
+				// Update value
+				saveChange[rowIndex][1] = text;
 			}
-			saveChange.get(sens).set(langue, text);
 		}
 	});
 }
 
-function mapToArray() {
-	let res = [];
-	for (let sens of saveChange) {
-		let reelSens = sens[0];
-		for (let element of sens[1]) {
-			res.push(element.concat([reelSens]));
-		}
-	}
-	return res;
-}
 
 
 fetch("/historyRequest", {
-	method: "POST",
-	headers: {
-	  Accept: "application/json",
-	  "Content-Type": "application/json",
-	},
-	body: JSON.stringify({
-	  langue: langue,
-	  sens: sens,
-	}),
+    method: "POST",
+    headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        langue: langue,
+        sens: sens,
+    }),
 })
 .then((resp) => {
     return resp.json();
 })
 .then((json) => {
-    // Assume the json is an array with structure [["langue", "sens", "text"]]
-	console.log(json);
-    saveChange = arrayToObject(json);
-    createTable(saveChange);
+    console.log(json);
+    createTable(json);
+    saveChange = json.slice();  // Copy the json data to saveChange
 });
+
+
 
   
 
