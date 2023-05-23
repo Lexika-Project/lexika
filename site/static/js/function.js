@@ -80,6 +80,7 @@ export function arrayToObject(arr) {
 		tmp.set(element[0], {
 			text: element[1],
 			sens: element[2],
+			numeroPage: element[3],
 			nomLivre: element[4],
 			audioLink: element[5],
 		});
