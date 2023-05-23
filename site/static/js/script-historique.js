@@ -61,13 +61,14 @@ function changePdfBox(bool) {
 
 function sendButtonInit(sendButton) {
 	sendButton.addEventListener("click", (_) => {
+		const tableData = getTableData();
 		fetch("/edit", {
 			method: "POST",
 			headers: {
 				Accept: "application/json",
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(mapToArray()),
+			body: JSON.stringify(tableData),
 		});
 	});
 }
@@ -88,25 +89,53 @@ function listernerOnchangeTable(table, editButton) {
 			let sens = event.target.sens;
 			let langue = event.target.langue;
 			let text = event.target.innerText;
-			if (!saveChange.has(sens)) {
-				saveChange.set(sens, new Map());
-			}
-			saveChange.get(sens).set(langue, text);
+			updateTableData(sens, langue, text);
 		}
 	});
 }
 
-function mapToArray() {
-	let res = [];
-	for (let sens of saveChange) {
-		let reelSens = sens[0];
-		for (let element of sens[1]) {
-			res.push(element.concat([reelSens]));
-		}
-	}
-	return res;
+function getTableData() {
+	const tableData = [];
+	const tableRows = document.querySelectorAll("#table tr");
+
+	tableRows.forEach((row) => {
+		const rowData = [];
+		const cells = row.querySelectorAll("td");
+
+		cells.forEach((cell) => {
+			const sens = cell.getAttribute("sens");
+			const langue = cell.getAttribute("langue");
+			const text = cell.innerText;
+			rowData.push({ sens, langue, text });
+		});
+
+		tableData.push(rowData);
+	});
+
+	return tableData;
 }
 
+function updateTableData(sens, langue, text) {
+	const tableData = getTableData();
+	let updated = false;
+
+	for (let i = 0; i < tableData.length; i++) {
+		const rowData = tableData[i];
+		for (let j = 0; j < rowData.length; j++) {
+			const cellData = rowData[j];
+			if (cellData.sens === sens && cellData.langue === langue) {
+				tableData[i][j].text = text;
+				updated = true;
+				break;
+			}
+		}
+		if (updated) {
+			break;
+		}
+	}
+
+	return tableData;
+}
 
 fetch("/historyRequest", {
 	method: "POST",
