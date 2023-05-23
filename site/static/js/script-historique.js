@@ -26,17 +26,22 @@ document.querySelector("#pdfViewer").src = `static/pdf/${livreStart}.pdf#page=${
 function createTable(data) {
     // Retrieve the table from the DOM
     const table = document.querySelector("#resultHistory");
+	const head = document.querySelector("#resulthead");
 
-    // Remove existing rows in the table, if any
-    while (table.firstChild) {
-        table.removeChild(table.firstChild);
-    }
 
     // Get the last row from data
     let lastRow = data[data.length - 1];
 
     // Create a new row
+	let th = document.createElement("tr");
     let tr = document.createElement("tr");
+
+	th.appendChild("Livre");
+	th.appendChild("Langue");
+	th.appendChild("Mot");
+	th.appendChild("Page");
+
+	head.appendChild(th);
 
     // Create and append 'livre' cell
     let tdLivre = document.createElement("td");
