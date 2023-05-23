@@ -134,6 +134,7 @@ fetch("/historyRequest", {
 })
 .then((json) => {
     // Assume the json is an array with structure [["langue", "sens", "text"]]
+	console.log(json);
     saveChange = arrayToObject(json);
     createTable(saveChange);
 });
