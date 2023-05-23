@@ -1,13 +1,23 @@
+import {
+	listernerOnchangeTable,
+	sendButtonInit,
+} from "./function.js";
+
 const urlParam = new URLSearchParams(window.location.search);
 const langue = urlParam.get("langue");
 const sens = urlParam.get("sens");
 const ALLOWED_EXTENTION = ["mp3", "wav"];
+let editButton = document.querySelector("#edit");
+let sendButton = document.querySelector("#send");
+editButton.hidden = false;
+sendButton.hidden = false;
 
 presentation = document.querySelector("#presentation");
 presentation.innerText = `Historique du sens ${sens} en ${langue}`;
 
 function createTable(json) {
 	result = document.querySelector("#resultHistory");
+
 	for (let line of json) {
 		let tr = document.createElement("tr");
 
@@ -91,3 +101,7 @@ dragBox.addEventListener("drop", (event) => {
 		}, 5000);
 	}
 });
+
+listernerOnchangeTable(document.querySelector("#table"), editButton);
+
+sendButtonInit(sendButton);
