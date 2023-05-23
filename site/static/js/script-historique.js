@@ -1,4 +1,7 @@
 import {
+	createTableResult,
+	arrayToObject,
+	resetSaveChange,
 	listernerOnchangeTable,
 	sendButtonInit,
 } from "./function.js";
