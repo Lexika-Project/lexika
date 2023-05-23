@@ -115,7 +115,6 @@ export function sendButtonInit(sendButton) {
 		});
 	});
 }
-
 export function listernerOnchangeTable(table, editButton) {
 	editButton.onclick = (_) => {
 		for (let td of document.querySelectorAll("td")) {
@@ -127,7 +126,6 @@ export function listernerOnchangeTable(table, editButton) {
 			}
 		}
 	};
-
 	table.addEventListener("keyup", (event) => {
 		if (event.target.tagName.toLowerCase() === "td") {
 			let sens = event.target.sens;

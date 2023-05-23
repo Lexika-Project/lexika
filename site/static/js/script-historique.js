@@ -12,6 +12,7 @@ presentation = document.querySelector("#presentation");
 presentation.innerText = `Historique du sens ${sens} en ${langue}`;
 
 function createTable(json) {
+	
 	let editButton = document.querySelector("#edit");
 	let sendButton = document.querySelector("#send");
 	editButton.hidden = false;
