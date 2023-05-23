@@ -8,6 +8,7 @@ presentation.innerText = `Historique du sens ${sens} en ${langue}`;
 
 function createTable(json) {
 	result = document.querySelector("#resultHistory");
+
 	for (let line of json) {
 		let tr = document.createElement("tr");
 
@@ -22,14 +23,38 @@ function createTable(json) {
 		)}`;
 		tr.appendChild(td);
 
-		// traduction
+		// Traduction
 		td = document.createElement("td");
 		td.innerText = line[1];
+		tr.appendChild(td);
+
+		// Mot en français
+		td = document.createElement("td");
+		td.innerText = line[2];  // Suppose que le mot en français se trouve à l'index 2
+		tr.appendChild(td);
+
+		// Boutons Editer et Mettre à jour
+		td = document.createElement("td");
+		let editButton = document.createElement("button");
+		editButton.innerText = "Editer";
+		editButton.addEventListener("click", (e) => {
+			// Ajouter ici la logique pour l'édition
+		});
+		td.appendChild(editButton);
+		
+		let updateButton = document.createElement("button");
+		updateButton.innerText = "Mettre à jour";
+		updateButton.addEventListener("click", (e) => {
+			// Ajouter ici la logique pour la mise à jour
+		});
+		td.appendChild(updateButton);
+
 		tr.appendChild(td);
 
 		result.appendChild(tr);
 	}
 }
+
 
 fetch("/historyRequest", {
 	method: "POST",
