@@ -174,3 +174,7 @@ listernerOnchangeTable(document.querySelector("#table"), editButton);
 sendButtonInit(sendButton);
 
 checkBox.addEventListener("click", changePdfBox);
+document.querySelector("#labelBox").addEventListener("click", (_) => {
+    checkBox.checked = !checkBox.checked;
+    changePdfBox();
+});
