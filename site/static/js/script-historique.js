@@ -23,32 +23,34 @@ if (showBox) {
 document.querySelector("#pdfViewer").src = `static/pdf/${livreStart}.pdf#page=${numPage}`;
 
 function createTable(saveChange) {
-	const result = document.querySelector("#resultHistory");
-	result.innerHTML = ""; // Effacer le contenu du tableau
-  
-	const lastEntry = Array.from(saveChange).pop();
-	const lines = Array.from(lastEntry[1].values()); // Obtenir les lignes de la dernière entrée de la map
-  
-	lines.forEach((line) => {
-	  const tr = document.createElement("tr");
-  
-	  // Date
-	  const tdDate = document.createElement("td");
-	  const date = new Date(line.date);
-	  const hours = String(date.getHours()).padStart(2, "0");
-	  const min = String(date.getMinutes()).padStart(2, "0");
-	  const second = String(date.getSeconds()).padStart(2, "0");
-	  tdDate.innerText = `${hours}:${min}:${second}, ${date.toLocaleDateString("fr")}`;
-	  tr.appendChild(tdDate);
-  
-	  // Traduction
-	  const tdTranslation = document.createElement("td");
-	  tdTranslation.innerText = line.text;
-	  tr.appendChild(tdTranslation);
-  
-	  result.appendChild(tr);
-	});
+    let table = document.querySelector("#resultHistory");
+    table.innerHTML = ""; // Clear the table first
+
+    let data = arrayToObject(saveChange);
+    let header = document.createElement("tr");
+
+    // Assume we have the same keys for each nested map
+    let keys = Array.from(data.values().next().values()).next().keys();
+    for (let key of keys) {
+        let th = document.createElement("th");
+        th.innerText = key;
+        header.appendChild(th);
+    }
+    table.appendChild(header);
+
+    for (let [sens, map] of data) {
+        let row = document.createElement("tr");
+        for (let [langue, text] of map) {
+            let td = document.createElement("td");
+            td.innerText = text;
+            td.sens = sens;
+            td.langue = langue;
+            row.appendChild(td);
+        }
+        table.appendChild(row);
+    }
 }
+
   
 
 function arrayToObject(arr) {
@@ -126,16 +128,16 @@ fetch("/historyRequest", {
 	  langue: langue,
 	  sens: sens,
 	}),
-  })
-	.then((resp) => {
-	  return resp.json();
-	})
-	.then((json) => {
-		console.log(JSON.stringify(json));
-		resetSaveChange(); // Réinitialiser la map saveChange
-		saveChange = new Map(arrayToObject(json.table)); // Convertir le JSON en map avec la nouvelle fonction arrayToObject
-		createTable(saveChange); // Passer la map saveChange à createTable
-	});
+})
+.then((resp) => {
+    return resp.json();
+})
+.then((json) => {
+    // Assume the json is an array with structure [["langue", "sens", "text"]]
+    saveChange = arrayToObject(json);
+    createTable(saveChange);
+});
+
   
 
 const dragBox = document.querySelector(".drag-audio");
