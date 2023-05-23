@@ -16,51 +16,54 @@
 
     <div id="unsupported-extention-popup" hidden></div>
 
-    <div class="left-column">
+    <div class="container">
+        <div class="left-column">
 
-        <span id="editbtn">
-            <button class="bouton" hidden id="edit">Editer</button>
-            <button class="bouton" hidden id="send">Mise a jour de la base de donnée</button>
-        </span>
-        
-        <table id="table">
+            <span id="editbtn">
+                <button class="bouton" hidden id="edit">Editer</button>
+                <button class="bouton" hidden id="send">Mise a jour de la base de donnée</button>
+            </span>
+            
+            <table id="table">
 
-            <thead>
+                <thead>
 
-                <tr>
-                    <th>Date de création</th>
-                    <th>Traduction</th>
-                </tr>
+                    <tr>
+                        <th>Date de création</th>
+                        <th>Traduction</th>
+                    </tr>
 
-            <tbody id="resultHistory"></tbody>
+                <tbody id="resultHistory"></tbody>
 
-            </thead>
+                </thead>
 
-        </table>
+            </table>
 
-    </div>
-
-    <div class="right-column">
-
-        <div id="btn">
-            <input id="showBox" type="checkbox">
-            <label class="clickable" id="labelBox">Afficher les contours</label>
         </div>
 
-        <div>
-            <embed id="pdfViewer">
+        <div class="right-column">
+
+            <div id="btn">
+                <input id="showBox" type="checkbox">
+                <label class="clickable" id="labelBox">Afficher les contours</label>
+            </div>
+
+            <div>
+                <embed id="pdfViewer">
+            </div>
+
+        </div>
+
+        <div class="drag-audio">
+
+            <h2>Glisser un fichier audio</h2>
+            <span>OU</span>
+            <button class="bouton">Chercher un fichier</button>
+
         </div>
 
     </div>
-
-    <div class="drag-audio">
-
-        <h2>Glisser un fichier audio</h2>
-        <span>OU</span>
-        <button class="bouton">Chercher un fichier</button>
-
-    </div>
-
+    
 </body>
 
 </html>
