@@ -52,30 +52,19 @@ function createTable(saveChange) {
   
 
 function arrayToObject(arr) {
-	let tab = [];
-	let currentSens = -1;
-	let tmp = undefined;
-	for (let element of arr) {
-	  if (element[2] !== currentSens) {
-		currentSens = element[2];
-		if (tmp !== undefined) {
-		  tab.push(tmp);
-		}
-		tmp = new Map();
+	const map = new Map();
+	for (const [langue, sens, text] of arr) {
+	  if (!map.has(sens)) {
+		map.set(sens, new Map());
 	  }
-	  tmp.set(element[0], {
-		text: element[1],
-		sens: element[2],
-		nomLivre: element[4],
-		audioLink: element[5],
-	  });
+	  map.get(sens).set(langue, text);
 	}
-	if (tmp !== undefined) {
-	  tab.push(tmp);
-	}
-	return tab;
-  }
-  
+	return map;
+}
+
+function resetSaveChange() {
+	saveChange = new Map(); // Créer une nouvelle map
+}
 
 
 function sendButtonInit(sendButton) {
