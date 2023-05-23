@@ -130,6 +130,8 @@ fetch("/historyRequest", {
 	.then((json) => {
 	  resetSaveChange(); // Réinitialiser la map saveChange
 	  saveChange = new Map(arrayToObject(json)); // Convertir le JSON en map avec la nouvelle fonction arrayToObject
+	  console.log(JSON.stringify(json));
+
 	  createTable(saveChange); // Passer la map saveChange à createTable
 	});
   
