@@ -1,11 +1,3 @@
-import {
-	createTableResult,
-	arrayToObject,
-	resetSaveChange,
-	listernerOnchangeTable,
-	sendButtonInit,
-} from "./function.js";
-
 const urlParam = new URLSearchParams(window.location.search);
 const langue = urlParam.get("langue");
 const sens = urlParam.get("sens");
@@ -43,6 +35,55 @@ function createTable(json) {
 		result.appendChild(tr);
 	}
 }
+
+function sendButtonInit(sendButton) {
+	sendButton.addEventListener("click", (_) => {
+		fetch("/edit", {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(mapToArray()),
+		});
+	});
+}
+
+function listernerOnchangeTable(table, editButton) {
+	editButton.onclick = (_) => {
+		for (let td of document.querySelectorAll("td")) {
+			td.contentEditable = true;
+			for (let elem of td.children) {
+				if (elem.tagName === "BUTTON") {
+					elem.remove();
+				}
+			}
+		}
+	};
+	table.addEventListener("keyup", (event) => {
+		if (event.target.tagName.toLowerCase() === "td") {
+			let sens = event.target.sens;
+			let langue = event.target.langue;
+			let text = event.target.innerText;
+			if (!saveChange.has(sens)) {
+				saveChange.set(sens, new Map());
+			}
+			saveChange.get(sens).set(langue, text);
+		}
+	});
+}
+
+function mapToArray() {
+	let res = [];
+	for (let sens of saveChange) {
+		let reelSens = sens[0];
+		for (let element of sens[1]) {
+			res.push(element.concat([reelSens]));
+		}
+	}
+	return res;
+}
+
 
 fetch("/historyRequest", {
 	method: "POST",
