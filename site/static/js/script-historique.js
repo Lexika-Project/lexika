@@ -13,25 +13,6 @@ let checkBox = document.querySelector("#showBox");
 editButton.hidden = false;
 sendButton.hidden = false;
 
-let isEditing = false;
-
-editButton.addEventListener("click", () => {
-    if (!isEditing) {
-        enableEditing();
-        editButton.innerText = "Cancel";
-    } else {
-        disableEditing();
-        editButton.innerText = "Edit";
-    }
-});
-
-sendButton.addEventListener("click", () => {
-    if (isEditing) {
-        disableEditing();
-        editButton.innerText = "Edit";
-    }
-    updateDatabase();
-});
 
 let livreBox = livre + "-rectangle";
 let livreStart = livre;
@@ -41,188 +22,177 @@ if (showBox) {
 
 document.querySelector("#pdfViewer").src = `static/pdf/${livreStart}.pdf#page=${numPage}`;
 
-function createTable(json) {
-    const result = document.querySelector("#resultHistory");
+function createTable(saveChange) {
+	const result = document.querySelector("#resultHistory");
+	result.innerHTML = ""; // Effacer le contenu du tableau
+  
+	const lastEntry = Array.from(saveChange).pop();
+	const lines = Array.from(lastEntry[1].values()); // Obtenir les lignes de la dernière entrée de la map
+  
+	lines.forEach((line) => {
+	  const tr = document.createElement("tr");
+  
+	  // Date
+	  const tdDate = document.createElement("td");
+	  const date = new Date(line.date);
+	  const hours = String(date.getHours()).padStart(2, "0");
+	  const min = String(date.getMinutes()).padStart(2, "0");
+	  const second = String(date.getSeconds()).padStart(2, "0");
+	  tdDate.innerText = `${hours}:${min}:${second}, ${date.toLocaleDateString("fr")}`;
+	  tr.appendChild(tdDate);
+  
+	  // Traduction
+	  const tdTranslation = document.createElement("td");
+	  tdTranslation.innerText = line.text;
+	  tr.appendChild(tdTranslation);
+  
+	  result.appendChild(tr);
+	});
+  }
+  
 
-    let line = json[json.length - 1];
-    let tr = document.createElement("tr");
+function arrayToObject(arr) {
+	let tab = [];
+	let currentSens = -1;
+	let tmp = undefined;
+	for (let element of arr) {
+	  if (element[2] !== currentSens) {
+		currentSens = element[2];
+		if (tmp !== undefined) {
+		  tab.push(tmp);
+		}
+		tmp = new Map();
+	  }
+	  tmp.set(element[0], {
+		text: element[1],
+		sens: element[2],
+		nomLivre: element[4],
+		audioLink: element[5],
+	  });
+	}
+	if (tmp !== undefined) {
+	  tab.push(tmp);
+	}
+	return tab;
+  }
+  
 
-    // Date
-    let td = document.createElement("td");
-    const date = new Date(line[0]);
-    const hours = String(date.getHours()).padStart(2, "0");
-    const min = String(date.getMinutes()).padStart(2, "0");
-    const seconde = String(date.getSeconds()).padStart(2, "0");
-    td.innerText = `${hours}:${min}:${seconde}, ${date.toLocaleDateString(
-        "fr"
-    )}`;
-    tr.appendChild(td);
 
-    // traduction
-    td = document.createElement("td");
-    td.innerText = line[1];
-    tr.appendChild(td);
-
-    result.appendChild(tr);
+function sendButtonInit(sendButton) {
+	sendButton.addEventListener("click", (_) => {
+		fetch("/edit", {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(mapToArray()),
+		});
+	});
 }
 
-function changePdfBox() {
-    if (checkBox.checked) {
-        document.querySelector(
-            "#pdfViewer"
-        ).src = `static/pdf/${livreBox}.pdf#page=${numPage}`;
-    } else {
-        document.querySelector(
-            "#pdfViewer"
-        ).src = `static/pdf/${livre}.pdf#page=${numPage}`;
-    }
-}
-
-function sendButtonInit() {
-    sendButton.addEventListener("click", () => {
-        updateDatabase();
-    });
-}
-
-function enableEditing() {
-    isEditing = true;
-
-    const cells = document.querySelectorAll("#table td");
-    cells.forEach((cell) => {
-        cell.contentEditable = true;
-    });
-}
-
-function disableEditing() {
-    isEditing = false;
-
-    const cells = document.querySelectorAll("#table td");
-    cells.forEach((cell) => {
-        cell.contentEditable = false;
-    });
-}
-
-function updateDatabase() {
-    const data = mapToArray();
-
-    fetch("/edit", {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    })
-        .then((response) => {
-            if (response.ok) {
-                console.log("Database updated successfully.");
-            } else {
-                console.error("Failed to update the database.");
-            }
-        })
-        .catch((error) => {
-            console.error("An error occurred:", error);
-        });
-}
-
-function listernerOnchangeTable(table) {
-    editButton.onclick = () => {
-        if (!isEditing) {
-            enableEditing();
-            editButton.innerText = "Cancel";
-        } else {
-            disableEditing();
-            editButton.innerText = "Edit";
-        }
-    };
-    table.addEventListener("keyup", (event) => {
-        if (event.target.tagName.toLowerCase() === "td") {
-            let sens = event.target.sens;
-            let langue = event.target.langue;
-            let text = event.target.innerText;
-            if (!saveChange.has(sens)) {
-                saveChange.set(sens, new Map());
-            }
-            saveChange.get(sens).set(langue, text);
-        }
-    });
+function listernerOnchangeTable(table, editButton) {
+	editButton.onclick = (_) => {
+		for (let td of document.querySelectorAll("td")) {
+			td.contentEditable = true;
+			for (let elem of td.children) {
+				if (elem.tagName === "BUTTON") {
+					elem.remove();
+				}
+			}
+		}
+	};
+	table.addEventListener("keyup", (event) => {
+		if (event.target.tagName.toLowerCase() === "td") {
+			let sens = event.target.sens;
+			let langue = event.target.langue;
+			let text = event.target.innerText;
+			if (!saveChange.has(sens)) {
+				saveChange.set(sens, new Map());
+			}
+			saveChange.get(sens).set(langue, text);
+		}
+	});
 }
 
 function mapToArray() {
-    let res = [];
-    for (let sens of saveChange) {
-        let reelSens = sens[0];
-        for (let element of sens[1]) {
-            res.push(element.concat([reelSens]));
-        }
-    }
-    return res;
+	let res = [];
+	for (let sens of saveChange) {
+		let reelSens = sens[0];
+		for (let element of sens[1]) {
+			res.push(element.concat([reelSens]));
+		}
+	}
+	return res;
 }
 
+
 fetch("/historyRequest", {
-    method: "POST",
-    headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-        langue: langue,
-        sens: sens,
-    }),
-})
-    .then((resp) => resp.json())
-    .then((json) => {
-        createTable(json);
-    });
+	method: "POST",
+	headers: {
+	  Accept: "application/json",
+	  "Content-Type": "application/json",
+	},
+	body: JSON.stringify({
+	  langue: langue,
+	  sens: sens,
+	}),
+  })
+	.then((resp) => {
+	  return resp.json();
+	})
+	.then((json) => {
+	  resetSaveChange(); // Réinitialiser la map saveChange
+	  saveChange = new Map(arrayToObject(json)); // Convertir le JSON en map avec la nouvelle fonction arrayToObject
+	  createTable(saveChange); // Passer la map saveChange à createTable
+	});
+  
 
 const dragBox = document.querySelector(".drag-audio");
 dragBox.addEventListener("dragenter", (_) => {
-    dragBox.classList.add("drag-audio-enter");
+	dragBox.classList.add("drag-audio-enter");
 });
 dragBox.addEventListener("dragleave", (_) => {
-    dragBox.classList.remove("drag-audio-enter");
+	dragBox.classList.remove("drag-audio-enter");
 });
 
 document.addEventListener("dragover", (event) => {
-    event.preventDefault();
+	event.preventDefault();
 });
 document.addEventListener("drop", (event) => {
-    event.preventDefault();
+	event.preventDefault();
 });
 
 const popupError = document.querySelector("#unsupported-extention-popup");
 dragBox.addEventListener("drop", (event) => {
-    event.preventDefault();
-    dragBox.classList.remove("drag-audio-enter");
-    const file = event.dataTransfer.files[0];
-    const name_split = file.name.split(".");
-    const extention = name_split.pop();
-    if (ALLOWED_EXTENTION.includes(extention.toLowerCase())) {
-        const data = new FormData();
-        data.append("file", file);
-        data.append("sens", sens);
-        data.append("langue", langue);
-        console.log(data);
-        fetch("/receiveAudio", {
-            method: "POST",
-            body: data,
-        }).then((resp) => {
-            console.log(resp);
-        });
-    } else {
-        popupError.innerText = `L'extension ${extention} n'est pas prise en charge.`;
-        popupError.hidden = false;
-        setTimeout((_) => {
-            popupError.hidden = true;
-        }, 5000);
-    }
+	event.preventDefault();
+	dragBox.classList.remove("drag-audio-enter");
+	const file = event.dataTransfer.files[0];
+	const name_split = file.name.split(".");
+	const extention = name_split.pop();
+	if (ALLOWED_EXTENTION.includes(extention.toLowerCase())) {
+		const data = new FormData();
+		data.append("file", file);
+		data.append("sens", sens);
+		data.append("langue", langue);
+		console.log(data);
+		fetch("/receiveAudio", {
+			method: "POST",
+			body: data,
+		}).then((resp) => {
+			console.log(resp);
+		});
+	} else {
+		popupError.innerText = `L'extention ${extention} n'est pas pris en charge.`;
+		popupError.hidden = false;
+		setTimeout((_) => {
+			popupError.hidden = true;
+		}, 5000);
+	}
 });
 
-listernerOnchangeTable(document.querySelector("#table"));
+listernerOnchangeTable(document.querySelector("#table"), editButton);
 
-sendButtonInit();
+sendButtonInit(sendButton);
+
 checkBox.addEventListener("click", changePdfBox);
-document.querySelector("#labelBox").addEventListener("click", () => {
-    checkBox.checked = !checkBox.checked;
-    changePdfBox();
-});
