@@ -1,39 +1,62 @@
 const urlParam = new URLSearchParams(window.location.search);
+const livre = urlParam.get("livre");
+const numPage = parseInt(urlParam.get("page"));
+const showBox = urlParam.get("showBox") === "true";
 const langue = urlParam.get("langue");
 const sens = urlParam.get("sens");
 const ALLOWED_EXTENTION = ["mp3", "wav"];
+const MAX_NUM_PAGE = 274;
+
 let editButton = document.querySelector("#edit");
 let sendButton = document.querySelector("#send");
+let checkBox = document.querySelector("#showBox");
 editButton.hidden = false;
 sendButton.hidden = false;
 
-presentation = document.querySelector("#presentation");
-presentation.innerText = `Historique du sens ${sens} en ${langue}`;
+
+let livreBox = livre + "-rectangle";
+let livreStart = livre;
+if (showBox) {
+    livreStart = livreBox;
+}
+
+document.querySelector("#pdfViewer").src = `static/pdf/${livreStart}.pdf#page=${numPage}`;
 
 function createTable(json) {
 	result = document.querySelector("#resultHistory");
 
-	for (let line of json) {
-		let tr = document.createElement("tr");
+	let line = json[json.length - 1];
+	let tr = document.createElement("tr");
 
-		// Date
-		let td = document.createElement("td");
-		const date = new Date(line[0]);
-		const hours = String(date.getHours()).padStart(2, "0");
-		const min = String(date.getMinutes()).padStart(2, "0");
-		const seconde = String(date.getSeconds()).padStart(2, "0");
-		td.innerText = `${hours}:${min}:${seconde}, ${date.toLocaleDateString(
-			"fr"
-		)}`;
-		tr.appendChild(td);
+	// Date
+	let td = document.createElement("td");
+	const date = new Date(line[0]);
+	const hours = String(date.getHours()).padStart(2, "0");
+	const min = String(date.getMinutes()).padStart(2, "0");
+	const seconde = String(date.getSeconds()).padStart(2, "0");
+	td.innerText = `${hours}:${min}:${seconde}, ${date.toLocaleDateString(
+		"fr"
+	)}`;
+	tr.appendChild(td);
 
-		// traduction
-		td = document.createElement("td");
-		td.innerText = line[1];
-		tr.appendChild(td);
+	// traduction
+	td = document.createElement("td");
+	td.innerText = line[1];
+	tr.appendChild(td);
 
-		result.appendChild(tr);
-	}
+	result.appendChild(tr);
+}
+
+function changePdfBox(bool) {
+    if (checkBox.checked) {
+        document.querySelector(
+            "#pdfViewer"
+        ).src = `static/pdf/${livreBox}.pdf#page=${numPage}`;
+    } else {
+        document.querySelector(
+            "#pdfViewer"
+        ).src = `static/pdf/${livre}.pdf#page=${numPage}`;
+    }
 }
 
 function sendButtonInit(sendButton) {
@@ -149,3 +172,5 @@ dragBox.addEventListener("drop", (event) => {
 listernerOnchangeTable(document.querySelector("#table"), editButton);
 
 sendButtonInit(sendButton);
+
+checkBox.addEventListener("click", changePdfBox);

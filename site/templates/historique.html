@@ -14,30 +14,44 @@
         <h1><a href="/home">Lexika</a></h1>
     </header>
 
-    <div id="presentation"></div>
-
     <div id="unsupported-extention-popup" hidden></div>
-    
-    <span id="editbtn">
-        <button class="bouton" hidden id="edit">Editer</button>
-        <button class="bouton" hidden id="send">Mise a jour de la base de donnée</button>
-    </span>
-    
-    <table id="table">
 
-        <thead>
+    <div class="lleft-column">
 
-            <tr>
-                <th>Date de création</th>
-                <th>Traduction</th>
-            </tr>
+        <span id="editbtn">
+            <button class="bouton" hidden id="edit">Editer</button>
+            <button class="bouton" hidden id="send">Mise a jour de la base de donnée</button>
+        </span>
+        
+        <table id="table">
 
-        <tbody id="resultHistory"></tbody>
+            <thead>
 
-        </thead>
+                <tr>
+                    <th>Date de création</th>
+                    <th>Traduction</th>
+                </tr>
 
-    </table>
+            <tbody id="resultHistory"></tbody>
 
+            </thead>
+
+        </table>
+
+    </div>
+
+    <div class="right-column">
+
+        <div id="btn">
+            <input id="showBox" type="checkbox">
+            <label class="clickable" id="labelBox">Afficher les contours</label>
+        </div>
+
+        <div>
+            <embed id="pdfViewer">
+        </div>
+
+    </div>
 
     <div class="drag-audio">
 

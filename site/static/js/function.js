@@ -26,7 +26,9 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 			for (let langue of listeLangue) {
 				td = document.createElement("td");
 				if (ligne.has(langue)) {
-					td.innerHTML = `<a class="linkHistory"  rel="noopener noreferrer" href="historique?sens=${sens}&langue=${langue}">${ligne.get(langue).text}</a>`;
+					let num = ligne.get(langueBase).numeroPage;
+					let livre = ligne.get(langueBase).nomLivre;
+					td.innerHTML = `<a class="linkHistory"  rel="noopener noreferrer" href="historique?sens=${sens}&langue=${langue}&livre=${livre}&page=${num}&showBox=false">${ligne.get(langue).text}</a>`;
 					if (
 						ligne.get(langue).audioLink !== null &&
 						ligne.get(langue).audioLink !== undefined
