@@ -7,7 +7,7 @@ const sens = urlParam.get("sens");
 const ALLOWED_EXTENTION = ["mp3", "wav"];
 const MAX_NUM_PAGE = 274;
 
-let saveChange = []
+let mot;
 let editButton = document.querySelector("#edit");
 let sendButton = document.querySelector("#send");
 let checkBox = document.querySelector("#showBox");
@@ -24,7 +24,6 @@ if (showBox) {
 document.querySelector("#pdfViewer").src = `static/pdf/${livreStart}.pdf#page=${numPage}`;
 
 function createTable(data) {
-    // Retrieve the table and table head from the DOM
     const table = document.querySelector("#resultHistory");
     const head = document.querySelector("#resulthead");
 
@@ -88,32 +87,6 @@ function sendButtonInit(sendButton) {
 }
 
 
-function listernerOnchangeTable(table, editButton) {
-	editButton.onclick = (_) => {
-		for (let td of document.querySelectorAll("td")) {
-			td.contentEditable = true;
-			for (let elem of td.children) {
-				if (elem.tagName === "BUTTON") {
-					elem.remove();
-				}
-			}
-		}
-	};
-	table.addEventListener("keyup", (event) => {
-		if (event.target.tagName.toLowerCase() === "td") {
-			let rowIndex = event.target.parentElement.rowIndex;
-			let columnIndex = event.target.cellIndex;
-			let text = event.target.innerText;
-			if (columnIndex === 0) {
-				// Update date
-				saveChange[rowIndex][0] = text;
-			} else {
-				// Update value
-				saveChange[rowIndex][1] = text;
-			}
-		}
-	});
-}
 
 
 
@@ -134,7 +107,6 @@ fetch("/historyRequest", {
 .then((json) => {
     console.log(json);
     createTable(json);
-    saveChange = json.slice();  // Copy the json data to saveChange
 });
 
 
@@ -196,12 +168,46 @@ function changePdfBox(bool) {
     }
 }
 
-listernerOnchangeTable(document.querySelector("#table"), editButton);
-
-sendButtonInit(sendButton);
-
 checkBox.addEventListener("click", changePdfBox);
 document.querySelector("#labelBox").addEventListener("click", (_) => {
     checkBox.checked = !checkBox.checked;
     changePdfBox();
+});
+
+
+// Function to handle cell editing
+function editCell(td) {
+    // Save the original text
+    let originalText = td.textContent;
+
+    // Replace the cell content with an input element
+    td.textContent = "";
+    let input = document.createElement("input");
+    input.type = "text";
+    input.value = originalText;
+    td.appendChild(input);
+
+    // Handle Enter key in the input field
+    input.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            // Replace the input field with the entered text
+            let newText = input.value;
+            td.textContent = newText;
+
+            // Save the entered text in the variable
+            mot = newText;
+        }
+    });
+
+    // Focus the input field
+    input.focus();
+}
+
+// Add event listener to the edit button
+editButton.addEventListener("click", function() {
+    // Get the renvoyer cell of the last row
+    let tdRenvoyer = document.querySelector("#resultHistory tr:last-child td:nth-child(3)");
+
+    // Start editing the cell
+    editCell(tdRenvoyer);
 });
