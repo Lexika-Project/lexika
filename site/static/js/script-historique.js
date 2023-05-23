@@ -24,46 +24,46 @@ if (showBox) {
 document.querySelector("#pdfViewer").src = `static/pdf/${livreStart}.pdf#page=${numPage}`;
 
 function createTable(data) {
-    // Retrieve the table from the DOM
+    // Retrieve the table and table head from the DOM
     const table = document.querySelector("#resultHistory");
-	const head = document.querySelector("#resulthead");
+    const head = document.querySelector("#resulthead");
+
+    let trHead = document.createElement("tr");
+
+    let thLivre = document.createElement("th");
+    thLivre.textContent = "Livre";
+    trHead.appendChild(thLivre);
+    let thLangue = document.createElement("th");
+    thLangue.textContent = "Langue";
+    trHead.appendChild(thLangue);
+    let thMot = document.createElement("th");
+    thMot.textContent = "Mot";
+    trHead.appendChild(thMot);
+    let thPage = document.createElement("th");
+    thPage.textContent = "Page";
+    trHead.appendChild(thPage);
+
+    head.appendChild(trHead);
 
 
-    // Get the last row from data
     let lastRow = data[data.length - 1];
 
-    // Create a new row
-	let th = document.createElement("tr");
+
     let tr = document.createElement("tr");
 
-	th.appendChild("Livre");
-	th.appendChild("Langue");
-	th.appendChild("Mot");
-	th.appendChild("Page");
-
-	head.appendChild(th);
-
-    // Create and append 'livre' cell
     let tdLivre = document.createElement("td");
     tdLivre.textContent = livre;
     tr.appendChild(tdLivre);
-
-    // Create and append 'langue' cell
     let tdLangue = document.createElement("td");
     tdLangue.textContent = langue;
     tr.appendChild(tdLangue);
-
-    // Create and append 'renvoyer' cell (the second item in the lastRow)
     let tdRenvoyer = document.createElement("td");
     tdRenvoyer.textContent = lastRow[1]; // accessing the second element of the array
     tr.appendChild(tdRenvoyer);
-
-    // Create and append 'numPage' cell
     let tdNumPage = document.createElement("td");
     tdNumPage.textContent = numPage;
     tr.appendChild(tdNumPage);
 
-    // Append the row to the table
     table.appendChild(tr);
 }
 
