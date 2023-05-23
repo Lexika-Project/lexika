@@ -48,7 +48,7 @@ function createTable(saveChange) {
   
 	  result.appendChild(tr);
 	});
-  }
+}
   
 
 function arrayToObject(arr) {
