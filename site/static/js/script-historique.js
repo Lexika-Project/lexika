@@ -24,19 +24,44 @@ if (showBox) {
 document.querySelector("#pdfViewer").src = `static/pdf/${livreStart}.pdf#page=${numPage}`;
 
 function createTable(data) {
-    let table = document.querySelector("#resultHistory");
-    table.innerHTML = "";  // Clear the table first
-    for (let [date, value] of data) {
-        let tr = document.createElement("tr");
-        let td1 = document.createElement("td");
-        let td2 = document.createElement("td");
-        td1.textContent = date;
-        td2.textContent = value;
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        table.appendChild(tr);
+    // Retrieve the table from the DOM
+    const table = document.querySelector("#resultHistory");
+
+    // Remove existing rows in the table, if any
+    while (table.firstChild) {
+        table.removeChild(table.firstChild);
     }
+
+    // Get the last row from data
+    let lastRow = data[data.length - 1];
+
+    // Create a new row
+    let tr = document.createElement("tr");
+
+    // Create and append 'livre' cell
+    let tdLivre = document.createElement("td");
+    tdLivre.textContent = livre;
+    tr.appendChild(tdLivre);
+
+    // Create and append 'langue' cell
+    let tdLangue = document.createElement("td");
+    tdLangue.textContent = langue;
+    tr.appendChild(tdLangue);
+
+    // Create and append 'renvoyer' cell (the second item in the lastRow)
+    let tdRenvoyer = document.createElement("td");
+    tdRenvoyer.textContent = lastRow[1]; // accessing the second element of the array
+    tr.appendChild(tdRenvoyer);
+
+    // Create and append 'numPage' cell
+    let tdNumPage = document.createElement("td");
+    tdNumPage.textContent = numPage;
+    tr.appendChild(tdNumPage);
+
+    // Append the row to the table
+    table.appendChild(tr);
 }
+
 
 
 function sendButtonInit(sendButton) {
