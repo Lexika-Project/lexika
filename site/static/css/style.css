@@ -146,7 +146,7 @@ table th {
 .bouton {
     cursor: pointer;
     color: #ffffff;
-    border: 1px solid #ccc;
+    border: 1px solid #3D7C98;
     padding: 10px;
     font-size: 18px;
     margin-bottom: 10px;
@@ -161,8 +161,8 @@ table th {
 select {
     cursor: pointer;
     background-color: #ffffff;
-    color: #73B0CD;
-    border: 1px solid #73B0CD;
+    color: #3D7C98; 
+    border: 1px solid #3D7C98;
     padding: 10px;
     font-size: 18px;
     margin-bottom: 10px;
@@ -206,14 +206,14 @@ p {
 }
 
 #regex-btn {
+    color: #ffffff;
     font-size: 180%;
     cursor: pointer;
     border: 0px solid #6296ae;
     padding: 1px;
+    background: #73B0CD;
     transition: background-color 0.3s;
     border-radius: 50px;
-    box-shadow:  5px 5px 10px #366e87,
-                -5px -5px 10px #448aa9;
 }
   
 #span_regex {
