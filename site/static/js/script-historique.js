@@ -44,12 +44,10 @@ function createTable(data) {
 
     head.appendChild(trHead);
 
-    console.log(data);
-    let lastRow = data[data.length - 1];
-
+    let firstRow = data[0];
 
     let tr = document.createElement("tr");
-
+    
     let tdLivre = document.createElement("td");
     tdLivre.textContent = livre;
     tr.appendChild(tdLivre);
@@ -57,12 +55,12 @@ function createTable(data) {
     tdLangue.textContent = langue;
     tr.appendChild(tdLangue);
     let tdRenvoyer = document.createElement("td");
-    tdRenvoyer.textContent = lastRow[1]; // accessing the second element of the array
+    tdRenvoyer.textContent = firstRow[1];
     tr.appendChild(tdRenvoyer);
     let tdNumPage = document.createElement("td");
     tdNumPage.textContent = numPage;
     tr.appendChild(tdNumPage);
-
+    
     table.appendChild(tr);
 }
 
