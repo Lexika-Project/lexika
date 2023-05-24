@@ -139,20 +139,19 @@ table th {
 
 
 
-    border: none;
+    border: 1px solid #3D7C98;
     outline: none;
-    border-radius: 15px;
-    padding: 1em;
-    background-color: #ccc;
-    box-shadow: inset 2px 5px 10px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #fffff;
+    box-shadow: inset 2px 5px 10px #ccc;
     transition: 300ms ease-in-out;
 }
 
 #search:focus {
     background-color: white;
-    transform: scale(1.05);
-    box-shadow: 13px 13px 100px #969696,
-               -13px -13px 100px #ffffff;
+    box-shadow: 5px 5px 5px #969696,
+               -5px -5px 5px #ffffff;
 }
 
 .bouton {
