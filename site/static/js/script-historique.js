@@ -21,7 +21,7 @@ if (showBox) {
     livreStart = livreBox;
 }
 
-document.querySelector("#pdfViewer").src = `static/pdf/${livreStart}.pdf#page=${numPage}#zoom=130`;
+document.querySelector("#pdfViewer").src = `static/pdf/${livreStart}.pdf#page=${numPage}&zoom=130`;
 
 function createTable(data) {
     const table = document.querySelector("#resultHistory");
