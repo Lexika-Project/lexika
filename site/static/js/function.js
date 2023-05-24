@@ -103,11 +103,11 @@ export function mapToArray() {
 			res.push(element.concat([reelSens]));
 		}
 	}
+	console.log(res);
 	return res;
 }
 
 export function sendButtonInit(sendButton) {
-	console.log(mapToArray());
 	sendButton.addEventListener("click", (_) => {
 		fetch("/edit", {
 			method: "POST",
