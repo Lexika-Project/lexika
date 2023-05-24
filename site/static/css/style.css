@@ -154,8 +154,8 @@ table th {
     transition: background-color 0.3s;
     border-radius: 10px;
     background: #3D7C98;
-    box-shadow:  5px 5px 10px #6296ae,
-                -5px -5px 10px #84caec;
+    box-shadow:  3px 3px 8px #6296ae,
+                -3px -3px 8px #84caec;
 }
 
 
