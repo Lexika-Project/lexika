@@ -107,6 +107,7 @@ export function mapToArray() {
 }
 
 export function sendButtonInit(sendButton) {
+	console.log(mapToArray());
 	sendButton.addEventListener("click", (_) => {
 		fetch("/edit", {
 			method: "POST",
