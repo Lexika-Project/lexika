@@ -226,3 +226,16 @@ p {
     display: flex;
     gap: 20px;
 }
+
+thead {
+    height: 50px;
+}
+  
+th:first-child {
+    border-top-left-radius: 10px;
+}
+  
+th:last-child {
+    border-top-right-radius: 10px;
+}
+  
