@@ -2,19 +2,26 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 
 	let editButton = document.querySelector("#edit");
 	let sendButton = document.querySelector("#send");
+	let foot = document.querySelector("#resultBottom");
 	editButton.hidden = false;
 	sendButton.hidden = false;
 	resultTitle.innerHTML = "";
+	foot.innerHTML="";
 	let trTitle = document.createElement("tr");
+	let trfoot = document.createElement("tr");
 	let th;
+	let thx;
 
 	for (let langue of listeLangue) {
 		th = document.createElement("th");
+		thx = document.createElement("th");
 		th.innerHTML = `${langue}`;
 		trTitle.appendChild(th);
+		trfoot.appendChild(thx);
 	}
 
 	resultTitle.appendChild(trTitle);
+	foot.appendChild(trfoot);
 	resultSearch.innerHTML = "";
 
 	for (let ligne of tab) {
