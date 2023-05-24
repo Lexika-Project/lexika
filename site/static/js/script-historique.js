@@ -94,7 +94,7 @@ function sendButtonInit(sendButton) {
 }
 
 
-
+sendButtonInit(sendButton);
 
 
 
