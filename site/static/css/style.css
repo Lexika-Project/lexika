@@ -151,10 +151,10 @@ table th {
     font-size: 18px;
     margin-bottom: 10px;
     transition: background-color 0.3s;
-    border-radius: 50px;
+    border-radius: 10px;
     background: #73b0cd;
-    box-shadow:  20px 20px 60px #6296ae,
-                -20px -20px 60px #84caec;
+    box-shadow:  8px 8px 16px #6296ae,
+                -8px -8px 16px #84caec;
 }
 
 
@@ -167,9 +167,7 @@ select {
     font-size: 18px;
     margin-bottom: 10px;
     transition: background-color 0.4s;
-    border-radius: 50px;
-    box-shadow:  20px 20px 60px #6296ae,
-                -20px -20px 60px #84caec;
+    border-radius: 10px;
 }
 
 
@@ -185,10 +183,10 @@ select {
     padding: 10px;
     font-size: 18px;
     transition: background-color 0.4s;
-    border-radius: 50px;
+    border-radius: 10px;
     background: #73b0cd;
-    box-shadow:  20px 20px 60px #6296ae,
-                -20px -20px 60px #84caec;
+    box-shadow:  8px 8px 16px #6296ae,
+                -8px -8px 16px #84caec;
 }
 
 p {
@@ -201,10 +199,10 @@ p {
     border: 1px solid #ccc;
     padding: 10px;
     font-size: 18px;
-    border-radius: 50px;
+    border-radius: 10px;
     background: #73b0cd;
-    box-shadow:  20px 20px 60px #6296ae,
-                -20px -20px 60px #84caec;
+    box-shadow:  8px 8px 16px #6296ae,
+                -8px -8px 16px #84caec;
 }
 
 #regex-btn {
@@ -215,9 +213,8 @@ p {
     padding: 1px;
     transition: background-color 0.3s;
     border-radius: 50px;
-    background: #73B0CD;
-    box-shadow:  20px 20px 60px #6296ae,
-                -20px -20px 60px #84caec;
+    box-shadow:  8px 8px 16px #6296ae,
+                -8px -8px 16px #84caec;
 }
   
 #span_regex {
