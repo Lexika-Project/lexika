@@ -198,6 +198,7 @@ function editCell(td) {
     input.addEventListener("input", function() {
         // Update the variable every time the input field changes
         mot = input.value;
+        sendButton.disabled = false;
     });
 
     // Handle Enter key in the input field
@@ -218,8 +219,6 @@ function editCell(td) {
 editButton.addEventListener("click", function() {
     // Get the renvoyer cell of the last row
     let tdRenvoyer = document.querySelector("#resultHistory tr:last-child td:nth-child(3)");
-
-    sendButton.disabled = false;
 
     // Start editing the cell
     editCell(tdRenvoyer);
