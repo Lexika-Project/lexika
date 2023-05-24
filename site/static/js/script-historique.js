@@ -70,7 +70,8 @@ function createTable(data) {
 
 function sendButtonInit(sendButton) {
     sendButton.addEventListener("click", (_) => {
-        const dataToSend = [langue,mot,sens]
+        const dataToSend = [langue, mot, sens]
+        console.log(dataToSend);
 
         fetch("/edit", {
             method: "POST",
@@ -79,9 +80,19 @@ function sendButtonInit(sendButton) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(dataToSend),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log('Request succeeded');
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
         });
     });
 }
+
 
 
 
