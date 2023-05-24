@@ -288,6 +288,25 @@ function displayRegexCommands() {
 		tbody.appendChild(row);
 	}
 
+	// Create a table footer
+	const tfoot = document.createElement('tfoot');
+
+	// Create a footer row
+	const footerRow = document.createElement('tr');
+
+	// Create three footer cells
+	for (let i = 0; i < 3; i++) {
+		const footerCell = document.createElement('th');
+		footerRow.appendChild(footerCell);
+	}
+
+	// Append the row to the table footer
+	tfoot.appendChild(footerRow);
+
+	// Append the table footer to the table
+	table.appendChild(tfoot);
+
+
 	// Append the table body to the table
 	table.appendChild(tbody);
 
