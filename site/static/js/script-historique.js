@@ -70,7 +70,7 @@ function createTable(data) {
 
 function sendButtonInit(sendButton) {
     sendButton.addEventListener("click", (_) => {
-        const dataToSend = [langue, mot, sens]
+        const dataToSend = [langue, mot, parseInt(sens)]
         console.log(dataToSend);
 
         fetch("/edit", {
