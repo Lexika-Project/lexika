@@ -44,7 +44,7 @@ function createTable(data) {
 
     head.appendChild(trHead);
 
-
+    console.log(data);
     let lastRow = data[data.length - 1];
 
 
