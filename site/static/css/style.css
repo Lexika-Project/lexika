@@ -138,12 +138,12 @@ table th {
     margin-left: 10px;
 
 
-
+    color: #3D7C98;
     border: 1px solid #3D7C98;
     outline: none;
     border-radius: 10px;
     padding: 10px;
-    background-color: #fffff;
+    background-color: #ffffff;
     box-shadow: inset 2px 5px 10px #ccc;
     transition: 300ms ease-in-out;
 }
