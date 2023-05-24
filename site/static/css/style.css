@@ -197,13 +197,10 @@ p {
     height: 30px;
     width: fit-conten;
     color: #ffffff;
-    border: 1px solid #ccc;
     padding: 10px;
     font-size: 18px;
     border-radius: 10px;
     background: #3D7C98;
-    box-shadow:  5px 5px 10px #6296ae,
-                -5px -5px 10px #84caec;
 }
 
 #regex-btn {
