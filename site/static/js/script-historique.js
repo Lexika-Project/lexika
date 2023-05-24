@@ -219,7 +219,7 @@ editButton.addEventListener("click", function() {
     // Get the renvoyer cell of the last row
     let tdRenvoyer = document.querySelector("#resultHistory tr:last-child td:nth-child(3)");
 
-    editButton.disabled = false;
+    sendButton.disabled = false;
 
     // Start editing the cell
     editCell(tdRenvoyer);
