@@ -33,17 +33,6 @@
     background-color: lightcoral;
 }
 
-header {
-  color: #ffffff;
-  background-color: #333;
-  height: 60px;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-}
-
 #btn {
   display: flex;
   margin-bottom: 10px;
