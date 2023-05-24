@@ -132,16 +132,19 @@ table th {
 }
 
 #search {
-    cursor: pointer;
     width: 400px;
-    padding: 10px;
-    font-size: 18px;
-    background-color: #ffffff;
-    color: #3D7C98;
-    border: 1px solid #3D7C98;
-    border-radius: 4px;
+
     margin-left: 10px;
-    border-radius: 4px;
+
+
+
+    border: none;
+    outline: none;
+    border-radius: 15px;
+    padding: 1em;
+    background-color: #ccc;
+    box-shadow: inset 2px 5px 10px rgba(0,0,0,0.3);
+    transition: 300ms ease-in-out;
 }
 
 .bouton {
