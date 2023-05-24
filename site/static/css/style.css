@@ -25,7 +25,7 @@ body {
 
 header {
     color: #ffffff;
-    background-color: #333;
+    background-color: #3D7C98;
     height: 60px;
     padding: 0 20px;
     display: flex;
@@ -55,7 +55,7 @@ a{
 }
 
 button:hover {
-    background-color: #444;
+    background-color: #6296ae;
 }
 
 
@@ -84,7 +84,7 @@ table th, table td {
 }
 
 table th {
-    background-color: #333;
+    background-color: #3D7C98;
     color: #ffffff;
 }
 
@@ -102,7 +102,7 @@ table th {
     font-size: 16px;
     padding: 8px 16px;
     text-decoration: none;
-    color: #333;
+    color: #3D7C98;
 }
 
 .currentPage {
@@ -111,7 +111,7 @@ table th {
 
 .pageNumber:hover {
     background-color: #ddd;
-    color: #333;
+    color: #3D7C98;
 }
 
 #topdiv {
@@ -136,8 +136,8 @@ table th {
     padding: 10px;
     font-size: 18px;
     background-color: #ffffff;
-    color: #333;
-    border: 1px solid #333;
+    color: #3D7C98;
+    border: 1px solid #3D7C98;
     border-radius: 4px;
     margin-left: 10px;
     border-radius: 4px;
@@ -145,27 +145,31 @@ table th {
 
 .bouton {
     cursor: pointer;
-    background-color: #333;
     color: #ffffff;
     border: 1px solid #ccc;
     padding: 10px;
     font-size: 18px;
-    border-radius: 6px;
     margin-bottom: 10px;
     transition: background-color 0.3s;
+    border-radius: 50px;
+    background: #73b0cd;
+    box-shadow:  20px 20px 60px #6296ae,
+                -20px -20px 60px #84caec;
 }
 
 
 select {
     cursor: pointer;
     background-color: #ffffff;
-    color: #333;
-    border: 1px solid #333;
+    color: #73B0CD;
+    border: 1px solid #73B0CD;
     padding: 10px;
     font-size: 18px;
-    border-radius: 4px;
     margin-bottom: 10px;
     transition: background-color 0.4s;
+    border-radius: 50px;
+    box-shadow:  20px 20px 60px #6296ae,
+                -20px -20px 60px #84caec;
 }
 
 
@@ -176,13 +180,15 @@ select {
 
 .clickable {
     cursor: pointer;
-    background-color: #333;
     color: #ffffff;
-    border: 1px solid #333;
+    border: 1px solid #73B0CD;
     padding: 10px;
     font-size: 18px;
-    border-radius: 4px;
     transition: background-color 0.4s;
+    border-radius: 50px;
+    background: #73b0cd;
+    box-shadow:  20px 20px 60px #6296ae,
+                -20px -20px 60px #84caec;
 }
 
 p {
@@ -191,23 +197,27 @@ p {
     align-items: center;
     height: 30px;
     width: fit-conten;
-    background-color: #333;
     color: #ffffff;
     border: 1px solid #ccc;
     padding: 10px;
     font-size: 18px;
-    border-radius: 10px;
+    border-radius: 50px;
+    background: #73b0cd;
+    box-shadow:  20px 20px 60px #6296ae,
+                -20px -20px 60px #84caec;
 }
 
 #regex-btn {
     font-size: 180%;
     cursor: pointer;
-    background-color: #333;
     color: #ffffff;
     border: 0px solid #ccc;
-    border-radius: 50px;
     padding: 1px;
     transition: background-color 0.3s;
+    border-radius: 50px;
+    background: #73B0CD;
+    box-shadow:  20px 20px 60px #6296ae,
+                -20px -20px 60px #84caec;
 }
   
 #span_regex {
