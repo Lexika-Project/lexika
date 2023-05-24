@@ -232,12 +232,31 @@ thead {
   height: 50px;
 }
 
-th:first-child {
-  border-top-left-radius: 10px;
+tfoot {
+    height: 30px;
+}
+table thead th:first-child {
+    border-top-left-radius: 10px; /* Ajoute un arrondi en haut à gauche */
 }
 
-th:last-child {
-  border-top-right-radius: 10px;
+table thead th:last-child {
+    border-top-right-radius: 10px; /* Ajoute un arrondi en haut à droite */
 }
 
+table tfoot th:first-child {
+    border-bottom-left-radius: 10px; /* Ajoute un arrondi en bas à gauche */
+}
+
+table tfoot th:last-child {
+    border-bottom-right-radius: 10px; /* Ajoute un arrondi en bas à droite */
+}
+
+table th, table td {
+    /* Autres styles... */
+    border-bottom: 1px solid #73B0CD;
+}
+
+table tr:last-child th, table tr:last-child td {
+    border-bottom: none;
+}
 
