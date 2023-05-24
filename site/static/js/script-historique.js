@@ -69,22 +69,20 @@ function createTable(data) {
 
 
 function sendButtonInit(sendButton) {
-	sendButton.addEventListener("click", (_) => {
-		let dataToSend = Array.from(document.querySelectorAll("#resultHistory tr")).map(tr => {
-			let date = tr.children[0].innerText;
-			let value = tr.children[1].innerText;
-			return [date, value];
-		});
-		fetch("/edit", {
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(dataToSend),
-		});
-	});
+    sendButton.addEventListener("click", (_) => {
+        const dataToSend = [langue,mot,sens]
+
+        fetch("/edit", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dataToSend),
+        });
+    });
 }
+
 
 
 
@@ -187,21 +185,25 @@ function editCell(td) {
     input.value = originalText;
     td.appendChild(input);
 
+    // Handle input change in the input field
+    input.addEventListener("input", function() {
+        // Update the variable every time the input field changes
+        mot = input.value;
+    });
+
     // Handle Enter key in the input field
     input.addEventListener("keydown", function(event) {
         if (event.key === "Enter") {
             // Replace the input field with the entered text
             let newText = input.value;
             td.textContent = newText;
-
-            // Save the entered text in the variable
-            mot = newText;
         }
     });
 
     // Focus the input field
     input.focus();
 }
+
 
 // Add event listener to the edit button
 editButton.addEventListener("click", function() {
