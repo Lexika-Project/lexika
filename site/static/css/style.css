@@ -75,6 +75,7 @@ button:hover {
 table {
     width: 100%;
     border-collapse: collapse;
+    
 }
 
 table th, table td {
@@ -228,14 +229,15 @@ p {
 }
 
 thead {
-    height: 50px;
+  height: 50px;
 }
-  
+
 th:first-child {
-    border-top-left-radius: 10px;
+  border-top-left-radius: 10px;
 }
-  
+
 th:last-child {
-    border-top-right-radius: 10px;
+  border-top-right-radius: 10px;
 }
-  
+
+
