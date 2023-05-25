@@ -74,6 +74,7 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 }
 
 export function sortTable(n) {
+	console.log("lancement fonction sort");
     var table, rows, switching, i, x, y, shouldSwitch, cmpX, cmpY;
     table = document.getElementById("table");
     switching = true;
