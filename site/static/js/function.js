@@ -88,7 +88,9 @@ function sortTable(n) {
             shouldSwitch = false;
             x = rows[i].getElementsByTagName("TD")[n];
             y = rows[i + 1].getElementsByTagName("TD")[n];
-			console.log(x,y);
+			console.log("ok");
+			console.log(x);
+			console.log(y);
             // Get <a> element's text
             var xText = x.getElementsByTagName("A")[0] ? x.getElementsByTagName("A")[0].innerText.toLowerCase() : '';
             var yText = y.getElementsByTagName("A")[0] ? y.getElementsByTagName("A")[0].innerText.toLowerCase() : '';
