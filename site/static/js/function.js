@@ -94,7 +94,6 @@ function sortTable(n) {
             // Get <a> element's text
             var xText = x.getElementsByTagName("A")[0] ? x.getElementsByTagName("A")[0].innerText.toLowerCase() : '';
             var yText = y.getElementsByTagName("A")[0] ? y.getElementsByTagName("A")[0].innerText.toLowerCase() : '';
-			console.log(xText,yText);
             if (dir == "asc") {
                 if (xText == '') continue; // Skip if empty
                 if (yText == '') {
