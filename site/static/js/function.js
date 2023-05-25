@@ -48,7 +48,7 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 						ligne.get(langue).audioLink !== undefined
 					) {
 						const button = document.createElement("button");
-						button.innerHTML = '<i class="fa fa-volume-up"></i>';
+						button.innerHTML = '<i id="soundbtn" class="fa fa-volume-up"></i>';
 						button.audioLink = ligne.get(langue).audioLink;
 						button.onclick = playSound;
 						td.appendChild(button);

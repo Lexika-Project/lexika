@@ -171,6 +171,16 @@ table th {
                 -3px -3px 8px #84caec;
 }
 
+#soundbtn {
+    cursor: pointer;
+    color: #ffffff;
+    border: 1px solid #3D7C98;
+    padding: 5px;
+    border-radius: 10px;
+    background: #3D7C98;
+    transition: background-color 0.3s;
+    margin-left: 2px;
+}
 
 select {
     cursor: pointer;
