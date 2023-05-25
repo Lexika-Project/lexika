@@ -104,7 +104,7 @@ async function search(keyword, engine, langueBase, langueResult, page) {
     const offset = (page - 1) * 25;
     resetSaveChange();
     if (keyword !== "") {
-        const loader = document.querySelector(".loader");
+        const loader = document.querySelector(".typewriter");
 		loader.removeAttribute('hidden');
 
         await fetch("/search", {
