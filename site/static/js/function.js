@@ -84,7 +84,8 @@ export function sortTable(n) {
 		shouldSwitch = false;
 		x = rows[i].getElementsByTagName("TD")[n];
 		y = rows[i + 1].getElementsByTagName("TD")[n];
-		if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+		// Check if x and y are not undefined
+		if (x && y && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
 		  shouldSwitch = true;
 		  break;
 		}
@@ -95,7 +96,6 @@ export function sortTable(n) {
 	  }
 	}
 }
-
 function playSound(event) {
 	let button = event.target;
 	if (button.tagName !== "BUTTON") {
