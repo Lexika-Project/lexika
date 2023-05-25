@@ -25,7 +25,7 @@ body {
 
 header {
     color: #ffffff;
-    background-color: #73B0CD;
+    background-color: linear-gradient(#84caec,#6296ae);
     height: 60px;
     padding: 0 20px;
     display: flex;
