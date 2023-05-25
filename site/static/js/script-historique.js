@@ -21,7 +21,7 @@ if (showBox) {
     livreStart = livreBox;
 }
 
-document.querySelector("#pdfViewer").src = `static/pdf/${livreStart}.pdf#page=${numPage}&zoom=130`;
+document.querySelector("#pdfViewer").src = `static/pdf/${livreStart}.pdf#page=${numPage}&zoom=140`;
 
 function createTable(data) {
     const table = document.querySelector("#resultHistory");
@@ -167,11 +167,11 @@ function changePdfBox(bool) {
     if (checkBox.checked) {
         document.querySelector(
             "#pdfViewer"
-        ).src = `static/pdf/${livreBox}.pdf#page=${numPage}`;
+        ).src = `static/pdf/${livreBox}.pdf#page=${numPage}&zoom=140`;
     } else {
         document.querySelector(
             "#pdfViewer"
-        ).src = `static/pdf/${livre}.pdf#page=${numPage}`;
+        ).src = `static/pdf/${livre}.pdf#page=${numPage}&zoom=140`;
     }
 }
 
