@@ -74,39 +74,57 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 }
 
 function sortTable(n) {
-    var table, rows, switching, i, x, y, shouldSwitch, cmpX, cmpY;
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById("table");
     switching = true;
+    dir = "asc";
     while (switching) {
         switching = false;
-        rows = table.getElementsByTagName("tr");
+        rows = table.rows;
         for (i = 1; i < (rows.length - 1); i++) {
             shouldSwitch = false;
-            x = rows[i].getElementsByTagName("td")[n].querySelector("a") || rows[i].getElementsByTagName("td")[n];
-            y = rows[i + 1].getElementsByTagName("td")[n].querySelector("a") || rows[i + 1].getElementsByTagName("td")[n];
-            cmpX = x.textContent || x.innerText;
-            cmpY = y.textContent || y.innerText;
-            cmpX = cmpX.trim().toLowerCase();
-            cmpY = cmpY.trim().toLowerCase();
-            
-            if (cmpX === '') {
-                cmpX = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'; // make it always larger than non-empty cells
-            }
-            if (cmpY === '') {
-                cmpY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'; // make it always larger than non-empty cells
-            }
-            
-            if (cmpX > cmpY) {
-                shouldSwitch = true;
-                break;
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+			console.log(x,y);
+            // Get <a> element's text
+            var xText = x.getElementsByTagName("A")[0] ? x.getElementsByTagName("A")[0].innerText.toLowerCase() : '';
+            var yText = y.getElementsByTagName("A")[0] ? y.getElementsByTagName("A")[0].innerText.toLowerCase() : '';
+			console.log(xText,yText);
+            if (dir == "asc") {
+                if (xText == '') continue; // Skip if empty
+                if (yText == '') {
+                    shouldSwitch = true;
+                    break;
+                }
+                if (xText > yText) {
+                    shouldSwitch = true;
+                    break;
+                }
+            } else if (dir == "desc") {
+                if (yText == '') continue; // Skip if empty
+                if (xText == '') {
+                    shouldSwitch = true;
+                    break;
+                }
+                if (xText < yText) {
+                    shouldSwitch = true;
+                    break;
+                }
             }
         }
         if (shouldSwitch) {
             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
             switching = true;
+            switchcount++;      
+        } else {
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
         }
     }
 }
+
 
 
 
