@@ -79,34 +79,26 @@ function sortTable(n) {
     switching = true;
     while (switching) {
         switching = false;
-        rows = table.getElementsByTagName("TR");
-        for (i = 1; i < (rows.length - 2); i++) {
+        rows = table.getElementsByTagName("tr");
+        for (i = 1; i < (rows.length - 1); i++) {
             shouldSwitch = false;
-            x = rows[i].getElementsByTagName("TD")[n];
-            y = rows[i + 1].getElementsByTagName("TD")[n];
-			console.log(x,y);
-            if (x && y) {
-                // Get first 'a' element in the cell if it exists, otherwise use the cell itself
-                x = x.getElementsByTagName('a')[0] ? x.getElementsByTagName('a')[0] : x;
-                y = y.getElementsByTagName('a')[0] ? y.getElementsByTagName('a')[0] : y;
-
-                cmpX = x.textContent || x.innerText;
-                cmpY = y.textContent || y.innerText;
-
-                cmpX = cmpX.trim().toLowerCase();
-                cmpY = cmpY.trim().toLowerCase();
-
-                if (cmpX === '') {
-                    cmpX = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'; // make it always larger than non-empty cells
-                }
-                if (cmpY === '') {
-                    cmpY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'; // make it always larger than non-empty cells
-                }
-
-                if (cmpX > cmpY) {
-                    shouldSwitch = true;
-                    break;
-                }
+            x = rows[i].getElementsByTagName("td")[n].querySelector("a") || rows[i].getElementsByTagName("td")[n];
+            y = rows[i + 1].getElementsByTagName("td")[n].querySelector("a") || rows[i + 1].getElementsByTagName("td")[n];
+            cmpX = x.textContent || x.innerText;
+            cmpY = y.textContent || y.innerText;
+            cmpX = cmpX.trim().toLowerCase();
+            cmpY = cmpY.trim().toLowerCase();
+            
+            if (cmpX === '') {
+                cmpX = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'; // make it always larger than non-empty cells
+            }
+            if (cmpY === '') {
+                cmpY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'; // make it always larger than non-empty cells
+            }
+            
+            if (cmpX > cmpY) {
+                shouldSwitch = true;
+                break;
             }
         }
         if (shouldSwitch) {
