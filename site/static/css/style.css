@@ -61,6 +61,10 @@ a{
     background-color: #6296ae;
 }
 
+button {
+    border: 0px solid #ffffff;
+    background-color: #f0f0f0; 
+}
 
 #optionsDiv {
     display: flex;
@@ -172,15 +176,16 @@ table th {
 }
 
 #soundbtn {
-    cursor: pointer;
     color: #ffffff;
-    border: 1px solid #3D7C98;
-    padding: 5px;
-    border-radius: 10px;
-    background: #3D7C98;
-    transition: background-color 0.3s;
-    margin-left: 2px;
+    font-size: 100%;
+    cursor: pointer;
+    padding: 6px;
+    background: #73B0CD;
+    border-radius: 6px;
+    margin-left: 10px;
+
 }
+
 
 select {
     cursor: pointer;
