@@ -104,6 +104,10 @@ async function search(keyword, engine, langueBase, langueResult, page) {
     const offset = (page - 1) * 25;
     resetSaveChange();
     if (keyword !== "") {
+        const loadingBar = document.querySelector("#loadingBar");
+        loadingBar.style.width = "0"; // Réinitialise la largeur de la barre de chargement
+        loadingBar.style.display = "block"; // Affiche la barre de chargement
+
         await fetch("/search", {
             method: "POST",
             headers: {
@@ -142,12 +146,19 @@ async function search(keyword, engine, langueBase, langueResult, page) {
 						);
 					}
 				} else {
-					console.log("Error database");
+					console.log("Erreur de la base de données");
 				}
-			});
-			
+			})
+			.finally(() => {
+                loadingBar.style.width = "100%"; // Définit la largeur de la barre de chargement à 100% lorsque l'opération fetch est terminée
+                setTimeout(() => {
+                    loadingBar.style.display = "none"; // Masque la barre de chargement après un court délai
+                }, 500);
+            });
     }
 }
+
+
 document.querySelector("#searchButton").addEventListener("click", (_) => {
 	changePage(
 		input.value,
