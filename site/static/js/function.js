@@ -87,6 +87,8 @@ export function sortTable(n) {
             y = rows[i + 1].getElementsByTagName("TD")[n];
             // Check if the two rows should switch place
 			console.log("2 ok");
+			console.log(x);
+			console.log(y);
             if (x && y) {
 				console.log("3 ok");
                 // Get trimmed lower case textContent for comparison
