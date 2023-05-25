@@ -17,15 +17,17 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 		th = document.createElement("th");
 		thx = document.createElement("th");
 		th.innerHTML = `${langue}`;
-		
-		// Remplacez l'attribut onclick par un écouteur d'événements
-		// th.setAttribute("onclick", `sortTable(${index})`); 
-		th.addEventListener('click', () => sortTable(index));
-		
+	
+		// Utiliser une IIFE pour capturer la valeur actuelle de l'index
+		(function(i) {
+			th.addEventListener('click', () => sortTable(i));
+		})(index);
+	
 		trTitle.appendChild(th);
 		trfoot.appendChild(thx);
 		index++;
 	}
+	
 
 	resultTitle.appendChild(trTitle);
 	foot.appendChild(trfoot);
