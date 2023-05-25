@@ -293,3 +293,7 @@ table tr:last-child th, table tr:last-child td {
     justify-content: center;
     align-items: center;
 }
+
+th:hover {
+    cursor: pointer;
+}
