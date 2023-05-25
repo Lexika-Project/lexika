@@ -12,7 +12,7 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 	let th;
 	let thx;
 	let index = 0;
-	
+
 	for (let langue of listeLangue) {
 		th = document.createElement("th");
 		thx = document.createElement("th");
@@ -69,7 +69,7 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 	}
 }
 
-function sortTable(n) {
+export function sortTable(n) {
 	var table, rows, switching, i, x, y, shouldSwitch;
 	table = document.getElementById("table");
 	switching = true;
