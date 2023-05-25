@@ -104,9 +104,8 @@ async function search(keyword, engine, langueBase, langueResult, page) {
     const offset = (page - 1) * 25;
     resetSaveChange();
     if (keyword !== "") {
-        const loadingBar = document.querySelector("#loadingBar");
-        loadingBar.style.width = "0"; // Réinitialise la largeur de la barre de chargement
-        loadingBar.style.display = "block"; // Affiche la barre de chargement
+        const loader = document.querySelector(".loader");
+		loader.removeAttribute('hidden');
 
         await fetch("/search", {
             method: "POST",
@@ -150,10 +149,8 @@ async function search(keyword, engine, langueBase, langueResult, page) {
 				}
 			})
 			.finally(() => {
-                loadingBar.style.width = "100%"; // Définit la largeur de la barre de chargement à 100% lorsque l'opération fetch est terminée
-                setTimeout(() => {
-                    loadingBar.style.display = "none"; // Masque la barre de chargement après un court délai
-                }, 500);
+				loader.setAttribute('hidden', '');
+
             });
     }
 }
