@@ -267,3 +267,9 @@ table tr:last-child th, table tr:last-child td {
     border-bottom: none;
 }
 
+#loadingBar {
+    width: 0;
+    height: 3px;
+    background-color: blue;
+    transition: width 0.3s ease;
+}
