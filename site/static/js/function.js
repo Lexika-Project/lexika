@@ -35,7 +35,14 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 				if (ligne.has(langue)) {
 					let num = ligne.get(langueBase).numeroPage;
 					let livre = ligne.get(langueBase).nomLivre;
-					td.innerHTML = `<a class="linkHistory"  rel="noopener noreferrer" href="historique?sens=${sens}&langue=${langue}&livre=${livre}&page=${num}&showBox=false">${ligne.get(langue).text}</a>`;
+
+					if (langue !== "français") {
+						td.innerHTML = `<a class="linkHistory">${ligne.get(langue).text}</a>`;
+					} else {
+						td.innerHTML = `<a class="linkHistory"  rel="noopener noreferrer" href="historique?sens=${sens}&langue=${langue}&livre=${livre}&page=${num}&showBox=false">${ligne.get(langue).text}</a>`;
+					}
+
+
 					if (
 						ligne.get(langue).audioLink !== null &&
 						ligne.get(langue).audioLink !== undefined
