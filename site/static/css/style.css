@@ -298,3 +298,9 @@ table tr:last-child th, table tr:last-child td {
       transform: rotate(360deg);
     }
 }
+
+.load {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
