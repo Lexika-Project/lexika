@@ -208,15 +208,15 @@ select {
 .clickable {
     cursor: pointer;
     color: #ffffff;
-    border: 1px solid #73B0CD;
     padding: 10px;
     font-size: 18px;
-    transition: background-color 0.4s;
+    transition: background-color 0.3s;
     border-radius: 10px;
-    background: #3D7C98;
-    box-shadow:  5px 5px 10px #6296ae,
-                -5px -5px 10px #84caec;
+    background: #73B0CD;
+    box-shadow:  3px 3px 8px #73B0CD,
+                -3px -3px 8px #73B0CD;
 }
+
 
 p {
     display: flex;
@@ -296,3 +296,4 @@ table tr:last-child th, table tr:last-child td {
 th:hover {
     cursor: pointer;
 }
+
