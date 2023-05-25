@@ -25,7 +25,7 @@ body {
 
 header {
     color: #ffffff;
-    background-color: linear-gradient(#84caec,#6296ae);
+    background: linear-gradient(145deg, #73B0CD, #3D7C98);
     height: 60px;
     padding: 0 20px;
     display: flex;
@@ -238,9 +238,9 @@ p {
     color: #ffffff;
     font-size: 180%;
     cursor: pointer;
-    border: 0px solid #6296ae;
+    border: transparent;
     padding: 1px;
-    background: #73B0CD;
+    background: transparent;
     transition: background-color 0.3s;
     border-radius: 50px;
 }
