@@ -74,28 +74,42 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 }
 
 export function sortTable(n) {
-	var table, rows, switching, i, x, y, shouldSwitch;
-	table = document.getElementById("table");
-	switching = true;
-	while (switching) {
-	  switching = false;
-	  rows = table.rows;
-	  for (i = 1; i < (rows.length - 1); i++) {
-		shouldSwitch = false;
-		x = rows[i].getElementsByTagName("TD")[n];
-		y = rows[i + 1].getElementsByTagName("TD")[n];
-		// Check if x and y are not undefined
-		if (x && y && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-		  shouldSwitch = true;
-		  break;
-		}
-	  }
-	  if (shouldSwitch) {
-		rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-		switching = true;
-	  }
-	}
+    var table, rows, switching, i, x, y, shouldSwitch, cmpX, cmpY;
+    table = document.getElementById("table");
+    switching = true;
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            // Check if the two rows should switch place
+            if (x && y) {
+                // Get lower case innerHTML for comparison
+                cmpX = x.innerHTML.toLowerCase();
+                cmpY = y.innerHTML.toLowerCase();
+                // Deal with empty cells
+                if (cmpX === '') {
+                    cmpX = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'; // make it always larger than non-empty cells
+                }
+                if (cmpY === '') {
+                    cmpY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'; // make it always larger than non-empty cells
+                }
+                if (cmpX > cmpY) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+        }
+    }
 }
+
+
 function playSound(event) {
 	let button = event.target;
 	if (button.tagName !== "BUTTON") {
