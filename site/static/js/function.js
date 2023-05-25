@@ -74,7 +74,6 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 }
 
 export function sortTable(n) {
-	console.log("1 ok");
     var table, rows, switching, i, x, y, shouldSwitch, cmpX, cmpY;
     table = document.getElementById("table");
     switching = true;
@@ -83,15 +82,15 @@ export function sortTable(n) {
         rows = table.rows;
         for (i = 1; i < (rows.length - 1); i++) {
             shouldSwitch = false;
-            x = rows[i].getElementsByTagName("TD")[n];
-            y = rows[i + 1].getElementsByTagName("TD")[n];
+            xx = rows[i].getElementsByTagName("TD")[n];
+            yy = rows[i + 1].getElementsByTagName("TD")[n];
             // Check if the two rows should switch place
-			console.log("2 ok");
+			x = xx.getElementsByTagName('a')[0];
+			y = yy.getElementsByTagName('a')[0];
 			console.log(x);
 			console.log(y);
             if (x && y) {
-				console.log("3 ok");
-                // Get trimmed lower case textContent for comparison
+                // Get lower case innerText for comparison
                 cmpX = x.textContent.trim().toLowerCase();
                 cmpY = y.textContent.trim().toLowerCase();
                 // Deal with empty cells
@@ -107,14 +106,11 @@ export function sortTable(n) {
                 }
             }
         }
-		console.log("4 ok");
         if (shouldSwitch) {
             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
             switching = true;
-			console.log("5 ok");
         }
     }
-	console.log("finish ok");
 }
 
 
