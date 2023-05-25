@@ -73,33 +73,36 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 	}
 }
 
-export function sortTable(n) {
-    var table, rows, switching, i, x, y, shouldSwitch, cmpX, cmpY, xx, yy;
+function sortTable(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, cmpX, cmpY;
     table = document.getElementById("table");
     switching = true;
     while (switching) {
         switching = false;
-        rows = table.rows;
-        for (i = 1; i < (rows.length - 1); i++) {
+        rows = table.getElementsByTagName("TR");
+        for (i = 1; i < (rows.length - 2); i++) {
             shouldSwitch = false;
-            xx = rows[i].getElementsByTagName("TD")[n];
-            yy = rows[i + 1].getElementsByTagName("TD")[n];
-            // Check if the two rows should switch place
-			x = xx.getElementsByTagName('a')[0];
-			y = yy.getElementsByTagName('a')[0];
-			console.log(x);
-			console.log(y);
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+
             if (x && y) {
-                // Get lower case innerText for comparison
-                cmpX = x.textContent.trim().toLowerCase();
-                cmpY = y.textContent.trim().toLowerCase();
-                // Deal with empty cells
+                // Get first 'a' element in the cell if it exists, otherwise use the cell itself
+                x = x.getElementsByTagName('a')[0] ? x.getElementsByTagName('a')[0] : x;
+                y = y.getElementsByTagName('a')[0] ? y.getElementsByTagName('a')[0] : y;
+
+                cmpX = x.textContent || x.innerText;
+                cmpY = y.textContent || y.innerText;
+
+                cmpX = cmpX.trim().toLowerCase();
+                cmpY = cmpY.trim().toLowerCase();
+
                 if (cmpX === '') {
                     cmpX = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'; // make it always larger than non-empty cells
                 }
                 if (cmpY === '') {
                     cmpY = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'; // make it always larger than non-empty cells
                 }
+
                 if (cmpX > cmpY) {
                     shouldSwitch = true;
                     break;
@@ -112,6 +115,7 @@ export function sortTable(n) {
         }
     }
 }
+
 
 
 
