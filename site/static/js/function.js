@@ -74,7 +74,6 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 }
 
 export function sortTable(n) {
-	console.log("lancement fonction sort");
     var table, rows, switching, i, x, y, shouldSwitch, cmpX, cmpY;
     table = document.getElementById("table");
     switching = true;
@@ -87,9 +86,9 @@ export function sortTable(n) {
             y = rows[i + 1].getElementsByTagName("TD")[n];
             // Check if the two rows should switch place
             if (x && y) {
-                // Get lower case innerHTML for comparison
-                cmpX = x.innerHTML.toLowerCase();
-                cmpY = y.innerHTML.toLowerCase();
+                // Get trimmed lower case textContent for comparison
+                cmpX = x.textContent.trim().toLowerCase();
+                cmpY = y.textContent.trim().toLowerCase();
                 // Deal with empty cells
                 if (cmpX === '') {
                     cmpX = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'; // make it always larger than non-empty cells
@@ -109,6 +108,7 @@ export function sortTable(n) {
         }
     }
 }
+
 
 
 function playSound(event) {
