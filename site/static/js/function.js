@@ -84,7 +84,7 @@ function sortTable(n) {
             shouldSwitch = false;
             x = rows[i].getElementsByTagName("TD")[n];
             y = rows[i + 1].getElementsByTagName("TD")[n];
-
+			console.log(x,y);
             if (x && y) {
                 // Get first 'a' element in the cell if it exists, otherwise use the cell itself
                 x = x.getElementsByTagName('a')[0] ? x.getElementsByTagName('a')[0] : x;
