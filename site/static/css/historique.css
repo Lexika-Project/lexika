@@ -36,7 +36,7 @@
 #btn {
   display: flex;
   margin-bottom: 10px;
-  justify-content: center;
+  justify-content: left;
 }
 
 #pdfViewer {
