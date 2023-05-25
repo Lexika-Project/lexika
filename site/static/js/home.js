@@ -4,6 +4,7 @@ import {
 	resetSaveChange,
 	listernerOnchangeTable,
 	sendButtonInit,
+	sortTable,
 } from "./function.js";
 
 const MAX_SIZE_TABLE = 25;
