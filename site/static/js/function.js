@@ -11,7 +11,8 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 	let trfoot = document.createElement("tr");
 	let th;
 	let thx;
-
+	let index = 0;
+	
 	for (let langue of listeLangue) {
 		th = document.createElement("th");
 		thx = document.createElement("th");
