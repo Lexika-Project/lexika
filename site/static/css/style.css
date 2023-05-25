@@ -32,6 +32,9 @@ header {
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+
 }
 
 h1 {
@@ -212,6 +215,8 @@ p {
     font-size: 18px;
     border-radius: 10px;
     background: #3D7C98;
+    margin-left:3px;
+    margin-right:3px;
 }
 
 #regex-btn {
@@ -266,38 +271,6 @@ table th, table td {
 
 table tr:last-child th, table tr:last-child td {
     border-bottom: none;
-}
-
-
-.loader {
-    border: 4px solid #73B0CD; 
-    border-left-color: transparent;
-    border-radius: 50%;
-}
-  
-.loader {
-    border: 4px solid #73B0CD;
-    border-left-color: transparent;
-    width: 36px;
-    height: 36px;
-}
-  
-.loader {
-    border: 4px solid #73B0CD;
-    border-left-color: transparent;
-    width: 36px;
-    height: 36px;
-    animation: spin89345 1s linear infinite;
-}
-
-@keyframes spin89345 {
-    0% {
-      transform: rotate(0deg);
-    }
-  
-    100% {
-      transform: rotate(360deg);
-    }
 }
 
 .load {
