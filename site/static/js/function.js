@@ -17,7 +17,11 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 		th = document.createElement("th");
 		thx = document.createElement("th");
 		th.innerHTML = `${langue}`;
-		th.setAttribute("onclick", `sortTable(${index})`); // ajout de l'attribut onclick
+		
+		// Remplacez l'attribut onclick par un écouteur d'événements
+		// th.setAttribute("onclick", `sortTable(${index})`); 
+		th.addEventListener('click', () => sortTable(index));
+		
 		trTitle.appendChild(th);
 		trfoot.appendChild(thx);
 		index++;
