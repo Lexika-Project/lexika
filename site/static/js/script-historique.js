@@ -117,7 +117,7 @@ fetch("/historyRequest", {
     createTable(json);
 });
 
-fetch("/reference", {
+fetch("/getreference", {
     method: "POST",
     headers: {
         Accept: "application/json",
