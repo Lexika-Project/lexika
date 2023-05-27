@@ -368,10 +368,19 @@ margin-right: 150px;
 }
 
 #regex-table {
-    width: 500px;
+    width: 800px;
 }
 
 #regex-div {
     display: flex;
     justify-content: center;
+}
+
+.fade-transition {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+  .fade-transition[style*="table"] {
+    opacity: 1;
 }
