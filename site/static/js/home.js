@@ -278,13 +278,12 @@ const regexCommands = [
 ];
 
 const regexCommandsContainer = document.getElementById('regex-commands');
+const table = document.createElement('table');
 
 function displayRegexCommands() {
-	
+
 	table.classList.add('fade-in');
 	// Create a table element
-	const table = document.createElement('table');
-
 	// Create a table header
 	const thead = document.createElement('thead');
 	const headerRow = document.createElement('tr');
