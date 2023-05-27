@@ -129,8 +129,9 @@ table th {
 }
 
 #topdiv {
-    display: flex;
     margin-top: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 #rgbtn {
@@ -333,24 +334,24 @@ th:hover {
     border: none;
     padding: 5px;
     color: #ffffff;
-    transition: all .15s ease-in-out;
+    transition: all .3s ease-in-out;
+    margin-right:5px;
     
 }
   
 .radio-inputs .radio input:checked + .name {
     background-color: #6296ae;
-    font-weight: 600;
 
 }
 
 #moteur {
-
+ margin-right: 20px;
 }
 
 #barre {
-    justify-content: center;
+margin-right: 20px;
 }
 
 #rbouton {
-
+margin-right: 150px;
 }
