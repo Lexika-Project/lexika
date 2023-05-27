@@ -298,7 +298,7 @@ function hideTable() {
     // sinon nous ne verrons pas la transition.
     setTimeout(() => {
         regexDiv.style.display = 'none';
-    }, 1000); // Le délai doit être le même que la durée de la transition CSS
+    }, 300); // Le délai doit être le même que la durée de la transition CSS
 }
 
 regexButton.addEventListener('click', () => {
