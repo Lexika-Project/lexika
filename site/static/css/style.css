@@ -358,14 +358,8 @@ margin-right: 20px;
 margin-right: 150px;
 }
 
-
-#regex-table {
-    width: 800px;
-    display: none;
-}
-
 #regex-div {
-    display: flex;
+    width: 800px;
     justify-content: center;
 }
 
@@ -376,4 +370,8 @@ margin-right: 150px;
 
 .fade-transition[style*="max-height"] {
     opacity: 1;
+}
+
+.fade-transition {
+    transition: opacity 0.3s ease-in-out;
 }

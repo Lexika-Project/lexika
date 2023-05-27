@@ -279,13 +279,12 @@ const regexCommands = [
 
 
 const regexButton = document.getElementById('regex-btn');
-const regexTable = document.getElementById('regex-table');
+const regexDiv = document.getElementById('regex-div');
 
 regexButton.addEventListener('click', () => {
-  if (regexTable.style.display === 'none' || !regexTable.style.display) {
-    regexTable.style.display = 'table'; // Or 'block', according to your style
+  if (regexDiv.style.display === 'none' || !regexDiv.style.display) {
+    regexDiv.style.display = 'flex';
   } else {
-    regexTable.style.display = 'none';
+    regexDiv.style.display = 'none';
   }
 });
-
