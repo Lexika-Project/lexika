@@ -10,6 +10,7 @@ const MAX_NUM_PAGE = 274;
 let mot;
 let editButton = document.querySelector("#edit");
 let sendButton = document.querySelector("#send");
+let reference = document.querySelector("#reference");
 let checkBox = document.querySelector("#showBox");
 editButton.hidden = false;
 sendButton.hidden = false;
@@ -22,8 +23,6 @@ if (showBox) {
 }
 
 document.querySelector("#pdfViewer").src = `static/pdf/${livreStart}.pdf#page=${numPage}&zoom=140`;
-
-console.log(livre);
 
 function createTable(data) {
     const table = document.querySelector("#resultHistory");
@@ -128,12 +127,9 @@ fetch("/getreference", {
     }),
 })
 .then((resp) => resp.text()) // Use resp.text() instead of resp.json()
-.then((text) => {
-    console.log(text); // Display the raw response content
+.then((text) => {reference.innerHTML = text; 
 })
-.catch((error) => {
-    console.error(error);
-});
+
 
 
   
