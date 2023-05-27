@@ -21,7 +21,8 @@ let listeLangues = [];
 let resultSelect = document.querySelector("#resultSelect");
 let baseSelect = document.querySelector("#baseSelect");
 
-let engineSelect = document.querySelector('input[name="radio"]:checked');
+let engineSelect = document.querySelector('input[name="radio"]:checked') ? document.querySelector('input[name="radio"]:checked').value : 'tsquery';
+
 engineSelect = engineSelect ? engineSelect.value : '';
 
 document.querySelectorAll('input[name="radio"]').forEach((radio) => {
