@@ -17,6 +17,7 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 		th = document.createElement("th");
 		thx = document.createElement("th");
 		th.innerHTML = `${langue}`;
+		th.innerHTML = `<i class="fa-solid fa-arrow-down-z-a" style="color: #ffffff;"></i>`;
 	
 		// Utiliser une IIFE pour capturer la valeur actuelle de l'index
 		(function(i) {
