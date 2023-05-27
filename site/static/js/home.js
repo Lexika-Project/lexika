@@ -21,8 +21,8 @@ let listeLangues = [];
 let resultSelect = document.querySelector("#resultSelect");
 let baseSelect = document.querySelector("#baseSelect");
 
-
-let engineSelect = document.querySelector('input[name="radio"]:checked').value;
+let engineSelect = document.querySelector('input[name="radio"]:checked');
+engineSelect = engineSelect ? engineSelect.value : '';
 
 document.querySelectorAll('input[name="radio"]').forEach((radio) => {
     radio.addEventListener('change', function() {
