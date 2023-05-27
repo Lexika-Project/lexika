@@ -368,5 +368,10 @@ margin-right: 150px;
 }
 
 #regex-table {
-    min-width: 300px;
+    width: 500px;
+}
+
+#regex-div {
+    display: flex;
+    justify-content: center;
 }
