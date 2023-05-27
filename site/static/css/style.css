@@ -80,9 +80,12 @@ button {
 }
 
 table {
+    margin-top:5px;
     width: 100%;
     border-collapse: collapse;
-    
+    border-radius: 11px;
+    box-shadow:  3px 3px 8px #73B0CD,
+    -3px -3px 8px #73B0CD;
 }
 
 table th, table td {
