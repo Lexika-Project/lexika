@@ -25,6 +25,7 @@ body {
 
 header {
     color: #ffffff;
+    margin-bottom: 40px;
     background: linear-gradient(145deg, #73B0CD, #3D7C98);
     height: 60px;
     padding: 0 20px;
@@ -34,6 +35,8 @@ header {
     text-decoration: none;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
+    box-shadow:  3px 3px 8px #73B0CD,
+    -3px -3px 8px #73B0CD;
 
 }
 
