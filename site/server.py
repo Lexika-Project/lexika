@@ -15,6 +15,7 @@ from database import (
     get_page_db,
     update_function,
     update_link,
+    reference,
 )
 
 
@@ -67,6 +68,12 @@ def history_request():  # pylint: disable=missing-function-docstring
     langue = result["langue"]
     sens = result["sens"]
     return jsonify(history(langue=langue, sens=sens))
+
+@app.route("/reference", methods=["POST"])
+def reference():  # pylint: disable=missing-function-docstring
+    result = json.loads(request.get_data())
+    livre = result["livre"]
+    return jsonify(reference(livre=livre))
 
 
 @app.route("/getPage", methods=["POST"])

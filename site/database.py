@@ -232,6 +232,15 @@ def get_page_db(livre, num_page):  # pylint: disable=missing-function-docstring
                 {"livre": livre, "num_page": num_page},
             )
             return cur.fetchall()
+        
+def reference(livre):  # pylint: disable=missing-function-docstring
+    with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
+        with conn.cursor() as cur:
+            cur.execute(
+                """SELECT reference FROM livre WHERE nom_livre =%(livre)s;""",
+                {"livre": livre},
+            )
+            return cur.fetchall()
 
 
 def history(sens, langue):  # pylint: disable=missing-function-docstring

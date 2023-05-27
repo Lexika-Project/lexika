@@ -116,6 +116,24 @@ fetch("/historyRequest", {
     createTable(json);
 });
 
+fetch("/reference", {
+    method: "POST",
+    headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        livre: livre,
+
+    }),
+})
+.then((resp) => {
+    return resp.json();
+})
+.then((json) => {
+    console.log(json);
+    
+});
 
 
   
