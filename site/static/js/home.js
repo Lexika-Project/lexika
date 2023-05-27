@@ -277,19 +277,15 @@ const regexCommands = [
 	// Add more regex expressions, their descriptions, and examples here
 ];
 
-const regexButton = document.getElementById('regex-btn');
 
+const regexButton = document.getElementById('regex-btn');
 const regexTable = document.getElementById('regex-table');
 
-const container = document.getElementById('regex-div');
-
 regexButton.addEventListener('click', () => {
-  if (regexTable.style.maxHeight === '0px') {
-	regexTable.style.maxHeight = regexTable.scrollHeight + 'px';
-	container.style.paddingBottom = regexTable.scrollHeight + 'px';
+  if (regexTable.style.display === 'none' || !regexTable.style.display) {
+    regexTable.style.display = 'table'; // Or 'block', according to your style
   } else {
-	regexTable.style.maxHeight = '0px';
-	container.style.paddingBottom = '0px';
+    regexTable.style.display = 'none';
   }
 });
 

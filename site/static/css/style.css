@@ -361,6 +361,7 @@ margin-right: 150px;
 
 #regex-table {
     width: 800px;
+    display: none;
 }
 
 #regex-div {
