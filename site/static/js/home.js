@@ -281,7 +281,7 @@ const regexButton = document.getElementById('regex-btn');
 
 const regexTable = document.getElementById('regex-table');
 
-const container = document.getElementById('container');
+const container = document.getElementById('regex-div');
 
 regexButton.addEventListener('click', () => {
   if (regexTable.style.maxHeight === '0px') {
