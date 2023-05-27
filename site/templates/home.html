@@ -24,14 +24,16 @@
     <div id="topdiv">
         
         <span class="radio-inputs" id="engineSelect">
-            <label class="radio">
-                <input type="radio" name="radio" value="tsquery">
-                <span class="name">Mots-clés</span>
-            </label>
-            <label class="radio">
-                <input type="radio" name="radio" value="regex">
-                <span class="name">Expression régulière</span>
-            </label>         
+            <div>
+                <label class="radio">
+                    <input type="radio" name="radio" checked="" value="tsquery">
+                    <span class="name">Mots-clés</span>
+                </label>
+                <label class="radio">
+                    <input type="radio" name="radio" value="regex">
+                    <span class="name">Expression régulière</span>
+                </label> 
+            </div>        
         </span>
 
         <span><input type="text" id="search" placeholder="Chercher" value="" autocomplete="off"></span>
