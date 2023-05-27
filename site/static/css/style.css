@@ -359,7 +359,6 @@ margin-right: 150px;
 }
 
 #regex-div {
-    display: flex;
     justify-content: center;
     align-items: center; /* pour centrer verticalement */
     height: 100vh; /* rendre le conteneur aussi grand que la hauteur de la vue */
