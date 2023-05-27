@@ -130,7 +130,6 @@ table th {
 
 #topdiv {
     display: flex;
-    justify-content: center;
     margin-top: 10px;
 }
 
@@ -140,17 +139,10 @@ table th {
     align-items: center;
 }
 
-#searchButton {
-    margin-left: 10px;
-}
 
 #search {
     width: 400px;
     font-size: 18px;
-
-    margin-left: 10px;
-
-
     color: #3D7C98;
     border: 1px solid #3D7C98;
     outline: none;
@@ -348,5 +340,17 @@ th:hover {
 .radio-inputs .radio input:checked + .name {
     background-color: #6296ae;
     font-weight: 600;
+
+}
+
+#moteur {
+
+}
+
+#barre {
+    justify-content: center;
+}
+
+#rbouton {
 
 }
