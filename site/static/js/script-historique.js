@@ -112,7 +112,6 @@ fetch("/historyRequest", {
     return resp.json();
 })
 .then((json) => {
-    console.log(json);
     createTable(json);
 });
 
