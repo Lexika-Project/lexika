@@ -51,6 +51,117 @@
         <div id="regex-commands" style="display: none;"></div>
     </div>
 
+    <div>
+        <table id="regex-table" style="display: none;">
+            <thead>
+              <tr>
+                <th>Expression</th>
+                <th>Description</th>
+                <th>Exemple</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>.</td>
+                <td>Correspond à n'importe quel caractère sauf un saut de ligne</td>
+                <td>a.o → ao, abo, a2o</td>
+              </tr>
+              <tr>
+                <td>*</td>
+                <td>Répète le caractère précédent zéro ou plusieurs fois</td>
+                <td>ab*c → ac, abc, abbc</td>
+              </tr>
+              <tr>
+                <td>+</td>
+                <td>Répète le caractère précédent une ou plusieurs fois</td>
+                <td>ab+c → abc, abbc</td>
+              </tr>
+              <tr>
+                <td>?</td>
+                <td>Rend le caractère précédent facultatif (0 ou 1 fois)</td>
+                <td>ab?c → ac, abc</td>
+              </tr>
+              <tr>
+                <td>^</td>
+                <td>Correspond au début de la chaîne</td>
+                <td>^abc → abc, abcdef</td>
+              </tr>
+              <tr>
+                <td>$</td>
+                <td>Correspond à la fin de la chaîne</td>
+                <td>abc$ → abc, defabc</td>
+              </tr>
+              <tr>
+                <td>{n}</td>
+                <td>Répète le caractère précédent exactement n fois</td>
+                <td>a{3} → aaa</td>
+              </tr>
+              <tr>
+                <td>{n,}</td>
+                <td>Répète le caractère précédent au moins n fois</td>
+                <td>a{2,} → aa, aaa</td>
+              </tr>
+              <tr>
+                <td>{n,m}</td>
+                <td>Répète le caractère précédent entre n et m fois</td>
+                <td>a{2,3} → aa, aaa</td>
+              </tr>
+              <tr>
+                <td>[abc]</td>
+                <td>Correspond à un des caractères entre les crochets</td>
+                <td>a[bc] → ab, ac</td>
+              </tr>
+              <tr>
+                <td>[^abc]</td>
+                <td>Correspond à tout caractère sauf ceux entre les crochets</td>
+                <td>a[^bc] → ad, ae</td>
+              </tr>
+              <tr>
+                <td>(a|b)</td>
+                <td>Correspond à l'un des éléments séparés par le symbole |</td>
+                <td>(ab|cd) → ab, cd</td>
+              </tr>
+              <tr>
+                <td>\d</td>
+                <td>Correspond à un chiffre (équivalent à [0-9])</td>
+                <td>a\d → a0, a1, a9</td>
+              </tr>
+              <tr>
+                <td>\D</td>
+                <td>Correspond à un caractère qui n'est pas un chiffre</td>
+                <td>a\D → aa, a%, a-</td>
+              </tr>
+              <tr>
+                <td>\w</td>
+                <td>Correspond à un caractère alphanumérique ou un tiret bas</td>
+                <td>a\w → aa, a1, a_</td>
+              </tr>
+              <tr>
+                <td>\W</td>
+                <td>Correspond à un caractère qui n'est pas alphanumérique</td>
+                <td>a\W → a!, a%, a@</td>
+              </tr>
+              <tr>
+                <td>\s</td>
+                <td>Correspond à un espace, un tab ou un saut de ligne</td>
+                <td>a\s → a , a\t, a\n</td>
+              </tr>
+              <tr>
+                <td>\S</td>
+                <td>Correspond à un caractère qui n'est pas un espace</td>
+                <td>a\S → aa, a1, a!</td>
+              </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+            </tfoot>
+          </table>
+    </div>
+
     <div id="tableDiv">
 
         <span class="editbtn">

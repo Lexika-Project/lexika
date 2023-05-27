@@ -277,84 +277,11 @@ const regexCommands = [
 	// Add more regex expressions, their descriptions, and examples here
 ];
 
-const regexCommandsContainer = document.getElementById('regex-commands');
-const table = document.createElement('table');
-
-function displayRegexCommands() {
-
-	table.classList.add('fade-in');
-	// Create a table element
-	// Create a table header
-	const thead = document.createElement('thead');
-	const headerRow = document.createElement('tr');
-	const headerExpression = document.createElement('th');
-	headerExpression.innerText = 'Expression';
-	const headerDescription = document.createElement('th');
-	headerDescription.innerText = 'Description';
-	const headerExample = document.createElement('th');
-	headerExample.innerText = 'Exemple';
-	headerRow.appendChild(headerExpression);
-	headerRow.appendChild(headerDescription);
-	headerRow.appendChild(headerExample);
-	thead.appendChild(headerRow);
-	table.appendChild(thead);
-
-	// Create a table body
-	const tbody = document.createElement('tbody');
-
-	for (const command of regexCommands) {
-		// Create a table row for each command
-		const row = document.createElement('tr');
-
-		// Create table cells for expression, description, and example
-		const expressionCell = document.createElement('td');
-		expressionCell.innerText = command.expression;
-		const descriptionCell = document.createElement('td');
-		descriptionCell.innerText = command.description;
-		const exampleCell = document.createElement('td');
-		exampleCell.innerText = command.example;
-
-		// Append table cells to the row
-		row.appendChild(expressionCell);
-		row.appendChild(descriptionCell);
-		row.appendChild(exampleCell);
-
-		// Append the row to the table body
-		tbody.appendChild(row);
-	}
-
-	// Create a table footer
-	const tfoot = document.createElement('tfoot');
-
-	// Create a footer row
-	const footerRow = document.createElement('tr');
-
-	// Create three footer cells
-	for (let i = 0; i < 3; i++) {
-		const footerCell = document.createElement('th');
-		footerRow.appendChild(footerCell);
-	}
-
-	// Append the row to the table footer
-	tfoot.appendChild(footerRow);
-
-	// Append the table footer to the table
-	table.appendChild(tfoot);
-
-	// Append the table body to the table
-	table.appendChild(tbody);
-
-	// Clear the previous content and append the table to the container
-	regexCommandsContainer.innerHTML = '';
-	regexCommandsContainer.appendChild(table);
-}
-
 const regexButton = document.getElementById('regex-btn');
 regexButton.addEventListener('click', () => {
-	if (regexCommandsContainer.style.display === 'none') {
-		regexCommandsContainer.style.display = 'block';
-		displayRegexCommands();
-	} else {
-		regexCommandsContainer.style.display = 'none';
-	}
-});
+    if (regexTable.style.display === 'none') {
+      regexTable.style.display = 'table';
+    } else {
+      regexTable.style.display = 'none';
+    }
+  });
