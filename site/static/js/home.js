@@ -25,12 +25,13 @@ let engineSelectElem = document.querySelector('input[name="radio"]:checked');
 let engineSelect = engineSelectElem ? engineSelectElem.value : 'tsquery';
 
 document.querySelectorAll('input[name="radio"]').forEach((radio) => {
-	radio.addEventListener('change', function() {
-		engineSelect = this.value;
-		// Stocker la valeur de engineSelect dans le localStorage
-		localStorage.setItem('engineSelect', engineSelect);
-	});
+    radio.addEventListener('change', function() {
+        engineSelect = this.value;
+        // Stocker la valeur de engineSelect dans le localStorage
+        localStorage.setItem('engineSelect', engineSelect);
+    });
 });
+
 
 main();
 
@@ -65,7 +66,6 @@ function createNum(div, num) {
 	newElement.href = newURL;
 	div.appendChild(newElement);
 }
-
 function createPageCount(total) {
 	const nbPage = Math.trunc(total / MAX_SIZE_TABLE);
 	if (numPage < nbPage) {
@@ -113,72 +113,75 @@ function createPageCount(total) {
 }
 
 async function search(keyword, engine, langueBase, langueResult, page) {
-	const offset = (page - 1) * 25;
-	resetSaveChange();
-	if (keyword !== "") {
-		const loader = document.querySelector(".typewriter");
+    const offset = (page - 1) * 25;
+    resetSaveChange();
+    if (keyword !== "") {
+        const loader = document.querySelector(".typewriter");
 		loader.removeAttribute('hidden');
 
-		await fetch("/search", {
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				keyword: keyword.toLowerCase(),
-				engine: engine,
-				langueBase: langueBase,
-				langueResult: langueResult,
-				offset: offset,
-			}),
-		})
-		.then((resp) => resp.json())
-		.then((json) => {
-			if (json.verif === "ok") {
-				if (json.table.length === 0) {
-					// Aucun résultat trouvé
-					console.log("Aucun résultat trouvé pour votre recherche.");
-					const message = document.createElement('p');
-					message.textContent = 'Aucun résultat trouvé pour votre recherche.';
-					document.querySelector('body').appendChild(message);
+        await fetch("/search", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                keyword: keyword.toLowerCase(),
+                engine: engine,
+                langueBase: langueBase,
+                langueResult: langueResult,
+                offset: offset,
+            }),
+        })
+            .then((resp) => {
+                return resp.json();
+            })
+			.then((json) => {
+				if (json.verif === "ok") {
+					if (json.table.length === 0) {
+						// Aucun résultat trouvé
+						console.log("Aucun résultat trouvé pour votre recherche.");
+						const message = document.createElement('p');
+						message.textContent = 'Aucun résultat trouvé pour votre recherche.';
+						document.querySelector('body').appendChild(message);
+					} else {
+						// Résultats trouvés
+						createPageCount(json.count);
+						createTableResult(
+							arrayToObject(json.table),
+							langueBase,
+							listeDesLangue(),
+							document.querySelector("#resultTitle"),
+							document.querySelector("#resultSearch"),
+							true
+						);
+					}
 				} else {
-					// Résultats trouvés
-					createPageCount(json.count);
-					createTableResult(
-						arrayToObject(json.table),
-						langueBase,
-						listeDesLangue(),
-						document.querySelector("#resultTitle"),
-						document.querySelector("#resultSearch"),
-						true
-					);
+					console.log("Erreur de la base de données");
 				}
-			} else {
-				console.log("Erreur de la base de données");
-			}
-		})
-		.finally(() => {
-			loader.setAttribute('hidden', '');
-		});
-	}
+			})
+			.finally(() => {
+				loader.setAttribute('hidden', '');
+
+            });
+    }
 }
+
 
 document.querySelector("#searchButton").addEventListener("click", (_) => {
 	changePage(
 		input.value,
-		engineSelect,
+		engineSelect.value,
 		baseSelect.value,
 		resultSelect.value,
 		1
 	);
 });
-
 document.querySelector("#search").addEventListener("keypress", (event) => {
 	if (event.key.toLowerCase() === "enter") {
 		changePage(
 			input.value,
-			engineSelect,
+			engineSelect.value,
 			baseSelect.value,
 			resultSelect.value,
 			1
@@ -187,7 +190,9 @@ document.querySelector("#search").addEventListener("keypress", (event) => {
 });
 
 async function main() {
+
 	engineSelect = localStorage.getItem('engineSelect');
+
 	let resp = await fetch("/listLangue", {
 		method: "POST",
 		headers: {
@@ -198,7 +203,7 @@ async function main() {
 	});
 
 	listeLangues = await resp.json();
-
+	
 	for (let langue of listeLangues) {
 		let tmp = document.createElement("option");
 		tmp.innerText = langue;
@@ -216,19 +221,19 @@ async function main() {
 		resultSelect.appendChild(tmp);
 	}
 
-	if (keyword !== null && !isNaN(numPage) && langueBase !== null && langueTarget !== null) {
+	if (keyword !== null && numPage !== NaN && langueBase !== null && langueTarget !== null) {
+
 		input.value = keyword;
 		baseSelect.value = langueBase;
+		engineSelect = engine;
 		resultSelect.value = langueTarget;
-		resultSelect.onchange = (_) => {
-			changePage(keyword, engineSelect, langueBase, resultSelect.value, numPage);
-		};
+		resultSelect.onchange = (_) => {changePage(keyword,engine,langueBase,resultSelect.value,numPage);};
 
-		baseSelect.onchange = (_) => {
-			changePage(keyword, engineSelect, baseSelect.value, langueTarget, numPage);
-		};
+		engineSelect.onchange = (_) => {changePage(keyword,engineSelect.value,langueBase,langueTarget,numPage);};
 
-		await search(keyword, engineSelect, langueBase, langueTarget, numPage);
+		baseSelect.onchange = (_) => {changePage(keyword,engine,baseSelect.value,langueTarget,numPage);};
+
+		await search(keyword, engine, langueBase, langueTarget, numPage);
 	}
 
 	resetSaveChange();
@@ -238,33 +243,34 @@ async function main() {
 }
 
 const regexCommands = [
-	{ expression: '.', description: "Correspond à n'importe quel caractère sauf un saut de ligne", example: 'a.o → ao, abo, a2o' },
-	{ expression: '*', description: 'Répète le caractère précédent zéro ou plusieurs fois', example: 'ab*c → ac, abc, abbc' },
-	{ expression: '+', description: 'Répète le caractère précédent une ou plusieurs fois', example: 'ab+c → abc, abbc' },
-	{ expression: '?', description: 'Rend le caractère précédent facultatif (0 ou 1 fois)', example: 'ab?c → ac, abc' },
-	{ expression: '^', description: 'Correspond au début de la chaîne', example: '^abc → abc, abcdef' },
-	{ expression: '$', description: 'Correspond à la fin de la chaîne', example: 'abc$ → abc, defabc' },
-	{ expression: '{n}', description: 'Répète le caractère précédent exactement n fois', example: 'a{3} → aaa' },
-	{ expression: '{n,}', description: 'Répète le caractère précédent au moins n fois', example: 'a{2,} → aa, aaa' },
-	{ expression: '{n,m}', description: 'Répète le caractère précédent entre n et m fois', example: 'a{2,3} → aa, aaa' },
-	{ expression: '[abc]', description: 'Correspond à un des caractères entre les crochets', example: 'a[bc] → ab, ac' },
-	{ expression: '[^abc]', description: 'Correspond à tout caractère sauf ceux entre les crochets', example: 'a[^bc] → ad, ae' },
-	{ expression: '(a|b)', description: "Correspond à l'un des éléments séparés par le symbole |", example: '(ab|cd) → ab, cd' },
-	{ expression: '\d', description: 'Correspond à un chiffre (équivalent à [0-9])', example: 'a\d → a0, a1, a9' },
-	{ expression: '\D', description: "Correspond à un caractère qui n'est pas un chiffre", example: 'a\D → aa, a%, a-' },
-	{ expression: '\w', description: 'Correspond à un caractère alphanumérique ou un tiret bas', example: 'a\w → aa, a1, a_' },
-	{ expression: '\W', description: "Correspond à un caractère qui n'est pas alphanumérique", example: 'a\W → a!, a%, a@' },
-	{ expression: '\s', description: 'Correspond à un espace, un tab ou un saut de ligne', example: 'a\s → a , a\t, a\n' },
-	{ expression: '\S', description: "Correspond à un caractère qui n'est pas un espace", example: 'a\S → aa, a1, a!' },
+	{expression: '.', description: "Correspond à n'importe quel caractère sauf un saut de ligne", example: 'a.o → ao, abo, a2o'},
+	{expression: '*', description: 'Répète le caractère précédent zéro ou plusieurs fois', example: 'ab*c → ac, abc, abbc'},
+	{expression: '+', description: 'Répète le caractère précédent une ou plusieurs fois', example: 'ab+c → abc, abbc'},
+	{expression: '?', description: 'Rend le caractère précédent facultatif (0 ou 1 fois)', example: 'ab?c → ac, abc'},
+	{expression: '^', description: 'Correspond au début de la chaîne', example: '^abc → abc, abcdef'},
+	{expression: '$', description: 'Correspond à la fin de la chaîne', example: 'abc$ → abc, defabc'},
+	{expression: '{n}', description: 'Répète le caractère précédent exactement n fois', example: 'a{3} → aaa'},
+	{expression: '{n,}', description: 'Répète le caractère précédent au moins n fois', example: 'a{2,} → aa, aaa'},
+	{expression: '{n,m}', description: 'Répète le caractère précédent entre n et m fois', example: 'a{2,3} → aa, aaa'},
+	{expression: '[abc]', description: 'Correspond à un des caractères entre les crochets', example: 'a[bc] → ab, ac'},
+	{expression: '[^abc]', description: 'Correspond à tout caractère sauf ceux entre les crochets', example: 'a[^bc] → ad, ae'},
+	{expression: '(a|b)', description: "Correspond à l'un des éléments séparés par le symbole |", example: '(ab|cd) → ab, cd'},
+	{expression: '\d', description: 'Correspond à un chiffre (équivalent à [0-9])', example: 'a\d → a0, a1, a9'},
+	{expression: '\D', description: "Correspond à un caractère qui n'est pas un chiffre", example: 'a\D → aa, a%, a-'},
+	{expression: '\w', description: 'Correspond à un caractère alphanumérique ou un tiret bas', example: 'a\w → aa, a1, a_'},
+	{expression: '\W', description: "Correspond à un caractère qui n'est pas alphanumérique", example: 'a\W → a!, a%, a@'},
+	{expression: '\s', description: 'Correspond à un espace, un tab ou un saut de ligne', example: 'a\s → a , a\\t, a\\n'},
+	{expression: '\S', description: "Correspond à un caractère qui n'est pas un espace", example: 'a\S → aa, a1, a!'},
 	// Add more regex expressions, their descriptions, and examples here
 ];
+
 
 const regexCommandsContainer = document.getElementById('regex-commands');
 
 function displayRegexCommands() {
 	// Create a table element
 	const table = document.createElement('table');
-
+	
 	// Create a table header
 	const thead = document.createElement('thead');
 	const headerRow = document.createElement('tr');
@@ -321,6 +327,7 @@ function displayRegexCommands() {
 
 	// Append the table footer to the table
 	table.appendChild(tfoot);
+
 
 	// Append the table body to the table
 	table.appendChild(tbody);
