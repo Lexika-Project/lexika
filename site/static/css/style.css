@@ -25,7 +25,7 @@ body {
 
 header {
     color: #ffffff;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     background: linear-gradient(145deg, #73B0CD, #3D7C98);
     height: 60px;
     padding: 0 20px;
@@ -312,13 +312,15 @@ th:hover {
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    border-radius: 0.5rem;
-    background-color: #EEE;
+    border-radius: 10px;
+    background-color: #73B0CD;
+    color: #ffffff;
     box-sizing: border-box;
-    box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
-    padding: 0.25rem;
-    width: 300px;
-    font-size: 14px;
+    padding:6px;
+    font-size: 17px;
+    width: 280px;
+    box-shadow:  3px 3px 8px #73B0CD,
+    -3px -3px 8px #73B0CD;
 }
   
 .radio-inputs .radio {
@@ -335,14 +337,16 @@ th:hover {
     cursor: pointer;
     align-items: center;
     justify-content: center;
-    border-radius: 0.5rem;
+    border-radius: 10px;
     border: none;
-    padding: .5rem 0;
-    color: rgba(51, 65, 85, 1);
+    padding: 5px;
+    color: #ffffff;
     transition: all .15s ease-in-out;
+    
 }
   
 .radio-inputs .radio input:checked + .name {
-    background-color: #fff;
+    background-color: #6296ae;
     font-weight: 600;
+
 }
