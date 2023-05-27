@@ -21,16 +21,33 @@ let listeLangues = [];
 let resultSelect = document.querySelector("#resultSelect");
 let baseSelect = document.querySelector("#baseSelect");
 
-let engineSelectElem = document.querySelector('input[name="radio"]:checked');
-let engineSelect = engineSelectElem ? engineSelectElem.value : 'tsquery';
+let engineSelectElem;
+let engineSelect;
+
+const urlParamEngine = urlParam.get("engine");
+if (urlParamEngine) {
+  // Vérifier la valeur de "engine" dans l'URL
+  engineSelectElem = document.querySelector(`input[name="radio"][value="${urlParamEngine}"]`);
+}
+
+if (engineSelectElem) {
+  // Si le bouton radio correspondant à "engine" existe, le sélectionner
+  engineSelectElem.checked = true;
+  engineSelect = engineSelectElem.value;
+} else {
+  // Si aucun bouton radio correspondant n'est trouvé, sélectionner le bouton radio "tsquery" par défaut
+  document.querySelector('#tsquery').checked = true;
+  engineSelect = 'tsquery';
+}
 
 document.querySelectorAll('input[name="radio"]').forEach((radio) => {
-	radio.addEventListener('change', function() {
-		engineSelect = this.value;
-		// Stocker la valeur de engineSelect dans le localStorage
-		localStorage.setItem('engineSelect', engineSelect);
-	});
+  radio.addEventListener('change', function() {
+    engineSelect = this.value;
+    // Stocker la valeur de engineSelect dans le localStorage
+    localStorage.setItem('engineSelect', engineSelect);
+  });
 });
+
 
 main();
 
