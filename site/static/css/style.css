@@ -24,6 +24,8 @@ body {
 }
 
 header {
+    margin-left: 20px;
+    margin-right: 20px;
     color: #ffffff;
     margin-bottom: 30px;
     background: linear-gradient(145deg, #73B0CD, #3D7C98);
@@ -245,7 +247,7 @@ p {
   
 #span_regex {
     position: absolute;
-    margin-right: 30px;
+    margin-right: 50px;
     right: 0;
 }
   
