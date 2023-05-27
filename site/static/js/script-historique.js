@@ -127,10 +127,10 @@ fetch("/reference", {
     }),
 })
 .then((resp) => {
-    return resp.json();
+    return resp.text();
 })
 .then((json) => {
-    console.log(json);
+    console.log(text);
     
 });
 
