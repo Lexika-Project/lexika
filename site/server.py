@@ -73,7 +73,7 @@ def history_request():  # pylint: disable=missing-function-docstring
 def reference():  # pylint: disable=missing-function-docstring
     result = json.loads(request.get_data())
     livre = result["livre"]
-    return jsonify(reference(livre=livre))
+    return jsonify(reference(livre))
 
 
 @app.route("/getPage", methods=["POST"])
