@@ -282,9 +282,9 @@ const regexButton = document.getElementById('regex-btn');
 const regexDiv = document.getElementById('regex-div');
 
 regexButton.addEventListener('click', () => {
-  if (regexDiv.style.display === 'none') {
-    regexDiv.style.display = 'flex';
+  if (regexDiv.style.opacity == 0) {
+    regexDiv.style.opacity = 1;
   } else {
-    regexDiv.style.display = 'none';
+    regexDiv.style.opacity = 0;
   }
 });
