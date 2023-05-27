@@ -182,7 +182,7 @@ async function search(keyword, engine, langueBase, langueResult, page) {
 }
 
 document.querySelector("#searchButton").addEventListener("click", (_) => {
-	console.log(engineSelect);
+
 	changePage(
 		input.value,
 		engineSelect,
