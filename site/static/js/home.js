@@ -24,12 +24,14 @@ let baseSelect = document.querySelector("#baseSelect");
 
 let engineSelect = document.querySelector('input[name="radio"]:checked').value;
 
-// Update the engineSelect when a different radio button is selected
 document.querySelectorAll('input[name="radio"]').forEach((radio) => {
     radio.addEventListener('change', function() {
         engineSelect = this.value;
+        // Stocker la valeur de engineSelect dans le localStorage
+        localStorage.setItem('engineSelect', engineSelect);
     });
 });
+
 
 main();
 
@@ -188,6 +190,8 @@ document.querySelector("#search").addEventListener("keypress", (event) => {
 });
 
 async function main() {
+
+	engineSelect = localStorage.getItem('engineSelect');
 
 	let resp = await fetch("/listLangue", {
 		method: "POST",
