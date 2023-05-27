@@ -51,8 +51,9 @@ justify-content: left;
 
 .container {
 margin-top: 20px;
-display: flex;
-flex-direction: row;
+display:flex;
+max-width: 1200px;
+flex-direction: column;
 }
 
 #editbtn {
@@ -67,4 +68,16 @@ display: none;
 #reference {
   font-size: 11px;
   margin-top:5px;
+  display: flex;
+  justify-content: center;
+}
+
+#pdf-div {
+  display: flex;
+  justify-content: center;
+}
+
+#table-div {
+  display: flex;
+  justify-content: flex;
 }
