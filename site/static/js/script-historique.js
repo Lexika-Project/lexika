@@ -123,15 +123,14 @@ fetch("/reference", {
     },
     body: JSON.stringify({
         livre: livre,
-
     }),
 })
-.then((resp) => {
-    return resp.text();
+.then((resp) => resp.text()) // Use resp.text() instead of resp.json()
+.then((text) => {
+    console.log(text); // Display the raw response content
 })
-.then((json) => {
-    console.log(text);
-    
+.catch((error) => {
+    console.error(error);
 });
 
 
