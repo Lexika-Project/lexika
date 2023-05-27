@@ -358,14 +358,6 @@ margin-right: 20px;
 margin-right: 150px;
 }
 
-#regex-commands table {
-    opacity: 0; /* Définit l'opacité initiale à 0 */
-    transition: opacity 0.3s ease; /* Ajoute une transition d'opacité de 0.3 secondes avec une fonction d'accélération */
-}
-
-.fade-in {
-    opacity: 1 !important; /* Définit l'opacité à 1 pour afficher la table en douceur */
-}
 
 #regex-table {
     width: 800px;
