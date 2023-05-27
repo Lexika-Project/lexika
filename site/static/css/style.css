@@ -359,6 +359,7 @@ margin-right: 150px;
 }
 
 #regex-div {
-    width: 800px;
-    justify-content: center;
+display:flex;
+justify-content: center;
+width: 800px;    
 }

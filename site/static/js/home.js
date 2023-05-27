@@ -283,7 +283,7 @@ const regexDiv = document.getElementById('regex-table');
 
 regexButton.addEventListener('click', () => {
   if (regexDiv.style.display === 'none') {
-    regexDiv.style.display = 'flex';
+    regexDiv.style.display = 'table';
   } else {
     regexDiv.style.display = 'none';
   }
