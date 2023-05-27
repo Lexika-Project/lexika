@@ -32,7 +32,6 @@ document.querySelectorAll('input[name="radio"]').forEach((radio) => {
 	});
 });
 
-
 main();
 
 function listeDesLangue() {
@@ -134,37 +133,34 @@ async function search(keyword, engine, langueBase, langueResult, page) {
 				offset: offset,
 			}),
 		})
-			.then((resp) => {
-				return resp.json();
-			})
-			.then((json) => {
-				if (json.verif === "ok") {
-					if (json.table.length === 0) {
-						// Aucun résultat trouvé
-						console.log("Aucun résultat trouvé pour votre recherche.");
-						const message = document.createElement('p');
-						message.textContent = 'Aucun résultat trouvé pour votre recherche.';
-						document.querySelector('body').appendChild(message);
-					} else {
-						// Résultats trouvés
-						createPageCount(json.count);
-						createTableResult(
-							arrayToObject(json.table),
-							langueBase,
-							listeDesLangue(),
-							document.querySelector("#resultTitle"),
-							document.querySelector("#resultSearch"),
-							true
-						);
-					}
+		.then((resp) => resp.json())
+		.then((json) => {
+			if (json.verif === "ok") {
+				if (json.table.length === 0) {
+					// Aucun résultat trouvé
+					console.log("Aucun résultat trouvé pour votre recherche.");
+					const message = document.createElement('p');
+					message.textContent = 'Aucun résultat trouvé pour votre recherche.';
+					document.querySelector('body').appendChild(message);
 				} else {
-					console.log("Erreur de la base de données");
+					// Résultats trouvés
+					createPageCount(json.count);
+					createTableResult(
+						arrayToObject(json.table),
+						langueBase,
+						listeDesLangue(),
+						document.querySelector("#resultTitle"),
+						document.querySelector("#resultSearch"),
+						true
+					);
 				}
-			})
-			.finally(() => {
-				loader.setAttribute('hidden', '');
-
-			});
+			} else {
+				console.log("Erreur de la base de données");
+			}
+		})
+		.finally(() => {
+			loader.setAttribute('hidden', '');
+		});
 	}
 }
 
@@ -192,11 +188,6 @@ document.querySelector("#search").addEventListener("keypress", (event) => {
 
 async function main() {
 	engineSelect = localStorage.getItem('engineSelect');
-	if (!engineSelect) {
-		engineSelect = 'tsquery';
-		localStorage.setItem('engineSelect', engineSelect);
-	}
-
 	let resp = await fetch("/listLangue", {
 		method: "POST",
 		headers: {
@@ -225,12 +216,19 @@ async function main() {
 		resultSelect.appendChild(tmp);
 	}
 
-	if (keyword !== null && numPage !== NaN && langueBase !== null && langueTarget !== null) {
-
+	if (keyword !== null && !isNaN(numPage) && langueBase !== null && langueTarget !== null) {
 		input.value = keyword;
 		baseSelect.value = langueBase;
 		resultSelect.value = langueTarget;
-		resultSelect.onchange = (_) => { changePage(keyword, engineSelect, langueBase, resultSelect.value, numPage); };
+		resultSelect.onchange = (_) => {
+			changePage(keyword, engineSelect, langueBase, resultSelect.value, numPage);
+		};
+
+		baseSelect.onchange = (_) => {
+			changePage(keyword, engineSelect, baseSelect.value, langueTarget, numPage);
+		};
+
+		await search(keyword, engineSelect, langueBase, langueTarget, numPage);
 	}
 
 	resetSaveChange();
@@ -252,12 +250,12 @@ const regexCommands = [
 	{ expression: '[abc]', description: 'Correspond à un des caractères entre les crochets', example: 'a[bc] → ab, ac' },
 	{ expression: '[^abc]', description: 'Correspond à tout caractère sauf ceux entre les crochets', example: 'a[^bc] → ad, ae' },
 	{ expression: '(a|b)', description: "Correspond à l'un des éléments séparés par le symbole |", example: '(ab|cd) → ab, cd' },
-	{ expression: '\\d', description: 'Correspond à un chiffre (équivalent à [0-9])', example: 'a\\d → a0, a1, a9' },
-	{ expression: '\\D', description: "Correspond à un caractère qui n'est pas un chiffre", example: 'a\\D → aa, a%, a-' },
-	{ expression: '\\w', description: 'Correspond à un caractère alphanumérique ou un tiret bas', example: 'a\\w → aa, a1, a_' },
-	{ expression: '\\W', description: "Correspond à un caractère qui n'est pas alphanumérique", example: 'a\\W → a!, a%, a@' },
-	{ expression: '\\s', description: 'Correspond à un espace, un tab ou un saut de ligne', example: 'a\\s → a , a\\t, a\\n' },
-	{ expression: '\\S', description: "Correspond à un caractère qui n'est pas un espace", example: 'a\\S → aa, a1, a!' },
+	{ expression: '\d', description: 'Correspond à un chiffre (équivalent à [0-9])', example: 'a\d → a0, a1, a9' },
+	{ expression: '\D', description: "Correspond à un caractère qui n'est pas un chiffre", example: 'a\D → aa, a%, a-' },
+	{ expression: '\w', description: 'Correspond à un caractère alphanumérique ou un tiret bas', example: 'a\w → aa, a1, a_' },
+	{ expression: '\W', description: "Correspond à un caractère qui n'est pas alphanumérique", example: 'a\W → a!, a%, a@' },
+	{ expression: '\s', description: 'Correspond à un espace, un tab ou un saut de ligne', example: 'a\s → a , a\t, a\n' },
+	{ expression: '\S', description: "Correspond à un caractère qui n'est pas un espace", example: 'a\S → aa, a1, a!' },
 	// Add more regex expressions, their descriptions, and examples here
 ];
 
@@ -323,7 +321,6 @@ function displayRegexCommands() {
 
 	// Append the table footer to the table
 	table.appendChild(tfoot);
-
 
 	// Append the table body to the table
 	table.appendChild(tbody);
