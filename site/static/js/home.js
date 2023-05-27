@@ -281,10 +281,30 @@ const regexCommands = [
 const regexButton = document.getElementById('regex-btn');
 const regexDiv = document.getElementById('regex-div');
 
+// Utilisez cette fonction pour afficher la table avec une transition
+function showTable() {
+    regexDiv.style.display = 'flex';
+    // Nous devons donner au navigateur le temps de rendre l'élément avant de changer son opacité
+    // sinon il n'y aura pas de transition.
+    setTimeout(() => {
+        regexDiv.style.opacity = '1';
+    }, 50); // 50ms est suffisant dans la plupart des cas
+}
+
+// Utilisez cette fonction pour masquer la table avec une transition
+function hideTable() {
+    regexDiv.style.opacity = '0';
+    // Nous devons attendre que la transition de l'opacité soit terminée avant de masquer l'élément
+    // sinon nous ne verrons pas la transition.
+    setTimeout(() => {
+        regexDiv.style.display = 'none';
+    }, 1000); // Le délai doit être le même que la durée de la transition CSS
+}
+
 regexButton.addEventListener('click', () => {
   if (regexDiv.style.opacity == 0) {
-    regexDiv.style.opacity = 1;
+    showTable();
   } else {
-    regexDiv.style.opacity = 0;
+    hideTable();
   }
 });
