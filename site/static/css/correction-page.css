@@ -1,88 +1,95 @@
 
-.drag-audio{
-    
-    background-color: lightgray;
-    outline: 2px dashed black;
-    outline-offset: -5px;
-    height: 200px;
-    width: 400px;
-    border-radius: 5px;
-    display: none;
+#switchButton {
+    cursor: pointer;
+    color: #ffffff;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+a {
+    color: #ffffff;
+    display: flex;
+    text-decoration: none;
+    text-align: center;
+}
+
+header {
+    color: #ffffff;
+    background-color: #333;
+    height: 60px;
+    padding: 0 20px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    margin: auto;
-    margin-top: 20px;
-  }
-  
-  
-  .drag-audio span{
-  margin: 10px 0 15px 0;
-  }
-  .drag-audio button{
-  padding: 10px 25px;
-  font-weight: 500;
-  border: 2px solid black;
-  outline: none;
-  border-radius: 5px;
-  cursor: pointer;
-  }
-  .drag-audio-enter{
-    outline-offset: -10px;
-  }
-  #unsupported-extention-popup{
-    background-color: lightcoral;
-  }
-  
-  #btn {
-  display: flex;
-  margin-bottom: 10px;
-  justify-content: left;
-  }
-  
-  #pdfViewer {
-    margin-top:5px;
+    text-decoration: none;
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+}
+
+button {
+    cursor: pointer;
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+#divswitchbutton {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    bottom: 0;
+}
+
+#btn {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+#pdfViewer {
     width: 100%;
-    height: 500px;
-    border: solid #73B0CD 2px;
-    border-radius: 10px;
-    box-shadow:  3px 3px 8px #73B0CD,
-    -3px -3px 8px #73B0CD;
-    }    
-  
-  .container {
-  display:flex;
-  max-width: 1500px;
-  flex-direction: column;
-  margin: auto;
-  }
-  
-  .editbtn {
-  margin-top:30px;
-  display: flex;
-  justify-content: center;
-  
-  
-  }
-  
-  #showBox {
-  display: none;
-  }
-  
-  #reference {
-    font-size: 11px;
-    margin-top:5px;
+    height: 1000px;
+    border: solid black 1px;
+}   
+
+.container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.left-column {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+#editbtn {
     display: flex;
     justify-content: center;
-  }
-  
-  #pdf-div {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-  }
-  
-  #table-div {
-    display: flex;
-    justify-content: center;
-  }
+}
+
+#showBox {
+    display: none;
+}
