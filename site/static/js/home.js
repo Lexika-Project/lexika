@@ -280,6 +280,8 @@ const regexCommands = [
 const regexCommandsContainer = document.getElementById('regex-commands');
 
 function displayRegexCommands() {
+	
+	table.classList.add('fade-in');
 	// Create a table element
 	const table = document.createElement('table');
 
