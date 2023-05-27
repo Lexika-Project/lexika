@@ -126,9 +126,11 @@ fetch("/getreference", {
         livre: livre,
     }),
 })
-.then((resp) => resp.text()) // Use resp.text() instead of resp.json()
-.then((text) => {reference.innerHTML = text; 
-})
+.then((resp) => resp.json()) // Utiliser resp.json() au lieu de resp.text()
+.then((data) => {
+    const text = data[0][0]; // Accéder à la valeur dans la structure de données
+    reference.innerHTML = text;
+});
 
 
 
