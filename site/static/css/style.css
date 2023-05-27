@@ -366,4 +366,7 @@ margin-right: 150px;
 .fade-in {
     opacity: 1 !important; /* Définit l'opacité à 1 pour afficher la table en douceur */
 }
-  
+
+#regex-table {
+    min-width: 300px;
+}
