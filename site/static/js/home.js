@@ -280,10 +280,16 @@ const regexCommands = [
 const regexButton = document.getElementById('regex-btn');
 
 const regexTable = document.getElementById('regex-table');
+
+const container = document.getElementById('container');
+
 regexButton.addEventListener('click', () => {
-    if (regexTable.style.display === 'none') {
-      regexTable.style.display = 'table';
-    } else {
-      regexTable.style.display = 'none';
-    }
-  });
+  if (regexTable.style.maxHeight === '0px') {
+	regexTable.style.maxHeight = regexTable.scrollHeight + 'px';
+	container.style.paddingBottom = regexTable.scrollHeight + 'px';
+  } else {
+	regexTable.style.maxHeight = '0px';
+	container.style.paddingBottom = '0px';
+  }
+});
+
