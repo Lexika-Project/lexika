@@ -363,6 +363,7 @@ margin-right: 150px;
     align-items: center; /* pour centrer verticalement */
     height: 100vh; /* rendre le conteneur aussi grand que la hauteur de la vue */
     width: 100%; /* rendre le conteneur aussi large que la largeur de la vue */
+    transition: opacity 1s ease-in-out;
 }
 
 #regex-table {
