@@ -17,46 +17,38 @@
     <div id="unsupported-extention-popup" hidden></div>
 
     <div class="container">
-        <div class="left-column">
-
-            <span class="editbtn">
-                <button class="bouton" hidden id="edit">Editer</button>
-                <button class="bouton" hidden id="send" disabled>Mise a jour de la base de donnée</button>
-            </span>
-            
-            <table id="table">
-
-                <thead id="resulthead"></thead>
-                <tbody id="resultHistory"></tbody>
-                <tfoot>
-                    <tr>
-                        <th> </th>
-                        <th> </th>
-                        <th> </th>
-                        <th> </th>
-                    </tr>
-                </tfoot>
 
 
-
-            </table>
-
-        </div>
-
-        <div class="right-column">
-
+        <span class="editbtn">
+            <button class="bouton" hidden id="edit">Editer</button>
+            <button class="bouton" hidden id="send" disabled>Mise a jour de la base de donnée</button>
             <div id="btn">
                 <input id="showBox" type="checkbox">
                 <label class="clickable" id="labelBox">Afficher les contours</label>
             </div>
+        </span>
+            
+        <table id="table">
 
-            <div>
-                <embed id="pdfViewer">
-            </div>
+            <thead id="resulthead"></thead>
+            <tbody id="resultHistory"></tbody>
+            <tfoot>
+                <tr>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </tfoot>
 
-            <div id="reference"></div>
+        </table>
 
+        <div>
+            <embed id="pdfViewer">
         </div>
+
+        <div id="reference"></div>
+
 
     </div>
 
