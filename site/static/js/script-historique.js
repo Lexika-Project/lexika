@@ -23,6 +23,8 @@ if (showBox) {
 
 document.querySelector("#pdfViewer").src = `static/pdf/${livreStart}.pdf#page=${numPage}&zoom=140`;
 
+console.log(livre);
+
 function createTable(data) {
     const table = document.querySelector("#resultHistory");
     const head = document.querySelector("#resulthead");
