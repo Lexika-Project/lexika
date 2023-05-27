@@ -278,6 +278,8 @@ const regexCommands = [
 ];
 
 const regexButton = document.getElementById('regex-btn');
+
+const regexTable = document.getElementById('regex-table');
 regexButton.addEventListener('click', () => {
     if (regexTable.style.display === 'none') {
       regexTable.style.display = 'table';
