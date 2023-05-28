@@ -142,9 +142,10 @@ fetch("/getaudio", {
         sens: sens,
     }),
 })
-.then((resp) => resp.text()) // Utiliser resp.json() au lieu de resp.text()
-.then((text) => {
-    console.log(text);
+.then((resp) => resp.json()) // Utiliser resp.json() au lieu de resp.text()
+.then((data) => {
+    audio = data[0][0]; // Accéder à la valeur dans la structure de données
+    console.log(audio);
 })
 .catch((error) => {
     console.error('Une erreur est survenue lors de la requête fetch:', error);
