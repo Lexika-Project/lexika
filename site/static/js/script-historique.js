@@ -292,7 +292,7 @@ editButton.addEventListener("click", function() {
 
 audiobtn.addEventListener("click", function() {
 
-    if (dragBox.style.display = 'none') {
+    if (dragBox.style.display === 'none') {
         dragBox.style.display = 'flex';
     } else {
         dragBox.style.display = 'none';
