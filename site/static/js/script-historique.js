@@ -6,6 +6,7 @@ const langue = urlParam.get("langue");
 const sens = urlParam.get("sens");
 const ALLOWED_EXTENTION = ["mp3", "wav"];
 const MAX_NUM_PAGE = 274;
+let audio ='';
 
 let mot;
 let editButton = document.querySelector("#edit");
@@ -52,12 +53,26 @@ function createTable(data) {
     let tdLivre = document.createElement("td");
     tdLivre.textContent = livre;
     tr.appendChild(tdLivre);
+
     let tdLangue = document.createElement("td");
     tdLangue.textContent = langue;
     tr.appendChild(tdLangue);
+
     let tdRenvoyer = document.createElement("td");
     tdRenvoyer.textContent = firstRow[1];
+
+    if (audio !== null && audio !== undefined) {
+
+        const button = document.createElement("button");
+        button.innerHTML = '<i id="soundbtn" class="fa fa-volume-up"></i>';
+        button.audioLink = audio;
+        button.onclick = playSound;
+        tdRenvoyer.appendChild(button);
+    }
+
     tr.appendChild(tdRenvoyer);
+
+
     let tdNumPage = document.createElement("td");
     tdNumPage.textContent = numPage;
     tr.appendChild(tdNumPage);
@@ -98,23 +113,6 @@ sendButtonInit(sendButton);
 
 
 
-fetch("/historyRequest", {
-    method: "POST",
-    headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-        langue: langue,
-        sens: sens,
-    }),
-})
-.then((resp) => {
-    return resp.json();
-})
-.then((json) => {
-    createTable(json);
-});
 
 fetch("/getreference", {
     method: "POST",
@@ -132,6 +130,39 @@ fetch("/getreference", {
     reference.innerHTML = text;
 });
 
+fetch("/getaudio", {
+    method: "POST",
+    headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        langue: langue,
+        sens: sens,
+    }),
+})
+.then((resp) => resp.json()) // Utiliser resp.json() au lieu de resp.text()
+.then((data) => {
+    audio = data[0][0]; // Accéder à la valeur dans la structure de données
+});
+
+fetch("/historyRequest", {
+    method: "POST",
+    headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        langue: langue,
+        sens: sens,
+    }),
+})
+.then((resp) => {
+    return resp.json();
+})
+.then((json) => {
+    createTable(json);
+});
 
 
   
@@ -196,6 +227,17 @@ document.querySelector("#labelBox").addEventListener("click", (_) => {
     checkBox.checked = !checkBox.checked;
     changePdfBox();
 });
+
+
+function playSound(event) {
+	let button = event.target;
+	if (button.tagName !== "BUTTON") {
+		button = button.parentElement;
+	}
+	playSound?.currentSound?.pause();
+	playSound.currentSound = new Audio("/static/audio/" + button.audioLink);
+	playSound.currentSound.play();
+}
 
 
 // Function to handle cell editing

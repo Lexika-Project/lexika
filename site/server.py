@@ -16,6 +16,7 @@ from database import (
     update_function,
     update_link,
     reference,
+    audio,
 )
 
 
@@ -68,6 +69,13 @@ def history_request():  # pylint: disable=missing-function-docstring
     langue = result["langue"]
     sens = result["sens"]
     return jsonify(history(langue=langue, sens=sens))
+
+@app.route("/getaudio", methods=["POST"])
+def get_audio():  # pylint: disable=missing-function-docstring
+    result = json.loads(request.get_data())
+    langue = result["langue"]
+    sens = result["sens"]
+    return jsonify(get_audio(sens, langue))
 
 @app.route("/getreference", methods=["POST"])
 def get_reference():  # pylint: disable=missing-function-docstring

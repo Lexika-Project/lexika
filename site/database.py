@@ -241,6 +241,18 @@ def reference(livre):  # pylint: disable=missing-function-docstring
                 {"livre": livre},
             )
             return cur.fetchall()
+        
+
+def audio(sens, langue):  # pylint: disable=missing-function-docstring
+    with psycopg.connect(CONN_PARAMS) as conn:  # pylint: disable=not-context-manager
+        with conn.cursor() as cur:
+            cur.execute(
+                """SELECT audio_link 
+                    FROM complete_table 
+                    WHERE nom_langue =%(langue)s AND sens =%(sens)s;""",
+                {"sens": sens, "langue": langue},
+            )
+            return cur.fetchall()
 
 
 def history(sens, langue):  # pylint: disable=missing-function-docstring
