@@ -65,7 +65,6 @@ function createTable(data) {
 
         const button = document.createElement("button");
         button.innerHTML = '<i id="soundbtn" class="fa fa-volume-up"></i>';
-        button.audioLink = audio;
         button.onclick = playSound;
         tdRenvoyer.appendChild(button);
     }
@@ -241,7 +240,7 @@ function playSound(event) {
 		button = button.parentElement;
 	}
 	playSound?.currentSound?.pause();
-	playSound.currentSound = new Audio("/static/audio/" + button.audioLink);
+	playSound.currentSound = new Audio("/static/audio/" + audio);
 	playSound.currentSound.play();
 }
 
