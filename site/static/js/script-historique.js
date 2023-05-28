@@ -83,6 +83,26 @@ function createTable(data) {
     table.appendChild(tr);
 }
 
+fetch("/getaudio", {
+    method: "POST",
+    headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        langue: langue,
+        sens: sens,
+    }),
+})
+.then((resp) => resp.json()) // Utiliser resp.json() au lieu de resp.text()
+.then((data) => {
+    audio = data[0][0]; // Accéder à la valeur dans la structure de données
+    console.log(audio);
+})
+.catch((error) => {
+    console.error('Une erreur est survenue lors de la requête fetch:', error);
+});
+
 
 
 function sendButtonInit(sendButton) {
@@ -131,27 +151,6 @@ fetch("/getreference", {
 .then((data) => {
     const text = data[0][0]; // Accéder à la valeur dans la structure de données
     reference.innerHTML = text;
-});
-
-
-fetch("/getaudio", {
-    method: "POST",
-    headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-        langue: langue,
-        sens: sens,
-    }),
-})
-.then((resp) => resp.json()) // Utiliser resp.json() au lieu de resp.text()
-.then((data) => {
-    audio = data[0][0]; // Accéder à la valeur dans la structure de données
-    console.log(audio);
-})
-.catch((error) => {
-    console.error('Une erreur est survenue lors de la requête fetch:', error);
 });
 
 
