@@ -219,6 +219,10 @@ select {
                 -3px -3px 8px #73B0CD;
 }
 
+.clickable:hover {
+    background-color: #6296ae;
+}
+
 
 p {
     display: flex;
