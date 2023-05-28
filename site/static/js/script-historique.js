@@ -9,6 +9,7 @@ const MAX_NUM_PAGE = 274;
 let audio ='';
 
 let mot;
+let audiobtn = document.querySelector("#audioadd");
 let editButton = document.querySelector("#edit");
 let sendButton = document.querySelector("#send");
 let reference = document.querySelector("#reference");
@@ -285,4 +286,16 @@ editButton.addEventListener("click", function() {
 
     // Start editing the cell
     editCell(tdRenvoyer);
+});
+
+
+
+audiobtn.addEventListener("click", function() {
+
+    if (dragBox.style.display = 'none') {
+        dragBox.style.display = 'flex';
+    } else {
+        dragBox.style.display = 'none';
+    }
+
 });
