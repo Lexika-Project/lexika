@@ -75,7 +75,7 @@ def get_audio():  # pylint: disable=missing-function-docstring
     result = json.loads(request.get_data())
     langue = result["langue"]
     sens = result["sens"]
-    return jsonify(get_audio(sens, langue))
+    return jsonify(audio(sens, langue))
 
 @app.route("/getreference", methods=["POST"])
 def get_reference():  # pylint: disable=missing-function-docstring
