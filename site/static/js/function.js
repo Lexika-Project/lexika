@@ -1,5 +1,7 @@
 export function createTableResult(tab, langueBase, listeLangue, resultTitle, resultSearch) {
-
+	let tablediv = document.querySelector("#tableDiv");
+	tablediv.style.display = 'flex';
+	
 	let editButton = document.querySelector("#edit");
 	let sendButton = document.querySelector("#send");
 	let foot = document.querySelector("#resultBottom");
