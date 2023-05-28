@@ -78,7 +78,7 @@ function createNum(div, num) {
 
 	newElement.innerText = num;
 	const url = new URL(window.location);
-	const newURL = `${url.pathname}?keyword=${keyword}&engine=${engine}&langueBase=${langueBase}&langueTarget=${langueTarget}&page=${num}`;
+	const newURL = `${url.pathname}?keyword=${keyword}&engine=${engineSelect}&langueBase=${langueBase}&langueTarget=${langueTarget}&page=${num}`;
 	newElement.href = newURL;
 	div.appendChild(newElement);
 }
