@@ -13,13 +13,13 @@ const keyword = urlParam.get("keyword");
 const langueBase = urlParam.get("langueBase");
 const langueTarget = urlParam.get("langueTarget");
 const numPage = parseInt(urlParam.get("page"));
-const engine = urlParam.get("engine");
 
 let input = document.querySelector("#search");
 
 let listeLangues = [];
 let resultSelect = document.querySelector("#resultSelect");
 let baseSelect = document.querySelector("#baseSelect");
+
 
 let engineSelectElem;
 let engineSelect;
@@ -88,7 +88,7 @@ function createPageCount(total) {
 	if (numPage < nbPage) {
 		nextButton.hidden = false;
 		nextButton.onclick = (_) => {
-			changePage(keyword, engine, langueBase, langueTarget, numPage + 1);
+			changePage(keyword, engineSelect, langueBase, langueTarget, numPage + 1);
 		};
 	} else {
 		nextButton.hidden = true;
@@ -96,7 +96,7 @@ function createPageCount(total) {
 	if (numPage > 1) {
 		prevButton.hidden = false;
 		prevButton.onclick = (_) => {
-			changePage(keyword, engine, langueBase, langueTarget, numPage - 1);
+			changePage(keyword, engineSelect, langueBase, langueTarget, numPage - 1);
 		};
 	} else {
 		prevButton.hidden = true;
