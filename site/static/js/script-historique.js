@@ -223,6 +223,37 @@ audioFileInput.addEventListener("change", function() {
     }
 });
 
+dragBox.addEventListener("drop", (event) => {
+    event.preventDefault();
+    dragBox.classList.remove("drag-audio-enter");
+    
+    let file = event.dataTransfer.files[0];
+    let name_split = file.name.split(".");
+    let extention = name_split.pop();
+    if (ALLOWED_EXTENTION.includes(extention.toLowerCase())) {
+        const data = new FormData();
+        data.append("file", file);
+        data.append("sens", sens);
+        data.append("langue", langue);
+        fetch("/receiveAudio", {
+            method: "POST",
+            body: data,
+        }).then((resp) => {
+            console.log(resp);
+            // Ici, vous pouvez ajouter du code pour afficher le nom du fichier dans le h2
+            fileStatus.textContent = 'Fichier téléchargé avec succès : ' + file.name;
+        });
+    } else {
+        // Afficher une erreur si l'extension n'est pas autorisée
+        popupError.innerText = `L'extension ${extention} n'est pas prise en charge.`;
+        popupError.hidden = false;
+        setTimeout((_) => {
+            popupError.hidden = true;
+        }, 5000);
+    }
+});
+
+
 function changePdfBox(bool) {
     if (checkBox.checked) {
         document.querySelector(
