@@ -29,8 +29,11 @@ margin-bottom: 10px;
 transition: background-color 0.3s;
 border-radius: 10px;
 background: #ffffff;
-box-shadow:  3px 3px 8px #ccc,
-            -3px -3px 8px #ccc;
+}
+
+.drag-audio button:hover {
+  background: #3D7C98;
+  color: #ffffff;
 }
 
 h2 {

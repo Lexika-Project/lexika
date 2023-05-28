@@ -6,9 +6,11 @@ const langue = urlParam.get("langue");
 const sens = urlParam.get("sens");
 const ALLOWED_EXTENTION = ["mp3", "wav"];
 const MAX_NUM_PAGE = 274;
-let audio ='';
 
+let audio ='';
 let mot;
+let fileStatus = document.querySelector("#fileStatus");
+let audiosearch = document.querySelector("#audiosearch");
 let audiobtn = document.querySelector("#audioadd");
 let editButton = document.querySelector("#edit");
 let sendButton = document.querySelector("#send");
@@ -189,31 +191,31 @@ document.addEventListener("drop", (event) => {
 });
 
 const popupError = document.querySelector("#unsupported-extention-popup");
-dragBox.addEventListener("drop", (event) => {
-	event.preventDefault();
-	dragBox.classList.remove("drag-audio-enter");
-	const file = event.dataTransfer.files[0];
-	const name_split = file.name.split(".");
-	const extention = name_split.pop();
-	if (ALLOWED_EXTENTION.includes(extention.toLowerCase())) {
-		const data = new FormData();
-		data.append("file", file);
-		data.append("sens", sens);
-		data.append("langue", langue);
-		console.log(data);
-		fetch("/receiveAudio", {
-			method: "POST",
-			body: data,
-		}).then((resp) => {
-			console.log(resp);
-		});
-	} else {
-		popupError.innerText = `L'extention ${extention} n'est pas pris en charge.`;
-		popupError.hidden = false;
-		setTimeout((_) => {
-			popupError.hidden = true;
-		}, 5000);
-	}
+audioFileInput.addEventListener("change", function() {
+    let file = this.files[0];
+    let name_split = file.name.split(".");
+    let extention = name_split.pop();
+    if (ALLOWED_EXTENTION.includes(extention.toLowerCase())) {
+        const data = new FormData();
+        data.append("file", file);
+        data.append("sens", sens);
+        data.append("langue", langue);
+        fetch("/receiveAudio", {
+            method: "POST",
+            body: data,
+        }).then((resp) => {
+            console.log(resp);
+            // Ici, vous pouvez ajouter du code pour afficher le nom du fichier dans le h2
+            fileStatus.textContent = 'Fichier téléchargé avec succès : ' + file.name;
+        });
+    } else {
+        // Afficher une erreur si l'extension n'est pas autorisée
+        popupError.innerText = `L'extension ${extention} n'est pas prise en charge.`;
+        popupError.hidden = false;
+        setTimeout((_) => {
+            popupError.hidden = true;
+        }, 5000);
+    }
 });
 
 function changePdfBox(bool) {
