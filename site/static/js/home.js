@@ -255,29 +255,6 @@ async function main() {
 	sendButtonInit(sendButton);
 }
 
-const regexCommands = [
-	{ expression: '.', description: "Correspond à n'importe quel caractère sauf un saut de ligne", example: 'a.o → ao, abo, a2o' },
-	{ expression: '*', description: 'Répète le caractère précédent zéro ou plusieurs fois', example: 'ab*c → ac, abc, abbc' },
-	{ expression: '+', description: 'Répète le caractère précédent une ou plusieurs fois', example: 'ab+c → abc, abbc' },
-	{ expression: '?', description: 'Rend le caractère précédent facultatif (0 ou 1 fois)', example: 'ab?c → ac, abc' },
-	{ expression: '^', description: 'Correspond au début de la chaîne', example: '^abc → abc, abcdef' },
-	{ expression: '$', description: 'Correspond à la fin de la chaîne', example: 'abc$ → abc, defabc' },
-	{ expression: '{n}', description: 'Répète le caractère précédent exactement n fois', example: 'a{3} → aaa' },
-	{ expression: '{n,}', description: 'Répète le caractère précédent au moins n fois', example: 'a{2,} → aa, aaa' },
-	{ expression: '{n,m}', description: 'Répète le caractère précédent entre n et m fois', example: 'a{2,3} → aa, aaa' },
-	{ expression: '[abc]', description: 'Correspond à un des caractères entre les crochets', example: 'a[bc] → ab, ac' },
-	{ expression: '[^abc]', description: 'Correspond à tout caractère sauf ceux entre les crochets', example: 'a[^bc] → ad, ae' },
-	{ expression: '(a|b)', description: "Correspond à l'un des éléments séparés par le symbole |", example: '(ab|cd) → ab, cd' },
-	{ expression: '\d', description: 'Correspond à un chiffre (équivalent à [0-9])', example: 'a\d → a0, a1, a9' },
-	{ expression: '\D', description: "Correspond à un caractère qui n'est pas un chiffre", example: 'a\D → aa, a%, a-' },
-	{ expression: '\w', description: 'Correspond à un caractère alphanumérique ou un tiret bas', example: 'a\w → aa, a1, a_' },
-	{ expression: '\W', description: "Correspond à un caractère qui n'est pas alphanumérique", example: 'a\W → a!, a%, a@' },
-	{ expression: '\s', description: 'Correspond à un espace, un tab ou un saut de ligne', example: 'a\s → a , a\t, a\n' },
-	{ expression: '\S', description: "Correspond à un caractère qui n'est pas un espace", example: 'a\S → aa, a1, a!' },
-	// Add more regex expressions, their descriptions, and examples here
-];
-
-
 const regexButton = document.getElementById('regex-btn');
 const regexDiv = document.getElementById('regex-div');
 
