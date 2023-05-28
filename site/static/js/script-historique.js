@@ -7,7 +7,7 @@ const sens = urlParam.get("sens");
 const ALLOWED_EXTENTION = ["mp3", "wav"];
 const MAX_NUM_PAGE = 274;
 
-let audio ='';
+let audio = null;
 let mot;
 let audioFileInput = document.querySelector("#audioFile");
 let fileStatus = document.querySelector("#fileStatus");
