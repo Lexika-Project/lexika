@@ -9,6 +9,7 @@ const MAX_NUM_PAGE = 274;
 
 let audio ='';
 let mot;
+let audioFileInput = document.querySelector("#audioFile");
 let fileStatus = document.querySelector("#fileStatus");
 let audiosearch = document.querySelector("#audiosearch");
 let audiobtn = document.querySelector("#audioadd");
@@ -188,6 +189,10 @@ document.addEventListener("dragover", (event) => {
 });
 document.addEventListener("drop", (event) => {
 	event.preventDefault();
+});
+
+audiosearch.addEventListener("click", function() {
+    audioFileInput.click();
 });
 
 const popupError = document.querySelector("#unsupported-extention-popup");
