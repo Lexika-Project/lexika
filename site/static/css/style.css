@@ -381,14 +381,17 @@ h1 {
 
 .headerspan {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .left-buttons {
-    display: flex;
+    margin-right: auto;
 }
 
 .right-button {
     margin-left: auto;
+}
+
+.center-text {
+    margin-left: auto;
+    margin-right: auto;
 }
