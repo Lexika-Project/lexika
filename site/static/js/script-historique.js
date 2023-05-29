@@ -251,8 +251,8 @@ dragBox.addEventListener("drop", (event) => {
 });
 
 
-function changePdfBox() {
-    if (box = 1) {
+function changePdfBox(boxx) {
+    if (boxx = 1) {
         document.querySelector(
             "#pdfViewer"
         ).src = `static/pdf/${livreBox}.pdf#page=${numPage}&zoom=140`;
@@ -267,10 +267,10 @@ boxbtn.addEventListener("click", function() {
 
     if (box = 0) {
         box = 1;
-        changePdfBox();
+        changePdfBox(box);
     } else {
        box = 0;
-       changePdfBox();
+       changePdfBox(box);
     }
 
 });
