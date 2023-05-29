@@ -256,11 +256,6 @@ p {
     right: 0;
 }
   
-.editbtn {
-    display: flex;
-    gap: 20px;
-}
-
 thead {
   height: 50px;
 }
@@ -374,4 +369,13 @@ margin-right: 150px;
 #regex-table {
     width: 800px;
 
+}
+
+.editbtn {
+    display: flex;
+    gap: 20px;
+}
+
+.iconbtn {
+    
 }
