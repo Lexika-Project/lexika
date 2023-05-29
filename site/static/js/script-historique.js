@@ -7,6 +7,7 @@ const sens = urlParam.get("sens");
 const ALLOWED_EXTENTION = ["mp3", "wav"];
 const MAX_NUM_PAGE = 274;
 
+let box = 0;
 let audio = null;
 let mot;
 let audioFileInput = document.querySelector("#audioFile");
@@ -16,16 +17,13 @@ let audiobtn = document.querySelector("#audioadd");
 let editButton = document.querySelector("#edit");
 let sendButton = document.querySelector("#send");
 let reference = document.querySelector("#reference");
-let checkBox = document.querySelector("#showBox");
+let boxbtn = document.querySelector("#boxbtn");
 editButton.hidden = false;
 sendButton.hidden = false;
 
 
 let livreBox = livre + "-rectangle";
 let livreStart = livre;
-if (showBox) {
-    livreStart = livreBox;
-}
 
 document.querySelector("#pdfViewer").src = `static/pdf/${livreStart}.pdf#page=${numPage}&zoom=140`;
 
@@ -253,24 +251,29 @@ dragBox.addEventListener("drop", (event) => {
 });
 
 
-function changePdfBox(bool) {
-    if (checkBox.checked) {
+function changePdfBox() {
+    if (box = 1) {
         document.querySelector(
             "#pdfViewer"
         ).src = `static/pdf/${livreBox}.pdf#page=${numPage}&zoom=140`;
-    } else {
+    } else if(box = 0) {
         document.querySelector(
             "#pdfViewer"
         ).src = `static/pdf/${livre}.pdf#page=${numPage}&zoom=140`;
     }
 }
 
-checkBox.addEventListener("click", changePdfBox);
-document.querySelector("#labelBox").addEventListener("click", (_) => {
-    checkBox.checked = !checkBox.checked;
-    changePdfBox();
-});
+boxbtn.addEventListener("click", function() {
 
+    if (box = 0) {
+        box = 1;
+        changePdfBox();
+    } else if (box = 1) {
+       box = 0;
+       changePdfBox();
+    }
+
+});
 
 function playSound(event) {
 	let button = event.target;

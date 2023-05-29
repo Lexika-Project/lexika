@@ -5,7 +5,7 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 	let editButton = document.querySelector("#edit");
 	let sendButton = document.querySelector("#send");
 	let csvButton = document.querySelector("#download-csv")
-	
+
 	let foot = document.querySelector("#resultBottom");
 	resultTitle.innerHTML = "";
 	foot.innerHTML="";
@@ -18,7 +18,7 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 	for (let langue of listeLangue) {
 		th = document.createElement("th");
 		thx = document.createElement("th");
-		th.innerHTML = `${langue}  <i class="fa-solid fa-arrow-down-z-a" style="color: #ffffff;"></i>`;
+		th.innerHTML = `${langue}  <i class="fa-solid fa-arrow-up-a-z" style="color: #ffffff;"></i>`;
 
 	
 		// Utiliser une IIFE pour capturer la valeur actuelle de l'index
