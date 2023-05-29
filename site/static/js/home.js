@@ -287,18 +287,19 @@ regexButton.addEventListener('click', () => {
 });
 
 
+
 function tableToCSV(table) {
     const rows = Array.from(table.querySelectorAll('tr'));
     return rows.map(row => {
         const cells = Array.from(row.querySelectorAll('td, th'));
-        return cells.map(cell => `"${cell.textContent.replace(/"/g, '""')}"`).join(',');
+        return cells.map(cell => `"${cell.textContent.replace(/"/g, '""')}"`).join(';');
     }).join('\n');
 }
 
 document.querySelector("#download-csv").addEventListener("click", function() {
     const table = document.querySelector("#table");
     const csvData = tableToCSV(table);
-    const blob = new Blob([csvData], { type: 'text/csv' });
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
 
     const link = document.createElement('a');
