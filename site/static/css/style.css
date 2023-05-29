@@ -352,9 +352,9 @@ margin-right: 150px;
 }
 
 .iconbtn {
+    font-size: 160%;
+    margin-right: 30px;
     cursor: pointer ;
-    margin: 20px;
-    font-size: 24px;
     background-color: transparent;
     color: #ffffff;
 
@@ -374,24 +374,37 @@ margin-right: 150px;
     border-radius: 50px;
 }
 
+.ibtn:hover {
+    color: #73B0CD;
+}
+
 h1 {
     color: #ffffff;
     font-size: 28px;
 }
 
 .headerspan {
-    display: flex;
+    position: relative;
+
 }
 
 .left-buttons {
-    margin-right: auto;
+    margin-left:20px;
+    margin-top: 14px;
+    position: absolute;
+    left: 0;
 }
 
 .right-button {
-    margin-left: auto;
+    margin-right: 20px;
+    margin-top: 12px;
+    position: absolute;
+    right: 0;
 }
 
 .center-text {
-    margin-left: auto;
-    margin-right: auto;
+    margin-top: 12px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
