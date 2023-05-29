@@ -153,7 +153,6 @@ async function search(keyword, engine, langueBase, langueResult, page) {
 		.then((resp) => resp.json())
 		.then((json) => {
 			if (json.verif === "ok") {
-				lastJsonResponse = json;
 				if (json.table.length === 0) {
 					// Aucun résultat trouvé
 					console.log("Aucun résultat trouvé pour votre recherche.");
@@ -162,7 +161,6 @@ async function search(keyword, engine, langueBase, langueResult, page) {
 					document.querySelector('body').appendChild(message);
 				} else {
 					// Résultats trouvés.
-					console.log(arrayToObject(json.table));
 					createPageCount(json.count);
 					createTableResult(
 						arrayToObject(json.table),
@@ -289,29 +287,22 @@ regexButton.addEventListener('click', () => {
 });
 
 
-function JSONtoCSV(json) {
-    const replacer = (key, value) => value === null ? '' : value;
-    const header = Object.keys(json[0]);
-    let csv = json.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','));
-    csv.unshift(header.join(','));
-    return csv.join('\r\n');
+function tableToCSV(table) {
+    const rows = Array.from(table.querySelectorAll('tr'));
+    return rows.map(row => {
+        const cells = Array.from(row.querySelectorAll('td, th'));
+        return cells.map(cell => `"${cell.textContent.replace(/"/g, '""')}"`).join(',');
+    }).join('\n');
 }
 
+document.querySelector("#download-csv").addEventListener("click", function() {
+    const table = document.querySelector("#table");
+    const csvData = tableToCSV(table);
+    const blob = new Blob([csvData], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
 
-document.querySelector('#download-csv').addEventListener('click', function() {
-	// Vérifier s'il y a une réponse JSON à convertir en CSV
-	if (lastJsonResponse) {
-		// Convertir le JSON en CSV
-		let csv = JSONtoCSV(lastJsonResponse.table);
-		
-		// Créer un Blob à partir du CSV
-		let csvBlob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-		
-		// Créer un lien pour télécharger le Blob
-		let csvURL = URL.createObjectURL(csvBlob);
-		let tempLink = document.createElement('a');
-		tempLink.href = csvURL;
-		tempLink.setAttribute('download', 'data.csv');
-		tempLink.click();
-	}
+    const link = document.createElement('a');
+    link.download = 'data.csv';
+    link.href = url;
+    link.click();
 });
