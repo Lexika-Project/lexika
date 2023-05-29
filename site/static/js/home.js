@@ -162,7 +162,7 @@ async function search(keyword, engine, langueBase, langueResult, page) {
 					document.querySelector('body').appendChild(message);
 				} else {
 					// Résultats trouvés.
-					console.log(json.table);
+					console.log(arrayToObject(json.table));
 					createPageCount(json.count);
 					createTableResult(
 						arrayToObject(json.table),
