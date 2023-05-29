@@ -4,9 +4,9 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 
 	let editButton = document.querySelector("#edit");
 	let sendButton = document.querySelector("#send");
+	let csvButton = document.querySelector("#download-csv")
+	
 	let foot = document.querySelector("#resultBottom");
-	editButton.hidden = false;
-	sendButton.hidden = false;
 	resultTitle.innerHTML = "";
 	foot.innerHTML="";
 	let trTitle = document.createElement("tr");
