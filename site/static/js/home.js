@@ -154,7 +154,6 @@ async function search(keyword, engine, langueBase, langueResult, page) {
 		.then((json) => {
 			if (json.verif === "ok") {
 				lastJsonResponse = json;
-				console.log(json);
 				if (json.table.length === 0) {
 					// Aucun résultat trouvé
 					console.log("Aucun résultat trouvé pour votre recherche.");
@@ -162,7 +161,8 @@ async function search(keyword, engine, langueBase, langueResult, page) {
 					message.textContent = 'Aucun résultat trouvé pour votre recherche.';
 					document.querySelector('body').appendChild(message);
 				} else {
-					// Résultats trouvés
+					// Résultats trouvés.
+					console.log(json.table);
 					createPageCount(json.count);
 					createTableResult(
 						arrayToObject(json.table),
