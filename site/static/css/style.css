@@ -339,6 +339,7 @@ margin-right: 150px;
 }
 
 #regex-div {
+    margin-bottom: 40px;
     display: none;
     opacity: 0;
     justify-content: center;
