@@ -229,16 +229,6 @@ p {
     margin-right:3px;
 }
 
-#regex-btn {
-    color: #ffffff;
-    font-size: 180%;
-    cursor: pointer;
-    border: transparent;
-    padding: 1px;
-    background: transparent;
-    transition: background-color 0.3s;
-    border-radius: 50px;
-}
   
 #span_regex {
     position: absolute;
@@ -361,18 +351,44 @@ margin-right: 150px;
 
 }
 
-.editbtn {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.iconbtn {
+    cursor: pointer ;
+    margin: 20px;
+    font-size: 24px;
+    background-color: transparent;
+    color: #ffffff;
+
 }
 
-.iconbtn {
-    
+.iconbtn:hover {
+    color: #3D7C98;
+}
+
+.ibtn {
+    color: #ffffff;
+    font-size: 180%;
+    cursor: pointer;
+    border: transparent;
+    padding: 1px;
+    background: transparent;
+    border-radius: 50px;
 }
 
 h1 {
-    text-align: center;
     color: #ffffff;
     font-size: 28px;
+}
+
+.headerspan {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-buttons {
+    display: flex;
+}
+
+.right-button {
+    margin-left: auto;
 }
