@@ -251,12 +251,12 @@ dragBox.addEventListener("drop", (event) => {
 });
 
 
-function changePdfBox(boxx) {
-    if (boxx = 1) {
+function changePdfBox() {
+    if (box === 1) {
         document.querySelector(
             "#pdfViewer"
         ).src = `static/pdf/${livreBox}.pdf#page=${numPage}&zoom=140`;
-    } else {
+    } else if(box === 0) {
         document.querySelector(
             "#pdfViewer"
         ).src = `static/pdf/${livre}.pdf#page=${numPage}&zoom=140`;
@@ -265,12 +265,12 @@ function changePdfBox(boxx) {
 
 boxbtn.addEventListener("click", function() {
 
-    if (box = 0) {
+    if (box === 0) {
         box = 1;
-        changePdfBox(box);
-    } else {
+        changePdfBox();
+    } else if (box === 1) {
        box = 0;
-       changePdfBox(box);
+       changePdfBox();
     }
 
 });
