@@ -256,7 +256,7 @@ function changePdfBox() {
         document.querySelector(
             "#pdfViewer"
         ).src = `static/pdf/${livreBox}.pdf#page=${numPage}&zoom=140`;
-    } else if(box = 0) {
+    } else {
         document.querySelector(
             "#pdfViewer"
         ).src = `static/pdf/${livre}.pdf#page=${numPage}&zoom=140`;
@@ -268,7 +268,7 @@ boxbtn.addEventListener("click", function() {
     if (box = 0) {
         box = 1;
         changePdfBox();
-    } else if (box = 1) {
+    } else {
        box = 0;
        changePdfBox();
     }
