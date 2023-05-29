@@ -31,9 +31,6 @@ header {
     background: linear-gradient(145deg, #73B0CD, #3D7C98);
     height: 60px;
     padding: 0 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     text-decoration: none;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
@@ -42,13 +39,6 @@ header {
 
 }
 
-h1 {
-    color: #ffffff;
-    font-size: 24px;
-    display: flex;
-    align-items: center;
-
-}
 
 a{
     color: #ffffff;
@@ -373,9 +363,16 @@ margin-right: 150px;
 
 .editbtn {
     display: flex;
+    align-items: center;
     gap: 20px;
 }
 
 .iconbtn {
     
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+    font-size: 28px;
 }
