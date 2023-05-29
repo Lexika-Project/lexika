@@ -15,7 +15,7 @@ const langueTarget = urlParam.get("langueTarget");
 const numPage = parseInt(urlParam.get("page"));
 
 let input = document.querySelector("#search");
-
+let lastJsonResponse;
 let listeLangues = [];
 let resultSelect = document.querySelector("#resultSelect");
 let baseSelect = document.querySelector("#baseSelect");
@@ -153,6 +153,7 @@ async function search(keyword, engine, langueBase, langueResult, page) {
 		.then((resp) => resp.json())
 		.then((json) => {
 			if (json.verif === "ok") {
+				lastJsonResponse = json;
 				if (json.table.length === 0) {
 					// Aucun résultat trouvé
 					console.log("Aucun résultat trouvé pour votre recherche.");
@@ -284,4 +285,32 @@ regexButton.addEventListener('click', () => {
   } else {
     hideTable();
   }
+});
+
+
+function JSONtoCSV(json) {
+    const replacer = (key, value) => value === null ? '' : value;
+    const header = Object.keys(json[0]);
+    let csv = json.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','));
+    csv.unshift(header.join(','));
+    return csv.join('\r\n');
+}
+
+
+document.querySelector('#download-csv').addEventListener('click', function() {
+	// Vérifier s'il y a une réponse JSON à convertir en CSV
+	if (lastJsonResponse) {
+		// Convertir le JSON en CSV
+		let csv = JSONtoCSV(lastJsonResponse.table);
+		
+		// Créer un Blob à partir du CSV
+		let csvBlob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+		
+		// Créer un lien pour télécharger le Blob
+		let csvURL = URL.createObjectURL(csvBlob);
+		let tempLink = document.createElement('a');
+		tempLink.href = csvURL;
+		tempLink.setAttribute('download', 'data.csv');
+		tempLink.click();
+	}
 });
