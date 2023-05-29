@@ -357,12 +357,12 @@ margin-right: 150px;
     margin-right: 30px;
     cursor: pointer ;
     background-color: transparent;
-    color: #ffffff;
+    color: #3D7C98;
 
 }
 
 .iconbtn:hover {
-    color: #3D7C98;
+    color: #ffffff;
 }
 
 .ibtn {
