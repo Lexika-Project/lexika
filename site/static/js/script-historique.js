@@ -104,29 +104,37 @@ fetch("/getaudio", {
 
 
 function sendButtonInit(sendButton) {
-    sendButton.addEventListener("click", (_) => {
-        const dataToSend = [[langue, mot, parseInt(sens)]]
-        console.log(dataToSend);
-
-        fetch("/edit", {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dataToSend),
+    sendButton.addEventListener("click", () => {
+      const dataToSend = [[langue, mot, parseInt(sens)]];
+      console.log(dataToSend);
+  
+      fetch("/edit", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSend),
+      })
+        .then((response) => {
+          if (response.ok) {
+            sendButton.innerHTML = `<i class="fa-solid fa-check" style="color: #ffffff;"></i>`;
+            setTimeout(() => {
+              sendButton.innerHTML = `<i class="fa-regular fa-floppy-disk"></i>`;
+            }, 1000);
+          } else {
+            throw new Error('Network response was not ok');
+          }
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            console.log('Request succeeded');
+        .then(() => {
+          console.log('Request succeeded');
         })
-        .catch(error => {
-            console.error('There has been a problem with your fetch operation:', error);
+        .catch((error) => {
+          console.error('There has been a problem with your fetch operation:', error);
         });
     });
-}
+  }
+  
 
 
 sendButtonInit(sendButton);
