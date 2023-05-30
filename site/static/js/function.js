@@ -1,10 +1,12 @@
+let editButton = document.querySelector("#edit");
+let sendButton = document.querySelector("#send");
+let csvButton = document.querySelector("#download-csv")
+
 export function createTableResult(tab, langueBase, listeLangue, resultTitle, resultSearch) {
 	let tablediv = document.querySelector("#tableDiv");
 	tablediv.style.display = 'table';
 
-	let editButton = document.querySelector("#edit");
-	let sendButton = document.querySelector("#send");
-	let csvButton = document.querySelector("#download-csv")
+
 
 	let foot = document.querySelector("#resultBottom");
 	resultTitle.innerHTML = "";
@@ -186,17 +188,34 @@ export function mapToArray() {
 }
 
 export function sendButtonInit(sendButton) {
-	sendButton.addEventListener("click", (_) => {
-		fetch("/edit", {
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(mapToArray()),
+	sendButton.addEventListener("click", () => {
+	  fetch("/edit", {
+		method: "POST",
+		headers: {
+		  Accept: "application/json",
+		  "Content-Type": "application/json",
+		},
+		body: JSON.stringify(mapToArray()),
+	  })
+		.then((response) => {
+		  if (response.ok) {
+			// Fetch réussi
+			sendButton.innerHTML = `<i class="fa-solid fa-check" style="color: #ffffff;"></i>`;
+			setTimeout(() => {
+			  sendButton.innerHTML = `<i class="fa-regular fa-floppy-disk"></i>`;
+			}, 1000); // Attendre 1 seconde avant de changer l'icône
+		  }
+		})
+		.catch((error) => {
+		  // Gérer les erreurs de fetch
+		  console.error(error);
 		});
 	});
-}
+  }
+  
+
+
+
 export function listernerOnchangeTable(table, editButton) {
 	editButton.onclick = (_) => {
 		for (let td of document.querySelectorAll("td")) {
