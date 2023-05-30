@@ -363,6 +363,9 @@ margin-right: 150px;
 
 .iconbtn:hover {
     color: #ffffff;
+    scale:1.2;
+    transition: color, scale 0.5s;
+    
 }
 
 .ibtn {
@@ -376,7 +379,8 @@ margin-right: 150px;
 }
 
 .ibtn:hover {
-    color: #73B0CD;
+    scale:1.2;
+    transition: scale 0.5s;
 }
 
 h1 {
