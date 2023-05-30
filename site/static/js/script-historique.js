@@ -19,7 +19,7 @@ let sendButton = document.querySelector("#send");
 let reference = document.querySelector("#reference");
 let boxbtn = document.querySelector("#boxbtn");
 
-
+sendButton.disabled = true;
 
 let livreBox = livre + "-rectangle";
 let livreStart = livre;
