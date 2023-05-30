@@ -18,9 +18,9 @@ export function createTableResult(tab, langueBase, listeLangue, resultTitle, res
 	for (let langue of listeLangue) {
 		th = document.createElement("th");
 		thx = document.createElement("th");
-		th.innerHTML = `${langue}         <i id ="az" class="fa-solid fa-arrow-up-a-z" style="color: #ffffff;"></i>`;
+		th.innerHTML = `${langue}&nbsp;&nbsp;<i id="az" class="fa-solid fa-arrow-up-a-z" style="color: #ffffff;"></i>`;
 
-	
+
 		// Utiliser une IIFE pour capturer la valeur actuelle de l'index
 		(function(i) {
 			th.addEventListener('click', () => sortTable(i));
