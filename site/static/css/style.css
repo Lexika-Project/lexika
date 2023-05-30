@@ -418,3 +418,8 @@ h1:hover {
     left: 50%;
     transform: translateX(-50%);
 }
+
+#az:hover {
+    scale:1.3;
+    transition: scale 0.3s;
+}
