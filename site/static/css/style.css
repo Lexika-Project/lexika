@@ -29,7 +29,7 @@ header {
     color: #ffffff;
     margin-bottom: 30px;
     background: linear-gradient(145deg, #73B0CD, #3D7C98);
-    height: 60px;
+    height: 70px;
     padding: 0 20px;
     text-decoration: none;
     border-bottom-right-radius: 20px;
@@ -401,20 +401,20 @@ h1:hover {
 
 .left-buttons {
     margin-left:20px;
-    margin-top: 14px;
+    margin-top: 24px;
     position: absolute;
     left: 0;
 }
 
 .right-button {
     margin-right: 20px;
-    margin-top: 12px;
+    margin-top: 18px;
     position: absolute;
     right: 0;
 }
 
 .center-text {
-    margin-top: 12px;
+    margin-top: 18px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
