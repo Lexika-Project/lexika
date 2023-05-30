@@ -105,7 +105,6 @@ fetch("/getaudio", {
 function sendButtonInit(sendButton) {
     sendButton.addEventListener("click", () => {
       const dataToSend = [[langue, mot, parseInt(sens)]];
-      console.log(dataToSend);
   
       fetch("/edit", {
         method: "POST",
