@@ -18,8 +18,7 @@ let editButton = document.querySelector("#edit");
 let sendButton = document.querySelector("#send");
 let reference = document.querySelector("#reference");
 let boxbtn = document.querySelector("#boxbtn");
-editButton.hidden = false;
-sendButton.hidden = false;
+
 
 
 let livreBox = livre + "-rectangle";
