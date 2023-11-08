@@ -9,7 +9,7 @@
   
 ## Installation
 
-Afin de téléchargé en tant qu'administrateur de l'ordinateur, pour être sûr que les extensions sont bien installées :
+Afin de téléchargé en tant qu'administrateur, pour être sûr que les extensions sont bien installées, on lance les lignes suivantes :
 
 ```bash
 pip install pymupdf --user
