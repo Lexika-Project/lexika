@@ -1,14 +1,16 @@
 # Librairires 
 
 Les librairies utilisées dans le code sont les suivantes:  
-    
+
+ ```bash
   -pytesseract  
   -fitz  
   -cv2  
   -numpy   
   -pathlib   
   -csv  
-  
+ ```
+
 ## Installation
 
 Afin de téléchargé en tant qu'administrateur, pour être sûr que les extensions sont bien installées, on lance les lignes suivantes :
