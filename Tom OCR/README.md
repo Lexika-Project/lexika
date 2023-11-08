@@ -7,7 +7,6 @@ Les librairies utilisées dans le code sont les suivantes:
   -fitz  
   -cv2  
   -numpy   
-  -pathlib   
   -csv  
  ```
 
