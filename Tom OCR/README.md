@@ -22,7 +22,7 @@ pip install pytesseract --user
 
 ## Lancer l'OCR
 
-Les lignes suivantes permettent de lancer l'ocr et de redirigé les données récupérées dans un fichier csv.
+Les lignes suivantes permettent de lancer l'ocr et de rediriger les données récupérées dans un fichier csv.
 
 ```python
 # Chemin du fichier PDF d'entrée
