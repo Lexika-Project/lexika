@@ -101,6 +101,18 @@ def get_parser():
 def overlap(
     elem1, elem2, tolerence_top=0, tolerence_left=0
 ):  # pylint: disable=missing-function-docstring
+    """
+    Vérifie si deux éléments se chevauchent en considérant des tolérances de position.
+
+    Args:
+        elem1 (dict): Informations sur le premier élément.
+        elem2 (dict): Informations sur le deuxième élément.
+        tolerence_top (int): Tolérance pour le chevauchement vertical.
+        tolerence_left (int): Tolérance pour le chevauchement horizontal.
+
+    Returns:
+        bool: True si les éléments se chevauchent, False sinon.
+    """
     if (
         (elem1["top"] >= elem2["top"] + elem2["height"] + tolerence_top)
         or (elem1["top"] + elem1["height"] <= elem2["top"] - tolerence_top)
@@ -112,6 +124,18 @@ def overlap(
 
 
 def compare(elem1, elem2, tolerence=1):  # pylint: disable=missing-function-docstring
+    """
+    Vérifie si deux éléments se chevauchent en considérant des tolérances de position.
+
+    Args:
+        elem1 (dict): Informations sur le premier élément.
+        elem2 (dict): Informations sur le deuxième élément.
+        tolerence_top (int): Tolérance pour le chevauchement vertical.
+        tolerence_left (int): Tolérance pour le chevauchement horizontal.
+
+    Returns:
+        bool: True si les éléments se chevauchent, False sinon.
+    """
     if elem1 is None or elem2 is None:
         return False
     if "bold" in elem1:
@@ -126,6 +150,16 @@ def compare(elem1, elem2, tolerence=1):  # pylint: disable=missing-function-docs
 def return_index_of_array(
     array, element
 ):  # pylint: disable=missing-function-docstring,redefined-outer-name
+    """
+    Retourne l'indice de l'élément dans un tableau en comparant avec une tolérance.
+
+    Args:
+        array (list): Tableau d'éléments à comparer.
+        element (dict): Élément à comparer.
+
+    Returns:
+        int or None: Indice de l'élément dans le tableau ou None s'il n'est pas trouvé.
+    """
     for test in array:
         if compare(test, element):
             return array.index(test)
@@ -133,6 +167,16 @@ def return_index_of_array(
 
 
 def concat(element1, element2):  # pylint: disable=missing-function-docstring
+    """
+    Concatène deux éléments en un seul, en tenant compte des positions et du texte.
+
+    Args:
+        element1 (dict): Premier élément à concaténer.
+        element2 (dict): Deuxième élément à concaténer.
+
+    Returns:
+        dict: Élément résultant de la concaténation.
+    """
     if abs(element1["top"] - element2["top"]) > 40:
         if element1["top"] < element2["top"]:
             text = element1["text"] + " " + element2["text"]
@@ -163,12 +207,35 @@ def concat(element1, element2):  # pylint: disable=missing-function-docstring
 
 
 def not_column_begin(elem, approx=200):
+    """
+    Vérifie si un élément ne débute pas une colonne.
+
+    Args:
+        elem (dict): Élément à vérifier.
+        approx (int): Tolérance pour la différence de position.
+
+    Returns:
+        bool: True si l'élément ne débute pas une colonne, False sinon.
+    """
     return abs(elem["left"] - COLLUMN_TO_LANGUE[get_closest_lang(elem)]) > approx
 
 
 def global_compare(
     element1, element2, array, approx_top=15, approx_left=90
 ):  # pylint: disable=missing-function-docstring
+    """
+    Compare deux éléments globalement en tenant compte des positions.
+
+    Args:
+        element1 (dict): Premier élément à comparer.
+        element2 (dict): Deuxième élément à comparer.
+        array (list): Tableau d'éléments de référence pour la comparaison.
+        approx_top (int): Tolérance pour la différence de position verticale.
+        approx_left (int): Tolérance pour la différence de position horizontale.
+
+    Returns:
+        bool: True si les éléments se chevauchent selon les critères donnés, False sinon.
+    """
     return (
         overlap(element1, element2, tolerence_left=100, tolerence_top=0)
         and not_column_begin(element1)
@@ -187,6 +254,15 @@ def global_compare(
 
 
 def get_fr_column(array):  # pylint: disable=missing-function-docstring
+    """
+    Récupère les éléments situés dans la colonne française.
+
+    Args:
+        array (list): Tableau d'éléments à filtrer.
+
+    Returns:
+        list: Liste des éléments dans la colonne française.
+    """
     res = []
     for element in array:
         if abs(element["left"] - COLLUMN_TO_LANGUE["français"]) < 400:
@@ -195,6 +271,16 @@ def get_fr_column(array):  # pylint: disable=missing-function-docstring
 
 
 def get_most_close_fr(array, element):  # pylint: disable=missing-function-docstring
+    """
+    Obtient l'élément le plus proche dans la colonne française par rapport à un élément donné.
+
+    Args:
+        array (list): Tableau d'éléments de référence.
+        element (dict): Élément de référence pour la comparaison.
+
+    Returns:
+        dict: Élément le plus proche dans la colonne française.
+    """
     fr_array = get_fr_column(array)
     res = fr_array[0]
     for element_fr in fr_array:
@@ -204,6 +290,17 @@ def get_most_close_fr(array, element):  # pylint: disable=missing-function-docst
 
 
 def fr_compare(element1, element2, array):  # pylint: disable=missing-function-docstring
+    """
+    Compare deux éléments en tenant compte de la position dans la colonne française.
+
+    Args:
+        element1 (dict): Premier élément à comparer.
+        element2 (dict): Deuxième élément à comparer.
+        array (list): Tableau d'éléments de référence pour la comparaison.
+
+    Returns:
+        bool: True si les éléments correspondent selon les critères donnés, False sinon.
+    """
     element1_close = get_most_close_fr(array, element1)
     element2_close = get_most_close_fr(array, element2)
     return (
@@ -214,6 +311,16 @@ def fr_compare(element1, element2, array):  # pylint: disable=missing-function-d
 
 
 def old1_concat_box(array, func_compare):  # pylint: disable=missing-function-docstring
+    """
+    Concatène les boîtes de texte du tableau en utilisant la fonction de comparaison donnée.
+
+    Args:
+        array (list): Tableau d'éléments à concaténer.
+        func_compare (function): Fonction de comparaison pour déterminer si les éléments peuvent être concaténés.
+
+    Returns:
+        list: Liste des éléments concaténés.
+    """
     change = True
     while change:
         change = False
@@ -242,6 +349,17 @@ def old1_concat_box(array, func_compare):  # pylint: disable=missing-function-do
 
 
 def get_most_close(array, test, func_compare):
+    """
+    Obtient l'élément le plus proche d'un élément de test par rapport à une fonction de comparaison donnée.
+
+    Args:
+        array (list): Tableau d'éléments de référence.
+        test (dict): Élément de test pour la comparaison.
+        func_compare (function): Fonction de comparaison.
+
+    Returns:
+        dict: Élément le plus proche du test.
+    """
     res = None
     for elem in array:
         if func_compare(test, elem, array) and not compare(test, elem):
@@ -255,6 +373,16 @@ def get_most_close(array, test, func_compare):
 
 
 def is_inside(elem1, elem2):
+    """
+    Vérifie si l'élément 1 est entièrement à l'intérieur de l'élément 2.
+
+    Args:
+        elem1 (dict): Premier élément à vérifier.
+        elem2 (dict): Deuxième élément pour la vérification.
+
+    Returns:
+        bool: True si elem1 est entièrement à l'intérieur de elem2, False sinon.
+    """
     return (
         elem1["top"] <= elem2["top"]
         and elem1["left"] <= elem2["left"]
@@ -266,6 +394,20 @@ def is_inside(elem1, elem2):
 def concat_box(
     array, func_compare, debug, pdf_page=None, file_output_name=None, num_page=None
 ):  # pylint: disable=missing-function-docstring
+    """
+    Concatène les boîtes de texte en utilisant la fonction de comparaison donnée.
+
+    Args:
+        array (list): Tableau d'éléments à concaténer.
+        func_compare (function): Fonction de comparaison pour déterminer si les éléments peuvent être concaténés.
+        debug (bool): Activation du mode débogage.
+        pdf_page (object): Objet de page PDF.
+        file_output_name (str): Nom du fichier de sortie.
+        num_page (int): Numéro de la page.
+
+    Returns:
+        list: Liste des éléments concaténés.
+    """
     change = True
     the_change = ""
     tri_rapide(array, compare_sort)
@@ -301,6 +443,15 @@ def concat_box(
 
 
 def get_the_min(array):  # pylint: disable=missing-function-docstring
+    """
+    Obtient la valeur minimale du paramètre 'left' dans le tableau.
+
+    Args:
+        array (list): Tableau d'éléments.
+
+    Returns:
+        int: Valeur minimale de la propriété 'left'.
+    """
     res = 10_000
     for element in array:  # pylint: disable=redefined-outer-name
         if element["top"] > TITLE_TOP:
@@ -309,6 +460,16 @@ def get_the_min(array):  # pylint: disable=missing-function-docstring
 
 
 def get_the_smallest_overlap(array, elem_test):
+    """
+    Obtient l'élément avec le plus petit recouvrement parmi les éléments du tableau.
+
+    Args:
+        array (list): Tableau d'éléments.
+        elem_test (dict): Élément de test.
+
+    Returns:
+        dict: Élément avec le plus petit recouvrement par rapport à elem_test.
+    """
     smallest = elem_test
     for elem in array:
         if (
@@ -320,6 +481,15 @@ def get_the_smallest_overlap(array, elem_test):
 
 
 def suppr_overlap(array):  # pylint: disable=missing-function-docstring
+    """
+    Supprime les chevauchements entre les éléments du tableau.
+
+    Args:
+        array (list): Tableau contenant les éléments à traiter.
+
+    Returns:
+        list: Tableau contenant les éléments sans chevauchement.
+    """
     res = []
     change = True
     while change:
@@ -349,6 +519,18 @@ def suppr_overlap(array):  # pylint: disable=missing-function-docstring
 
 
 def particionner(tab, deb, fin, func):  # pylint: disable=missing-function-docstring
+    """
+    Partitionne un tableau en utilisant la technique du tri rapide.
+
+    Args:
+        tab (list): Tableau à trier.
+        deb (int): Indice de début de la partition.
+        fin (int): Indice de fin de la partition.
+        func (function): Fonction de comparaison pour le tri.
+
+    Returns:
+        None: Modifie le tableau en place.
+    """
     if deb < fin:
         curent = deb
         for i in range(deb + 1, fin):
@@ -363,10 +545,30 @@ def particionner(tab, deb, fin, func):  # pylint: disable=missing-function-docst
 
 
 def tri_rapide(tab, func):  # pylint: disable=missing-function-docstring
+    """
+    Effectue un tri rapide sur le tableau donné.
+
+    Args:
+        tab (list): Tableau à trier.
+        func (function): Fonction de comparaison pour le tri.
+
+    Returns:
+        None: Modifie le tableau en place.
+    """
     particionner(tab, 0, len(tab), func)
 
 
 def compare_sort(elem1, elem2):  # pylint: disable=missing-function-docstring
+    """
+    Fonction de comparaison utilisée pour le tri rapide.
+
+    Args:
+        elem1 (dict): Premier élément à comparer.
+        elem2 (dict): Deuxième élément à comparer.
+
+    Returns:
+        int: Résultat de la comparaison (0 si elem1 avant elem2, 1 sinon).
+    """
     if elem1["top"] + elem1["height"] < elem2["top"]:
         return 0
     if elem2["top"] + elem2["height"] < elem1["top"]:
@@ -379,6 +581,16 @@ def compare_sort(elem1, elem2):  # pylint: disable=missing-function-docstring
 def overlap_from_two_array(
     array_base, array_clean
 ):  # pylint: disable=missing-function-docstring
+    """
+    Calcule les chevauchements entre deux tableaux d'éléments.
+
+    Args:
+        array_base (list): Tableau de base.
+        array_clean (list): Tableau à nettoyer des chevauchements.
+
+    Returns:
+        list: Tableau résultant des chevauchements.
+    """
     res = []
     for element_clean in array_clean:
         tmp = []
@@ -405,6 +617,15 @@ def overlap_from_two_array(
 
 
 def from_array_to_line(array):  # pylint: disable=missing-function-docstring
+    """
+    Organise les éléments du tableau en lignes en fonction de la colonne 'français'.
+
+    Args:
+        array (list): Tableau d'éléments.
+
+    Returns:
+        dict: Dictionnaire avec les tops des éléments comme clés et les éléments associés comme valeurs.
+    """
     fr_col = get_fr_column(array)
     res = {}
     for fr_elem in fr_col:
@@ -416,6 +637,15 @@ def from_array_to_line(array):  # pylint: disable=missing-function-docstring
 
 
 def get_closest_lang(elem):  # pylint: disable=missing-function-docstring
+    """
+    Détermine la langue la plus proche pour un élément donné.
+
+    Args:
+        elem (dict): Élément à traiter.
+
+    Returns:
+        str: Langue la plus proche de l'élément.
+    """
     res = "français"
     for langue in COLLUMN_TO_LANGUE:
         # print(elem["left"])
@@ -430,6 +660,15 @@ def get_closest_lang(elem):  # pylint: disable=missing-function-docstring
 
 
 def from_line_to_csv(array):  # pylint: disable=missing-function-docstring
+    """
+    Convertit les éléments regroupés en lignes en une chaîne CSV.
+
+    Args:
+        array (dict): Dictionnaire avec les tops comme clés et les éléments comme valeurs.
+
+    Returns:
+        str: Chaîne CSV des éléments.
+    """
     res = ""
     tmp = {}
     for elem in array:
@@ -467,6 +706,15 @@ def from_line_to_csv(array):  # pylint: disable=missing-function-docstring
 
 
 def find_title_coord(array):  # pylint: disable=missing-function-docstring
+    """
+    Cette fonction trouve et calcule les coordonnées du titre dans le tableau donné.
+
+    Args:
+        array (list): Liste d'éléments contenant les coordonnées des zones de texte.
+
+    Returns:
+        float: La coordonnée verticale calculée du titre.
+    """
     tmp = []
     for elem in array:
         if len(list(set(elem["text"].lower().split()).intersection(LANGUE_LIST))) != 0:
@@ -487,6 +735,15 @@ def find_title_coord(array):  # pylint: disable=missing-function-docstring
 
 
 def get_title_list(array):  # pylint: disable=missing-function-docstring
+    """
+    Cette fonction extrait la liste des éléments considérés comme des titres du tableau donné.
+
+    Args:
+        array (list): Liste d'éléments contenant les coordonnées des zones de texte.
+
+    Returns:
+        list: Liste des éléments considérés comme des titres, triés par la coordonnée horizontale.
+    """
     tmp = []
     for elem in array:
         if abs(elem["top"] - (TITLE_TOP - 50)) < 30:
@@ -500,6 +757,17 @@ def get_title_list(array):  # pylint: disable=missing-function-docstring
 
 
 def get_array_tess(pdf_img, test_bold=False, bold_aprox=0.001):
+    """
+    Cette fonction utilise Tesseract pour extraire du texte et les coordonnées de boîtes englobantes à partir d'une image.
+
+    Args:
+        pdf_img (fitz.Pixmap): Image à partir de laquelle extraire le texte.
+        test_bold (bool, optional): Indique s'il faut tester si le texte est en gras. Par défaut False.
+        bold_aprox (float, optional): Approximation pour déterminer si le texte est en gras. Par défaut 0.001.
+
+    Returns:
+        tuple: Tuple contenant la liste des boîtes englobantes et l'image, ainsi que les dimensions de l'image (hauteur, largeur).
+    """
     mat = fitz.Matrix(6, 6)
     pix = pdf_img.get_pixmap(matrix=mat)
     img_data = pix.tobytes("png")
@@ -546,6 +814,17 @@ def get_array_tess(pdf_img, test_bold=False, bold_aprox=0.001):
 
 
 def save_as_img(array, img, file_output_name, num_page, color=(255, 0, 0), error=True):
+    """
+    Sauvegarde l'image avec les boîtes englobantes autour des éléments dans la liste.
+
+    Args:
+        array (list): Liste des éléments avec les coordonnées des boîtes englobantes.
+        img (numpy.ndarray): Image sur laquelle dessiner les boîtes englobantes.
+        file_output_name (str): Nom du fichier de sortie.
+        num_page (int): Numéro de la page.
+        color (tuple, optional): Couleur des boîtes englobantes. Par défaut (255, 0, 0) (rouge).
+        error (bool, optional): Indique s'il faut marquer en bleu les boîtes sans texte. Par défaut True.
+    """
     for element in array:
         if "bold" in element:
             if element["bold"]:
@@ -583,6 +862,19 @@ def draw_pdf(
     width=1,
     mode="normal",
 ):
+    """
+    Dessine les boîtes englobantes sur la page PDF.
+
+    Args:
+        array (list): Liste des éléments avec les coordonnées des boîtes englobantes.
+        pdf_page (fitz.fitz.Page): Page PDF sur laquelle dessiner les boîtes englobantes.
+        num_page (int): Numéro de la page.
+        img_width (int): Largeur de l'image.
+        img_height (int): Hauteur de l'image.
+        color (tuple, optional): Couleur des boîtes englobantes. Par défaut (0, 0, 1) (bleu).
+        width (int, optional): Largeur de la ligne de la boîte. Par défaut 1.
+        mode (str, optional): Mode de dessin (non utilisé ici). Par défaut "normal".
+    """
     if not pdf_page.is_wrapped:
         pdf_page.wrap_contents()
 
@@ -613,10 +905,32 @@ def draw_pdf(
 
 
 def concat_horizon(elem1, elem2, array):
+    """
+    Vérifie si deux éléments peuvent être concaténés horizontalement.
+
+    Args:
+        elem1 (dict): Premier élément.
+        elem2 (dict): Deuxième élément.
+        array (list): Liste des éléments.
+
+    Returns:
+        bool: True si les éléments peuvent être concaténés horizontalement, False sinon.
+    """
     return abs((elem1["left"] + elem1["width"]) - elem2["left"]) < 0
 
 
 def concat_bold(elem1, elem2, array):
+    """
+    Vérifie si deux éléments en gras peuvent être concaténés.
+
+    Args:
+        elem1 (dict): Premier élément.
+        elem2 (dict): Deuxième élément.
+        array (list): Liste des éléments.
+
+    Returns:
+        bool: True si les éléments en gras peuvent être concaténés, False sinon.
+    """
     return (
         elem1["bold"]
         and elem2["bold"]
@@ -629,12 +943,34 @@ def concat_bold(elem1, elem2, array):
 
 
 def concat_not_bold(elem1, elem2, array):
+    """
+    Vérifie si deux éléments non en gras peuvent être concaténés.
+
+    Args:
+        elem1 (dict): Premier élément.
+        elem2 (dict): Deuxième élément.
+        array (list): Liste des éléments.
+
+    Returns:
+        bool: True si les éléments non en gras peuvent être concaténés, False sinon.
+    """
     if elem1["bold"] or elem2["bold"]:
         return False
     return overlap(elem1, elem2, tolerence_left=100)
 
 
 def concat_by_closest_bold(elem1, elem2, array):
+    """
+    Vérifie si deux éléments peuvent être concaténés en se basant sur les éléments les plus proches en gras.
+
+    Args:
+        elem1 (dict): Premier élément.
+        elem2 (dict): Deuxième élément.
+        array (list): Liste des éléments.
+
+    Returns:
+        bool: True si les éléments peuvent être concaténés, False sinon.
+    """
     if elem1["bold"] or elem2["bold"]:
         return False
     elem1_bold = get_most_close_bold(array, elem1)
@@ -653,6 +989,18 @@ def concat_false(elem1, elem2, array):
 
 
 def suppr_middle_bold(array):
+    """
+    Supprime les éléments en gras dans la partie médiane d'une colonne.
+
+    Args:
+        array (list): Liste des éléments.
+
+    Modifie:
+        array (list): Modifie la liste en supprimant les éléments en gras dans la partie médiane.
+
+    Returns:
+        None
+    """
     res = []
     for elem in array:
         to_add = True
@@ -677,6 +1025,16 @@ def suppr_middle_bold(array):
 
 
 def get_most_close_bold(array, test):
+    """
+    Retourne l'élément en gras le plus proche du test.
+
+    Args:
+        array (list): Liste des éléments.
+        test (dict): Élément à tester.
+
+    Returns:
+        dict: L'élément en gras le plus proche ou None s'il n'y en a pas.
+    """
     res = None
     for elem in array:
         if elem["bold"] and (
@@ -689,6 +1047,16 @@ def get_most_close_bold(array, test):
 
 
 def get_first_under_bold(array, test):
+    """
+    Retourne le premier élément en gras en dessous du test.
+
+    Args:
+        array (list): Liste des éléments.
+        test (dict): Élément à tester.
+
+    Returns:
+        dict: Le premier élément en gras en dessous du test ou None s'il n'y en a pas.
+    """
     res = None
     for elem in array:
         if elem["bold"]:
@@ -699,6 +1067,15 @@ def get_first_under_bold(array, test):
 
 
 def single_language_array_to_line(array):
+    """
+    Fusionne les éléments du même langage dans une ligne.
+
+    Args:
+        array (list): Liste des éléments.
+
+    Returns:
+        list: Liste des lignes de texte fusionnées par langage.
+    """
     tmp = {}
     for elem in array:
         if not elem["bold"]:
@@ -721,6 +1098,16 @@ def single_language_array_to_line(array):
 
 
 def nyelayu_compare(elem1, elem2):
+    """
+    Compare deux éléments pour le langage nyelayu.
+
+    Args:
+        elem1 (dict): Premier élément.
+        elem2 (dict): Deuxième élément.
+
+    Returns:
+        int: 0 si elem1 est à gauche de elem2, 1 sinon.
+    """
     if elem1["left"] < 1000 < elem2["left"]:
         return 0
     if elem2["left"] < 1000 < elem1["left"]:
@@ -731,6 +1118,17 @@ def nyelayu_compare(elem1, elem2):
 
 
 def concat_single_bold(elem1, elem2, array):
+    """
+    Fusionne deux éléments en conservant le style bold.
+
+    Args:
+        elem1 (dict): Premier élément.
+        elem2 (dict): Deuxième élément.
+        array (list): Liste des éléments.
+
+    Returns:
+        bool: True si la fusion a réussi tout en conservant le style bold, False sinon.
+    """
     if not elem1["bold"] or not elem2["bold"]:
         return False
     elem1_verif = False
@@ -761,6 +1159,20 @@ def concat_single_bold(elem1, elem2, array):
 def hienghene(
     pdf_img, file_output_name, csv, output_type, debug, num_page=0
 ):  # pylint: disable=missing-function-docstring
+    """
+    Traitement spécifique pour le cas de Hienghène.
+
+    Args:
+        pdf_img (object): Image du PDF.
+        file_output_name (str): Nom du fichier de sortie.
+        csv (object): Fichier CSV pour l'enregistrement des données.
+        output_type (str): Type de sortie ("img" ou autre).
+        debug (bool): Activation du mode debug.
+        num_page (int): Numéro de page du PDF (par défaut 0).
+
+    Returns:
+        None
+    """
     array_boxe, img, img_height, img_width = get_array_tess(pdf_img)
     if len(array_boxe) > 20:
         global TITLE_TOP
@@ -839,6 +1251,20 @@ def hienghene(
 def nyelayu(
     pdf_img, file_output_name, csv, output_type, debug, num_page=0
 ):  # pylint: disable=missing-function-docstring
+    """
+    Traitement spécifique pour le cas de Nyelayu.
+
+    Args:
+        pdf_img (object): Image du PDF.
+        file_output_name (str): Nom du fichier de sortie.
+        csv (object): Fichier CSV pour l'enregistrement des données.
+        output_type (str): Type de sortie ("img" ou autre).
+        debug (bool): Activation du mode debug.
+        num_page (int): Numéro de page du PDF (par défaut 0).
+
+    Returns:
+        None
+    """
     global TITLE_TOP
     TITLE_TOP = 400
     array_boxe, img, img_height, img_width = get_array_tess(pdf_img, test_bold=True)
@@ -889,6 +1315,12 @@ def test(
 
 
 def getProcess():
+    """
+    Renvoie le processus et les bornes de pages en fonction de l'argument `args.process`.
+
+    Returns:
+        list: Liste contenant le processus, la page de début et la page de fin.
+    """
     match args.process:
         case 0:
             process = hienghene
@@ -902,25 +1334,35 @@ def getProcess():
 
 
 if __name__ == "__main__":
-    os.chdir(os.path.dirname(__file__))
+    os.chdir(os.path.dirname(__file__)) # Changement du répertoire courant
+    
+    # Parsing des arguments
     args = get_parser().parse_args()
     filename_without_ex = os.path.splitext(args.filename)[0]
     file_input = "pdf/" + filename_without_ex
+    
+    # Ouverture du fichier PDF en mode lecture binaire
     with open(file_input + ".pdf", "rb") as pdf_file:
-        i = 1
+        i = 1 # Initialisation du compteur de page
 
-        numero_page = args.page
+        numero_page = args.page # Numéro de page spécifié par l'utilisateur
 
         file_output = "output/" + filename_without_ex
         if numero_page != 0:
             file_output += "-" + str(numero_page)
+
+        # Récupération du processus et des bornes de pages    
         process, START, END = getProcess()
+
+        # Ouverture du fichier de sortie CSV en mode écriture
         with open(file_output + ".csv", "w", encoding="utf-8") as file:
             with fitz.open(file_input + ".pdf") as pdf_file:
                 if numero_page == 0:
                     with tqdm(total=END - START) as pbar:
+                        # Parcours des pages du PDF
                         for page_pdf in pdf_file:
                             if START <= i <= END:
+                                # Traitement de la page en utilisant le processus approprié
                                 process(
                                     page_pdf,
                                     file_output + "-" + str(i),
@@ -930,10 +1372,11 @@ if __name__ == "__main__":
                                     i,
                                 )
                                 pbar.update()
-                            i += 1
+                            i += 1 # Incrémentation du compteur de page
                         if args.output == "pdf":
                             pdf_file.save(file_output + ".pdf")
                 elif 0 < numero_page < pdf_file.page_count:
+                    # Traitement de la page spécifiée par l'utilisateur
                     process(
                         pdf_file.load_page(numero_page - 1),
                         file_output,
