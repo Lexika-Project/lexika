@@ -1,5 +1,7 @@
 # Librairires 
 
+Les librairies utilisées dans le code sont les suivantes:  
+    
   -pytesseract  
   -fitz  
   -cv2  
