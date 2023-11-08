@@ -9,6 +9,17 @@ import csv
 
 
 def get_array_tess(pdf_path, test_bold=True, bold_aprox=0.1):
+    """
+    Utilité:
+        Extrait le texte d'un fichier PDF en images, effectue une reconnaissance de caractères (OCR) à l'aide de Tesseract, 
+        et renvoie une liste de dictionnaires contenant les informations sur le texte extrait.
+    Paramètres:
+        pdf_path: Chemin du fichier PDF.
+        test_bold: (Facultatif) Un booléen indiquant si vous souhaitez tester si le texte est en gras.
+        bold_aprox: (Facultatif) Le pourcentage approximatif de pixels en gras pour déterminer si le texte est en gras.
+    Return:
+        Une liste de dictionnaires contenant les informations du texte extrait.
+    """
     pdf_document = fitz.open(pdf_path)
     images = []
     is_inside_parentheses = False
@@ -95,6 +106,15 @@ def get_array_tess(pdf_path, test_bold=True, bold_aprox=0.1):
 
 
 def order_text(result):
+    """
+    Utilité:
+        Trie les éléments en fonction de la colonne dans laquelle ils se trouvent et renvoie deux listes séparées 
+        pour chaque colonne.
+    Paramètres:
+        result: Liste de dictionnaires du texte extrait.
+    Return:
+        Deux listes séparées pour chaque colonne du texte.
+    """
     column1 = []
     column2=[]
     for item in result:
@@ -106,6 +126,13 @@ def order_text(result):
 
 
 def txt_fr(word):
+    """
+    Utilité:
+        Vérifie si un mot donné est présent dans un fichier texte contenant une liste de mots français. Si le mot n'est pas dans la liste 
+        et que le texte est en gras, elle indique que le mot est en gras.
+    Paramètres:
+        word: Dictionnaire contenant les informations du mot extrait.
+    """
     dico = r"C:\Users\Hurel Roques Tom\Desktop\Stage Lexika\ocr\pdf\liste.de.mots.francais.frgut.txt"
     with open(dico, "r", encoding="utf-8") as file:
         content = file.read()
@@ -119,6 +146,14 @@ def txt_fr(word):
 
 
 def array_from_txt(column):
+    """
+    Utilité:
+        Regroupe le texte en gras et non gras en paires et renvoie une liste de paires de texte.
+    Paramètres:
+        column: Liste de dictionnaires du texte extrait pour une colonne donnée.
+    Return:
+        Une liste de paires de texte (texte en gras et non gras).
+    """
     res = []
     temp = ['', '']
 
@@ -146,6 +181,13 @@ def array_from_txt(column):
 
 
 def export_to_csv(data, output_file):
+    """
+    Utilité:
+        Exporte une liste de données vers un fichier CSV.
+    Paramètres:
+        data: Liste de données à exporter.
+        output_file: Chemin du fichier CSV de sortie.
+    """
     with open(output_file, mode='a', newline='', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile, delimiter=';')
         for row in data:
@@ -153,6 +195,13 @@ def export_to_csv(data, output_file):
 
 
 def csv_fusion(source, destination):
+    """
+    Utilité:
+        Fusionne le contenu d'un fichier source avec un fichier de destination.
+    Paramètres:
+        source: Chemin du fichier source.
+        destination: Chemin du fichier de destination.
+    """
     with open(source, 'r') as f1:
         new = f1.read()
     with open(destination, 'a') as f2:
@@ -160,6 +209,15 @@ def csv_fusion(source, destination):
 
 
 def iaai(pdf_path, pdf1, pdf2):
+    """
+    Utilité:
+        Coordonne l'ensemble du processus de traitement pour un fichier PDF donné. Elle extrait le texte, 
+        le classe en deux colonnes, vérifie si les mots sont en français et exporte les données vers deux fichiers CSV.
+    Paramètres:
+        pdf_path: Chemin du fichier PDF d'entrée.
+        pdf1: Chemin du premier fichier CSV de sortie.
+        pdf2: Chemin du deuxième fichier CSV de sortie.
+    """
     array_boxes = get_array_tess(pdf_path, test_bold=True, bold_aprox=0.1)
     column1, column2 = order_text(array_boxes)
     
@@ -170,6 +228,13 @@ def iaai(pdf_path, pdf1, pdf2):
 
 
 def multi_iaai(pdf_paths, output_paths):
+    """
+    Utilité:
+        Permet de traiter plusieurs fichiers PDF en série en utilisant la fonction iaai pour chaque PDF.
+    Paramètres:
+        pdf_paths: Liste des chemins des fichiers PDF à traiter.
+        output_paths: Liste des chemins des fichiers de sortie pour chaque PDF.
+    """
     for i in range(len(pdf_paths)):
         pdf_path = pdf_paths[i]
         output_path = output_paths[i]
@@ -182,53 +247,3 @@ def multi_iaai(pdf_paths, output_paths):
         
         export_to_csv(column1, output_path + "c1.csv")
         export_to_csv(column2, output_path + "c2.csv")
-
-
-
-
-output_file = "final.csv"
-pdf_path = [
-    "C:/Users/Hurel Roques Tom/Desktop/Stage Lexika/IAAI/035.pdf",
-    "C:/Users/Hurel Roques Tom/Desktop/Stage Lexika/IAAI/036.pdf",
-    "C:/Users/Hurel Roques Tom/Desktop/Stage Lexika/IAAI/037.pdf",
-    "C:/Users/Hurel Roques Tom/Desktop/Stage Lexika/IAAI/038.pdf"
-    ]
-
-output_path = [
-    "p35",
-    "p36",
-    "p37",
-    "p38"
-    ]
-
-
-p1c1 = r"C:\Users\Hurel Roques Tom\Desktop\Stage Lexika\iaai csv\p37c1.csv"
-p1c2 = r"C:\Users\Hurel Roques Tom\Desktop\Stage Lexika\iaai csv\p37c2.csv"
-
-
-csv_fusion(p1c1, output_file)
-csv_fusion(p1c2, output_file)
-
-# column1 = array_from_txt(column1)
-# column2 = array_from_txt(column2)
-
-# export_to_csv(column1, p27c1)
-# export_to_csv(column2, p27c2)
-
-
-
-
-
-
-# with open(output_file, "w", encoding="utf-8") as f:
-#     f.write("Textes de la colonne 1:\n")
-#     for box in array_boxes:
-#         if box["column"] == 1:
-#             bold_info = "Oui" if box["bold"] else "Non"
-#             f.write(f"Texte: {box['text']}, Gras: {bold_info}, Pourcent: {box['bold_percent']}\n")
-
-#     f.write("\nTextes de la colonne 2:\n")
-#     for box in array_boxes:
-#         if box["column"] == 2:
-#             bold_info = "Oui" if box["bold"] else "Non"
-#             f.write(f"Texte: {box['text']}, Gras: {bold_info}, Pourcent: {box['bold_percent']}\n")
