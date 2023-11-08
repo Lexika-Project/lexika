@@ -1,11 +1,11 @@
 # Librairires 
 
-  -pytesseract
-  -fitz
-  -cv2
-  -numpy
-  -pathlib
-  -csv
+  -pytesseract \n
+  -fitz \n
+  -cv2 \n
+  -numpy \n
+  -pathlib \n
+  -csv \n
   
 ## Installation
 
