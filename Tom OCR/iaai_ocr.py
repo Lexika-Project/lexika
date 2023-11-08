@@ -1,21 +1,8 @@
-import os
-
-import argparse
-
 import pytesseract
 import fitz
 
 import cv2
 import numpy as np
-
-import itertools
-
-from pathlib import Path
-import json
-
-from tqdm import tqdm
-
-from tesseract_miner import *
 
 import csv 
 
