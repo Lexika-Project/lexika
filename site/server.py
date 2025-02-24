@@ -26,7 +26,7 @@ os.chdir(os.path.dirname(__file__))
 update_function()
 
 app = Flask(__name__)
-app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'votre_cle_secrete_tres_longue_et_complexe')
+app.secret_key = os.environ.get('FLASK_SECRET_KEY', '5bf990faff27d10c2869dce5ce04a5d09ed3b467aa207700187a291c3a1a031b')
 
 def require_password(f):
     @wraps(f)
@@ -40,7 +40,8 @@ def require_password(f):
 def login():
     if request.method == 'POST':
         password = request.form.get('password')
-        correct_password = os.environ.get('LEXIKA_PASSWORD')
+        correct_password = os.environ.get('LEXIKA_PASSWORD', 'dikala2025!')  # Valeur par défaut si la variable n'est pas définie
+        print(f"Trying password: {password}, Expected: {correct_password}")  # Debug log
         if password == correct_password:
             session['authenticated'] = True
             return redirect('/')
