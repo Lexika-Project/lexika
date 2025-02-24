@@ -26,7 +26,8 @@ os.chdir(os.path.dirname(__file__))
 update_function()
 
 app = Flask(__name__)
-app.secret_key = os.environ.get('FLASK_SECRET_KEY', '5bf990faff27d10c2869dce5ce04a5d09ed3b467aa207700187a291c3a1a031b')
+
+app.secret_key = '5bf990faff27d10c2869dce5ce04a5d09ed3b467aa207700187a291c3a1a031b'
 
 def require_password(f):
     @wraps(f)
