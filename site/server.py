@@ -41,7 +41,7 @@ def require_password(f):
 def login():
     if request.method == 'POST':
         password = request.form.get('password')
-        correct_password = os.environ.get('LEXIKA_PASSWORD', 'dikala2025!')  # Valeur par défaut si la variable n'est pas définie
+        correct_password = os.environ.get('LEXIKA_PASSWORD')
         print(f"Trying password: {password}, Expected: {correct_password}")  # Debug log
         if password == correct_password:
             session['authenticated'] = True
