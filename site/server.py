@@ -19,7 +19,7 @@ from database import (
     reference,
     audio,
 )
-
+import hashlib
 
 os.chdir(os.path.dirname(__file__))
 
@@ -41,13 +41,8 @@ def require_password(f):
 def login():
     if request.method == 'POST':
         password = request.form.get('password')
-        correct_password = os.environ.get('LEXIKA_PASSWORD')
-           debug_info = {
-            'entered': password,
-            'from_env': correct_password,
-            'env_type': str(type(correct_password))
-        }
-        if password == correct_password:
+        correct_hash = '8a1d2f69e80343b687b6bd93537105c0a5940b7634437804b48497069c8c4c9c'
+        if hash_password(password) == correct_hash:
             session['authenticated'] = True
             return redirect('/')
         return render_template('login.html', error='Mot de passe incorrect')
