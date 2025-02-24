@@ -19,7 +19,7 @@ from database import (
     reference,
     audio,
 )
-import hashlib
+ 
 
 os.chdir(os.path.dirname(__file__))
 
@@ -42,12 +42,14 @@ def require_password(f):
 def login():
     if request.method == 'POST':
         password = request.form.get('password')
-        correct_hash = '8a1d2f69e80343b687b6bd93537105c0a5940b7634437804b48497069c8c4c9c'
-        if hash_password(password) == correct_hash:
+        correct_password = os.environ.get('LEXIKA_PASSWORD', 'dikala2025!')  # Valeur par défaut si la variable n'est pas définie
+        print(f"Trying password: {password}, Expected: {correct_password}")  # Debug log
+        if password == correct_password:
             session['authenticated'] = True
             return redirect('/')
         return render_template('login.html', error='Mot de passe incorrect')
     return render_template('login.html')
+
 
 @app.route('/logout')
 def logout():
