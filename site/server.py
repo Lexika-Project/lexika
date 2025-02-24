@@ -28,7 +28,7 @@ update_function()
 app = Flask(__name__)
 
 app.secret_key = '5bf990faff27d10c2869dce5ce04a5d09ed3b467aa207700187a291c3a1a031b'
-
+app.secret_key = os.environ.get('FLASK_SECRET_KEY')
 def require_password(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -42,7 +42,11 @@ def login():
     if request.method == 'POST':
         password = request.form.get('password')
         correct_password = os.environ.get('LEXIKA_PASSWORD')
-        print(f"Trying password: {password}, Expected: {correct_password}")  # Debug log
+           debug_info = {
+            'entered': password,
+            'from_env': correct_password,
+            'env_type': str(type(correct_password))
+        }
         if password == correct_password:
             session['authenticated'] = True
             return redirect('/')
