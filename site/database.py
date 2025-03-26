@@ -13,13 +13,17 @@ os.chdir(os.path.dirname(__file__))
 
 try:
     load_dotenv()
+
+
+    # Configuration hardcodée
     config = {
-        "USER": os.environ.get("USER"),
-        "PASSWORD": os.environ.get("PASSWORD"),
-        "HOST": os.environ.get("HOST"),
-        "PORT": os.environ.get("PORT"),
-        "DATABASE": os.environ.get("DATABASE"),
+        "USER": "postgres.ypwwtrxqndqpzxjtiwob",
+        "PASSWORD": "x7bSbrTG333",
+        "HOST": "aws-0-ap-southeast-1.pooler.supabase.com",
+        "PORT": "6543",
+        "DATABASE": "postgres",
     }
+
 except Exception as e:
     print(f"Erreur lors du chargement des variables d'environnement: {e}")
     # Valeurs par défaut Supabase
