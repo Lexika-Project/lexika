@@ -27,37 +27,8 @@ update_function()
 
 app = Flask(__name__)
 
-app.secret_key = '5bf990faff27d10c2869dce5ce04a5d09ed3b467aa207700187a291c3a1a031b'
-
-
-def require_password(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if not session.get('authenticated'):
-            return redirect('/login')
-        return f(*args, **kwargs)
-    return decorated_function
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        password = request.form.get('password')
-        correct_password = os.environ.get('LEXIKA_PASSWORD', 'dikala2025!')  # Valeur par défaut si la variable n'est pas définie
-        print(f"Trying password: {password}, Expected: {correct_password}")  # Debug log
-        if password == correct_password:
-            session['authenticated'] = True
-            return redirect('/')
-        return render_template('login.html', error='Mot de passe incorrect')
-    return render_template('login.html')
-
-
-@app.route('/logout')
-def logout():
-    session.pop('authenticated', None)
-    return redirect('/login')
 
 @app.route("/search", methods=["POST"])
-@require_password
 def fetch_search():  # pylint: disable=missing-function-docstring
     result = json.loads(request.get_data())
     keyword = result["keyword"]
@@ -79,21 +50,18 @@ def fetch_search():  # pylint: disable=missing-function-docstring
         return jsonify({"verif": "error"})
 
 @app.route("/listLangue", methods=["POST"])
-@require_password
 def fetch_langue():  # pylint: disable=missing-function-docstring
     result = json.loads(request.get_data())
     res = list_langue(result["livre"])
     return jsonify(res)
 
 @app.route("/edit", methods=["POST"])
-@require_password
 def edit():  # pylint: disable=missing-function-docstring
     for change in json.loads(request.get_data()):
         modif_data(change[0], change[1], change[2])
     return "ok"
 
 @app.route("/historyRequest", methods=["POST"])
-@require_password
 def history_request():  # pylint: disable=missing-function-docstring
     result = json.loads(request.get_data())
     langue = result["langue"]
@@ -101,7 +69,6 @@ def history_request():  # pylint: disable=missing-function-docstring
     return jsonify(history(langue=langue, sens=sens))
 
 @app.route("/getaudio", methods=["POST"])
-@require_password
 def get_audio():  # pylint: disable=missing-function-docstring
     result = json.loads(request.get_data())
     langue = result["langue"]
@@ -109,14 +76,12 @@ def get_audio():  # pylint: disable=missing-function-docstring
     return jsonify(audio(sens, langue))
 
 @app.route("/getreference", methods=["POST"])
-@require_password
 def get_reference():  # pylint: disable=missing-function-docstring
     result = json.loads(request.get_data())
     livre = result["livre"]
     return jsonify(reference(livre))
 
 @app.route("/getPage", methods=["POST"])
-@require_password
 def get_page():  # pylint: disable=missing-function-docstring
     result = json.loads(request.get_data())
     livre = result["livre"]
@@ -130,7 +95,6 @@ def root():
     return redirect("/home", code=302)
 
 @app.route("/home")
-@require_password
 def index():
     return render_template("home.html")
 
@@ -147,7 +111,6 @@ def correction_page():  # pylint: disable=missing-function-docstring
     return render_template("correction-page.html")
 
 @app.route("/receiveAudio", methods=["POST"])
-@require_password
 def receive_audio():  # pylint: disable=missing-function-docstring
     file = request.files["file"]
     sens = request.form["sens"]
