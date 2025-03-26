@@ -15,14 +15,15 @@ try:
     load_dotenv()
 
 
-# Configuration hardcodée
-config = {
-    "USER": "postgres.ypwwtrxqndqpzxjtiwob",
-    "PASSWORD": "x7bSbrTG333",
-    "HOST": "aws-0-ap-southeast-1.pooler.supabase.com",
-    "PORT": "6543",
-    "DATABASE": "postgres",
-}
+    # Configuration hardcodée
+    config = {
+        "USER": "postgres.ypwwtrxqndqpzxjtiwob",
+        "PASSWORD": "x7bSbrTG333",
+        "HOST": "aws-0-ap-southeast-1.pooler.supabase.com",
+        "PORT": "6543",
+        "DATABASE": "postgres",
+    }
+
 except Exception as e:
     print(f"Erreur lors du chargement des variables d'environnement: {e}")
     # Valeurs par défaut Supabase
