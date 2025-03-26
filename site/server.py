@@ -72,10 +72,19 @@ def history_request():  # pylint: disable=missing-function-docstring
 
 @app.route("/getaudio", methods=["POST"])
 def get_audio():  # pylint: disable=missing-function-docstring
-    result = json.loads(request.get_data())
-    langue = result["langue"]
-    sens = result["sens"]
-    return jsonify(audio(sens, langue))
+    try:
+        result = json.loads(request.get_data())
+        langue = result["langue"]
+        sens = result["sens"]
+        audio_result = audio(sens, langue)
+        # Si aucun résultat n'est trouvé, renvoyez un tableau vide au lieu de None
+        if not audio_result:
+            return jsonify([[""]])
+        return jsonify(audio_result)
+    except Exception as e:
+        print(f"Erreur dans get_audio: {e}")
+        # Toujours renvoyer un JSON valide même en cas d'erreur
+        return jsonify([[""]])
 
 @app.route("/getreference", methods=["POST"])
 def get_reference():  # pylint: disable=missing-function-docstring

@@ -7,6 +7,12 @@ const sens = urlParam.get("sens");
 const ALLOWED_EXTENTION = ["mp3", "wav"];
 const MAX_NUM_PAGE = 274;
 
+// Mappage des noms de livres de l'URL vers les noms de fichiers PDF réels
+const pdfMapping = {
+    "hienghene-Fr": "LACITO_Hienghene",
+    // Ajoutez d'autres mappages si nécessaire
+};
+
 let box = 0;
 let audio = null;
 let mot;
@@ -21,63 +27,15 @@ let boxbtn = document.querySelector("#boxbtn");
 
 sendButton.disabled = true;
 
-let livreBox = livre + "-rectangle";
-let livreStart = livre;
+// Utilisez le mappage pour obtenir le nom de fichier PDF correct
+let pdfBaseName = pdfMapping[livre] || livre;
+let livreBox = pdfBaseName + "-rectangle";
+let livreStart = pdfBaseName;
 
-document.querySelector("#pdfViewer").src = `static/pdf/${livreStart}.pdf#page=${numPage}&zoom=140`;
-
-function createTable(data) {
-    const table = document.querySelector("#resultHistory");
-    const head = document.querySelector("#resulthead");
-
-    let trHead = document.createElement("tr");
-
-    let thLivre = document.createElement("th");
-    thLivre.textContent = "Livre";
-    trHead.appendChild(thLivre);
-    let thLangue = document.createElement("th");
-    thLangue.textContent = "Langue";
-    trHead.appendChild(thLangue);
-    let thMot = document.createElement("th");
-    thMot.textContent = "Mot";
-    trHead.appendChild(thMot);
-    let thPage = document.createElement("th");
-    thPage.textContent = "Page";
-    trHead.appendChild(thPage);
-
-    head.appendChild(trHead);
-
-    let firstRow = data[0];
-
-    let tr = document.createElement("tr");
-    
-    let tdLivre = document.createElement("td");
-    tdLivre.textContent = livre;
-    tr.appendChild(tdLivre);
-
-    let tdLangue = document.createElement("td");
-    tdLangue.textContent = langue;
-    tr.appendChild(tdLangue);
-
-    let tdRenvoyer = document.createElement("td");
-    tdRenvoyer.textContent = firstRow[1];
-
-    if (audio !== null && audio !== undefined) {
-
-        const button = document.createElement("button");
-        button.innerHTML = '<i id="soundbtn" class="fa fa-volume-up"></i>';
-        button.onclick = playSound;
-        tdRenvoyer.appendChild(button);
-    }
-
-    tr.appendChild(tdRenvoyer);
-
-
-    let tdNumPage = document.createElement("td");
-    tdNumPage.textContent = numPage;
-    tr.appendChild(tdNumPage);
-    
-    table.appendChild(tr);
+try {
+    document.querySelector("#pdfViewer").src = `static/pdf/${livreStart}.pdf#page=${numPage}&zoom=140`;
+} catch (error) {
+    console.error("Erreur lors du chargement du PDF:", error);
 }
 
 fetch("/getaudio", {
@@ -265,7 +223,7 @@ function changePdfBox() {
     } else if(box === 0) {
         document.querySelector(
             "#pdfViewer"
-        ).src = `static/pdf/${livre}.pdf#page=${numPage}&zoom=140`;
+        ).src = `static/pdf/${livreStart}.pdf#page=${numPage}&zoom=140`;
     }
 }
 
@@ -345,3 +303,57 @@ audiobtn.addEventListener("click", function() {
     }
 
 });
+
+function createTable(data) {
+    const table = document.querySelector("#resultHistory");
+    const head = document.querySelector("#resulthead");
+
+    let trHead = document.createElement("tr");
+
+    let thLivre = document.createElement("th");
+    thLivre.textContent = "Livre";
+    trHead.appendChild(thLivre);
+    let thLangue = document.createElement("th");
+    thLangue.textContent = "Langue";
+    trHead.appendChild(thLangue);
+    let thMot = document.createElement("th");
+    thMot.textContent = "Mot";
+    trHead.appendChild(thMot);
+    let thPage = document.createElement("th");
+    thPage.textContent = "Page";
+    trHead.appendChild(thPage);
+
+    head.appendChild(trHead);
+
+    let firstRow = data[0];
+
+    let tr = document.createElement("tr");
+    
+    let tdLivre = document.createElement("td");
+    tdLivre.textContent = livre;
+    tr.appendChild(tdLivre);
+
+    let tdLangue = document.createElement("td");
+    tdLangue.textContent = langue;
+    tr.appendChild(tdLangue);
+
+    let tdRenvoyer = document.createElement("td");
+    tdRenvoyer.textContent = firstRow[1];
+
+    if (audio !== null && audio !== undefined) {
+
+        const button = document.createElement("button");
+        button.innerHTML = '<i id="soundbtn" class="fa fa-volume-up"></i>';
+        button.onclick = playSound;
+        tdRenvoyer.appendChild(button);
+    }
+
+    tr.appendChild(tdRenvoyer);
+
+
+    let tdNumPage = document.createElement("td");
+    tdNumPage.textContent = numPage;
+    tr.appendChild(tdNumPage);
+    
+    table.appendChild(tr);
+}
