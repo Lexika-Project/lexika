@@ -126,7 +126,7 @@ def get_page():  # pylint: disable=missing-function-docstring
 @app.route("/")
 def root():
     if not session.get('authenticated'):
-        return redirect('/login')
+        return redirect('/home')
     return redirect("/home", code=302)
 
 @app.route("/home")
