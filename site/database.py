@@ -6,25 +6,30 @@ Returns:
 import os
 import urllib.parse
 import psycopg
-
-from dotenv import dotenv_values
+from dotenv import load_dotenv
 from tqdm import tqdm
 
 os.chdir(os.path.dirname(__file__))
 
-if os.path.exists(".env"):
-    config = dotenv_values(".env")
-elif os.path.exists("../../.env"):
-    config = dotenv_values("../../.env")
-else:
+try:
+    load_dotenv()
     config = {
-        "USER": os.environ.get("USER_DB"),
-        "PASSWORD": os.environ.get("PASSWORD_DB"),
-        "HOST": os.environ.get("HOST_DB"),
-        "PORT": os.environ.get("PORT_DB"),
-        "DATABASE": os.environ.get("DATABASE_DB"),
+        "USER": os.environ.get("USER"),
+        "PASSWORD": os.environ.get("PASSWORD"),
+        "HOST": os.environ.get("HOST"),
+        "PORT": os.environ.get("PORT"),
+        "DATABASE": os.environ.get("DATABASE"),
     }
-
+except Exception as e:
+    print(f"Erreur lors du chargement des variables d'environnement: {e}")
+    # Valeurs par défaut Supabase
+    config = {
+        "USER": "postgres.ypwwtrxqndqpzxjtiwob",
+        "PASSWORD": "x7bSbrTG333",
+        "HOST": "aws-0-ap-southeast-1.pooler.supabase.com",
+        "PORT": "6543",
+        "DATABASE": "postgres",
+    }
 
 FILENAME_DB_SHEMA = "database/database.sql"
 FILENAME_FUNCTION_SHEMA = "database/function.sql"
